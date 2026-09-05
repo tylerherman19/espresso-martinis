@@ -30,4 +30,6 @@ jobs:
           git config user.email 'actions@github.com'
           git add data/martinis.json
           git diff --cached --quiet || git commit -m "Sweep $(date -u +%Y-%m-%d): espresso martini index refresh"
+          # A code push may have landed mid-run; fold it in instead of failing.
+          git pull --rebase origin main
           git push
