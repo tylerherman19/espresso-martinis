@@ -23,13 +23,13 @@ button:focus-visible, select:focus-visible { outline: 2px solid var(--ink); outl
 .wordmark span:first-child { font-weight: 800; font-size: clamp(19px, 2.4vw, 25px); line-height: 1; letter-spacing: -.045em; }
 .wordmark span:last-child { font-family: 'IBM Plex Mono', monospace; font-size: 9.5px; letter-spacing: .14em; color: var(--masthead-muted); white-space: nowrap; }
 .masthead-stamp { margin-left: auto; font-family: 'IBM Plex Mono', monospace; font-size: 9.5px; letter-spacing: .08em; color: var(--masthead-muted); text-align: right; line-height: 1.7; text-transform: uppercase; }
-.tab-strip { display: flex; align-items: baseline; gap: clamp(16px, 3vw, 34px); overflow-x: auto; margin-top: 14px; padding: 0 var(--gutter); scrollbar-width: none; }
+.tab-strip { display: flex; flex-wrap: wrap; align-items: baseline; gap: clamp(16px, 3vw, 34px); overflow-x: auto; margin-top: 14px; padding: 0 var(--gutter); scrollbar-width: none; }
 .tab-strip::-webkit-scrollbar { display: none; }
 .tab-strip button { position: relative; background: none; border: 0; padding: 0 0 9px; cursor: pointer; white-space: nowrap; color: var(--masthead-muted); font-weight: 500; font-size: clamp(14px, 1.7vw, 17px); letter-spacing: -.028em; box-shadow: inset 0 -3px 0 transparent; }
 .tab-strip button sup { font-family: 'IBM Plex Mono', monospace; font-size: 9px; font-weight: 400; margin-left: 4px; opacity: .62; }
 .tab-strip button.active { font-weight: 700; color: var(--masthead-fg); box-shadow: inset 0 -3px 0 var(--masthead-fg); }
 .tab-spacer { flex: 1 1 auto; }
-.tab-strip select { flex: 0 0 auto; background: var(--ink); color: var(--masthead-fg); border: 1px solid var(--masthead-muted); border-radius: 0; font-size: 12.5px; padding: 4px 6px; margin-bottom: 6px; max-width: 44vw; }
+.tab-strip select { flex: 0 0 auto; background: var(--ink); color: var(--masthead-fg); border: 1px solid var(--masthead-muted); border-radius: 0; font-size: 12.5px; padding: 4px 6px; margin-bottom: 6px; max-width: 60vw; }
 .column-header { display: grid; grid-template-columns: clamp(26px, 3vw, 40px) minmax(0, 1fr) clamp(96px, 12vw, 132px) calc(clamp(44px, 5vw, 58px) - clamp(10px, 2vw, 22px)); gap: clamp(10px, 2vw, 22px); padding: 6px var(--gutter); margin-top: 8px; background: var(--paper); border-bottom: 1.5px solid var(--ink); color: var(--ink); font-family: 'IBM Plex Mono', monospace; font-size: 9px; letter-spacing: .13em; white-space: nowrap; }
 .column-header .col-c { text-align: right; }
 .column-header span { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
