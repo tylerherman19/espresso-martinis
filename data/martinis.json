@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-09-05T05:27:37+00:00",
+ "generated_at": "2026-09-05T05:37:50+00:00",
  "metro": "Milwaukee",
  "restaurants_scanned": 340,
  "count": 95,
@@ -10,6 +10,7 @@
    "lat": 42.951169,
    "lng": -87.859599,
    "neighborhood": "Cudahy",
+   "downtown": false,
    "price_cents": 500,
    "items": [
     {
@@ -21,31 +22,12 @@
    "guid": "dfba8b49-1acf-439d-a06f-d535a55d5339"
   },
   {
-   "name": "Story Hill BKC",
-   "address": "5100 West Bluemound Road, Milwaukee, WI",
-   "lat": 43.037022,
-   "lng": -87.97779,
-   "neighborhood": "Story Hill",
-   "price_cents": 500,
-   "items": [
-    {
-     "item": "SHOP Bols Espresso Martini",
-     "price_cents": 500
-    },
-    {
-     "item": "Espresso Martini",
-     "price_cents": 1400
-    }
-   ],
-   "platform": "toast",
-   "guid": "ad73eb48-1f4b-4fb7-9e34-6958e472df3d"
-  },
-  {
    "name": "DIA Cafe - Greendale 6601 Northway",
    "address": "6601 Northway, Greendale, WI",
    "lat": 42.942068,
    "lng": -87.997245,
    "neighborhood": "Greendale",
+   "downtown": false,
    "price_cents": 600,
    "items": [
     {
@@ -62,6 +44,7 @@
    "lat": 43.043742,
    "lng": -87.914774,
    "neighborhood": "Downtown",
+   "downtown": true,
    "price_cents": 600,
    "items": [
     {
@@ -82,6 +65,7 @@
    "lat": 43.191399,
    "lng": -88.118853,
    "neighborhood": "Menomonee Falls",
+   "downtown": false,
    "price_cents": 700,
    "items": [
     {
@@ -102,6 +86,7 @@
    "lat": 43.045308,
    "lng": -87.915448,
    "neighborhood": "Downtown",
+   "downtown": true,
    "price_cents": 700,
    "items": [
     {
@@ -126,6 +111,7 @@
    "lat": 43.207517,
    "lng": -88.002732,
    "neighborhood": "Mequon",
+   "downtown": false,
    "price_cents": 700,
    "items": [
     {
@@ -146,6 +132,7 @@
    "lat": 43.148935,
    "lng": -88.045959,
    "neighborhood": "Park Place",
+   "downtown": false,
    "price_cents": 700,
    "items": [
     {
@@ -190,6 +177,7 @@
    "lat": 42.96717,
    "lng": -88.00802,
    "neighborhood": "Greenfield",
+   "downtown": false,
    "price_cents": 800,
    "items": [
     {
@@ -210,6 +198,7 @@
    "lat": 43.04362,
    "lng": -87.91459,
    "neighborhood": "Downtown",
+   "downtown": true,
    "price_cents": 900,
    "items": [
     {
@@ -226,6 +215,7 @@
    "lat": 43.060563,
    "lng": -87.99399,
    "neighborhood": "Pabst Park",
+   "downtown": false,
    "price_cents": 995,
    "items": [
     {
@@ -242,6 +232,7 @@
    "lat": 43.029713,
    "lng": -87.909326,
    "neighborhood": "Downtown",
+   "downtown": true,
    "price_cents": 1000,
    "items": [
     {
@@ -266,6 +257,7 @@
    "lat": 42.9588636,
    "lng": -87.86283979999999,
    "neighborhood": "Cudahy",
+   "downtown": false,
    "price_cents": 1000,
    "items": [
     {
@@ -282,6 +274,7 @@
    "lat": 42.9599386,
    "lng": -88.0129396,
    "neighborhood": "Whitnall Oaks",
+   "downtown": false,
    "price_cents": 1000,
    "items": [
     {
@@ -302,6 +295,7 @@
    "lat": 42.948156,
    "lng": -88.004706,
    "neighborhood": "Southridge Commercial District",
+   "downtown": false,
    "price_cents": 1000,
    "items": [
     {
@@ -318,6 +312,7 @@
    "lat": 43.075632,
    "lng": -88.053479,
    "neighborhood": "Wauwatosa",
+   "downtown": false,
    "price_cents": 1000,
    "items": [
     {
@@ -334,6 +329,7 @@
    "lat": 42.93811,
    "lng": -88.04469,
    "neighborhood": "Forest Home Corridor",
+   "downtown": false,
    "price_cents": 1000,
    "items": [
     {
@@ -350,6 +346,7 @@
    "lat": 42.97334,
    "lng": -87.97879,
    "neighborhood": "Honey Creek Manor",
+   "downtown": false,
    "price_cents": 1100,
    "items": [
     {
@@ -366,6 +363,7 @@
    "lat": 43.044057,
    "lng": -87.914126,
    "neighborhood": "Downtown",
+   "downtown": true,
    "price_cents": 1100,
    "items": [
     {
@@ -382,6 +380,7 @@
    "lat": 43.002799,
    "lng": -87.89695,
    "neighborhood": "Bay View",
+   "downtown": false,
    "price_cents": 1100,
    "items": [
     {
@@ -398,6 +397,7 @@
    "lat": 43.060562,
    "lng": -87.996879,
    "neighborhood": "Pabst Park",
+   "downtown": false,
    "price_cents": 1100,
    "items": [
     {
@@ -414,6 +414,7 @@
    "lat": 43.012085,
    "lng": -87.91127,
    "neighborhood": "Harbor District",
+   "downtown": false,
    "price_cents": 1100,
    "items": [
     {
@@ -430,6 +431,7 @@
    "lat": 42.954259,
    "lng": -87.97707,
    "neighborhood": "Greenfield",
+   "downtown": false,
    "price_cents": 1200,
    "items": [
     {
@@ -446,6 +448,7 @@
    "lat": 43.039225,
    "lng": -87.906267,
    "neighborhood": "Downtown",
+   "downtown": true,
    "price_cents": 1200,
    "items": [
     {
@@ -462,6 +465,7 @@
    "lat": 43.049483,
    "lng": -88.008475,
    "neighborhood": "Lowell Damon Woods",
+   "downtown": false,
    "price_cents": 1200,
    "items": [
     {
@@ -482,6 +486,7 @@
    "lat": 43.034878,
    "lng": -87.907038,
    "neighborhood": "Downtown",
+   "downtown": true,
    "price_cents": 1200,
    "items": [
     {
@@ -502,6 +507,7 @@
    "lat": 43.002752,
    "lng": -87.90381,
    "neighborhood": "Bay View",
+   "downtown": false,
    "price_cents": 1200,
    "items": [
     {
@@ -522,6 +528,7 @@
    "lat": 43.04345,
    "lng": -87.914709,
    "neighborhood": "Downtown",
+   "downtown": true,
    "price_cents": 1200,
    "items": [
     {
@@ -538,6 +545,7 @@
    "lat": 43.222131,
    "lng": -87.987711,
    "neighborhood": "Mequon",
+   "downtown": false,
    "price_cents": 1200,
    "items": [
     {
@@ -554,6 +562,7 @@
    "lat": 43.075632,
    "lng": -88.053479,
    "neighborhood": "Wauwatosa",
+   "downtown": false,
    "price_cents": 1200,
    "items": [
     {
@@ -570,6 +579,7 @@
    "lat": 43.057746,
    "lng": -87.887241,
    "neighborhood": "East Side",
+   "downtown": true,
    "price_cents": 1200,
    "items": [
     {
@@ -586,6 +596,7 @@
    "lat": 43.149017,
    "lng": -88.048904,
    "neighborhood": "Park Place",
+   "downtown": false,
    "price_cents": 1200,
    "items": [
     {
@@ -606,6 +617,7 @@
    "lat": 43.052805,
    "lng": -87.896602,
    "neighborhood": "East Side",
+   "downtown": true,
    "price_cents": 1200,
    "items": [
     {
@@ -634,6 +646,7 @@
    "lat": 43.05016,
    "lng": -88.00861,
    "neighborhood": "Tosa Village",
+   "downtown": false,
    "price_cents": 1200,
    "items": [
     {
@@ -654,6 +667,7 @@
    "lat": 43.029667,
    "lng": -87.908722,
    "neighborhood": "Downtown",
+   "downtown": true,
    "price_cents": 1200,
    "items": [
     {
@@ -678,6 +692,7 @@
    "lat": 42.927558,
    "lng": -87.950517,
    "neighborhood": "Franklin",
+   "downtown": false,
    "price_cents": 1200,
    "items": [
     {
@@ -694,6 +709,7 @@
    "lat": 43.035864,
    "lng": -88.047955,
    "neighborhood": "Underwood Parkway",
+   "downtown": false,
    "price_cents": 1200,
    "items": [
     {
@@ -710,6 +726,7 @@
    "lat": 43.038898,
    "lng": -87.911637,
    "neighborhood": "Downtown",
+   "downtown": true,
    "price_cents": 1200,
    "items": [
     {
@@ -726,6 +743,7 @@
    "lat": 42.94234,
    "lng": -88.0388,
    "neighborhood": "Forest Home Corridor",
+   "downtown": false,
    "price_cents": 1200,
    "items": [
     {
@@ -746,6 +764,7 @@
    "lat": 43.207664,
    "lng": -87.979378,
    "neighborhood": "Mequon",
+   "downtown": false,
    "price_cents": 1200,
    "items": [
     {
@@ -762,6 +781,7 @@
    "lat": 43.034556,
    "lng": -87.911848,
    "neighborhood": "Menomonee River Valley",
+   "downtown": true,
    "price_cents": 1200,
    "items": [
     {
@@ -778,6 +798,7 @@
    "lat": 42.89122,
    "lng": -87.9125,
    "neighborhood": "Oak Creek",
+   "downtown": false,
    "price_cents": 1200,
    "items": [
     {
@@ -794,6 +815,7 @@
    "lat": 43.105051,
    "lng": -88.068073,
    "neighborhood": "Butler",
+   "downtown": false,
    "price_cents": 1200,
    "items": [
     {
@@ -810,6 +832,7 @@
    "lat": 43.0604,
    "lng": -87.887068,
    "neighborhood": "East Side",
+   "downtown": true,
    "price_cents": 1200,
    "items": [
     {
@@ -826,6 +849,7 @@
    "lat": 43.039039,
    "lng": -87.941916,
    "neighborhood": "Near West Side",
+   "downtown": false,
    "price_cents": 1300,
    "items": [
     {
@@ -842,6 +866,7 @@
    "lat": 42.996205,
    "lng": -87.897774,
    "neighborhood": "Bay View",
+   "downtown": false,
    "price_cents": 1300,
    "items": [
     {
@@ -862,6 +887,7 @@
    "lat": 43.016192,
    "lng": -88.029956,
    "neighborhood": "Conrad Gardens",
+   "downtown": false,
    "price_cents": 1300,
    "items": [
     {
@@ -882,6 +908,7 @@
    "lat": 43.032243,
    "lng": -87.908334,
    "neighborhood": "Downtown",
+   "downtown": true,
    "price_cents": 1300,
    "items": [
     {
@@ -898,6 +925,7 @@
    "lat": 42.930156,
    "lng": -88.095172,
    "neighborhood": "Muskego",
+   "downtown": false,
    "price_cents": 1300,
    "items": [
     {
@@ -914,6 +942,7 @@
    "lat": 42.93014,
    "lng": -88.095138,
    "neighborhood": "Muskego",
+   "downtown": false,
    "price_cents": 1300,
    "items": [
     {
@@ -930,6 +959,7 @@
    "lat": 43.05948,
    "lng": -87.914612,
    "neighborhood": "Halyard Park",
+   "downtown": true,
    "price_cents": 1300,
    "items": [
     {
@@ -946,6 +976,7 @@
    "lat": 43.045188,
    "lng": -87.914767,
    "neighborhood": "Downtown",
+   "downtown": true,
    "price_cents": 1300,
    "items": [
     {
@@ -962,6 +993,7 @@
    "lat": 42.911075,
    "lng": -87.86678,
    "neighborhood": "Downtown District",
+   "downtown": false,
    "price_cents": 1300,
    "items": [
     {
@@ -982,6 +1014,7 @@
    "lat": 43.059949,
    "lng": -87.885973,
    "neighborhood": "East Side",
+   "downtown": true,
    "price_cents": 1300,
    "items": [
     {
@@ -998,6 +1031,7 @@
    "lat": 43.040389,
    "lng": -87.907097,
    "neighborhood": "Downtown",
+   "downtown": true,
    "price_cents": 1300,
    "items": [
     {
@@ -1014,6 +1048,7 @@
    "lat": 42.93591,
    "lng": -88.049524,
    "neighborhood": "Village Center District",
+   "downtown": false,
    "price_cents": 1400,
    "items": [
     {
@@ -1030,6 +1065,7 @@
    "lat": 43.07564,
    "lng": -88.05345,
    "neighborhood": "Wauwatosa",
+   "downtown": false,
    "price_cents": 1400,
    "items": [
     {
@@ -1046,6 +1082,7 @@
    "lat": 42.955267,
    "lng": -88.108102,
    "neighborhood": "New Berlin",
+   "downtown": false,
    "price_cents": 1400,
    "items": [
     {
@@ -1062,6 +1099,7 @@
    "lat": 43.066901,
    "lng": -87.877791,
    "neighborhood": "East Side",
+   "downtown": false,
    "price_cents": 1400,
    "items": [
     {
@@ -1078,6 +1116,7 @@
    "lat": 43.222038,
    "lng": -87.983458,
    "neighborhood": "Mequon",
+   "downtown": false,
    "price_cents": 1400,
    "items": [
     {
@@ -1094,6 +1133,7 @@
    "lat": 43.049284,
    "lng": -88.008113,
    "neighborhood": "Lowell Damon Woods",
+   "downtown": false,
    "price_cents": 1400,
    "items": [
     {
@@ -1110,6 +1150,7 @@
    "lat": 43.060614,
    "lng": -87.993913,
    "neighborhood": "Pabst Park",
+   "downtown": false,
    "price_cents": 1400,
    "items": [
     {
@@ -1126,6 +1167,7 @@
    "lat": 43.060949,
    "lng": -87.998149,
    "neighborhood": "Inglewood",
+   "downtown": false,
    "price_cents": 1400,
    "items": [
     {
@@ -1142,6 +1184,7 @@
    "lat": 43.039383,
    "lng": -87.90623,
    "neighborhood": "Downtown",
+   "downtown": true,
    "price_cents": 1400,
    "items": [
     {
@@ -1158,6 +1201,7 @@
    "lat": 43.083301,
    "lng": -87.88782,
    "neighborhood": "Shorewood",
+   "downtown": false,
    "price_cents": 1400,
    "items": [
     {
@@ -1174,6 +1218,7 @@
    "lat": 43.249962,
    "lng": -87.92484,
    "neighborhood": "Mequon",
+   "downtown": false,
    "price_cents": 1400,
    "items": [
     {
@@ -1190,6 +1235,7 @@
    "lat": 43.017495,
    "lng": -87.986301,
    "neighborhood": "Six Points",
+   "downtown": false,
    "price_cents": 1400,
    "items": [
     {
@@ -1206,6 +1252,7 @@
    "lat": 43.035197,
    "lng": -87.908011,
    "neighborhood": "Downtown",
+   "downtown": true,
    "price_cents": 1400,
    "items": [
     {
@@ -1222,6 +1269,7 @@
    "lat": 43.053202,
    "lng": -87.894547,
    "neighborhood": "East Side",
+   "downtown": true,
    "price_cents": 1400,
    "items": [
     {
@@ -1238,6 +1286,7 @@
    "lat": 43.022921,
    "lng": -87.910397,
    "neighborhood": "Walker's Point",
+   "downtown": true,
    "price_cents": 1400,
    "items": [
     {
@@ -1254,6 +1303,7 @@
    "lat": 43.003323,
    "lng": -87.905064,
    "neighborhood": "Bay View",
+   "downtown": false,
    "price_cents": 1400,
    "items": [
     {
@@ -1270,6 +1320,7 @@
    "lat": 43.06597,
    "lng": -87.87828,
    "neighborhood": "East Side",
+   "downtown": false,
    "price_cents": 1400,
    "items": [
     {
@@ -1286,6 +1337,7 @@
    "lat": 43.065368,
    "lng": -87.878181,
    "neighborhood": "East Side",
+   "downtown": false,
    "price_cents": 1400,
    "items": [
     {
@@ -1297,11 +1349,29 @@
    "guid": "a204faba-dc7c-4d21-b562-e89336f9f1c4"
   },
   {
+   "name": "Story Hill BKC",
+   "address": "5100 West Bluemound Road, Milwaukee, WI",
+   "lat": 43.037022,
+   "lng": -87.97779,
+   "neighborhood": "Story Hill",
+   "downtown": false,
+   "price_cents": 1400,
+   "items": [
+    {
+     "item": "Espresso Martini",
+     "price_cents": 1400
+    }
+   ],
+   "platform": "toast",
+   "guid": "ad73eb48-1f4b-4fb7-9e34-6958e472df3d"
+  },
+  {
    "name": "The King & I Thai Restaurant 830 North Doctor Martin Luther King Jr Dr.",
    "address": "830 North Dr Martin Luther King Jr Dr., Milwaukee, WI",
    "lat": 43.040951,
    "lng": -87.914123,
    "neighborhood": "Downtown",
+   "downtown": true,
    "price_cents": 1400,
    "items": [
     {
@@ -1318,6 +1388,7 @@
    "lat": 43.029798,
    "lng": -88.109704,
    "neighborhood": "Brookfield",
+   "downtown": false,
    "price_cents": 1400,
    "items": [
     {
@@ -1334,6 +1405,7 @@
    "lat": 43.00741,
    "lng": -87.912075,
    "neighborhood": "Bay View",
+   "downtown": false,
    "price_cents": 1500,
    "items": [
     {
@@ -1350,6 +1422,7 @@
    "lat": 43.014344,
    "lng": -87.922859,
    "neighborhood": "Historic Mitchell Street",
+   "downtown": false,
    "price_cents": 1500,
    "items": [
     {
@@ -1366,6 +1439,7 @@
    "lat": 43.019109,
    "lng": -88.105988,
    "neighborhood": "Brookfield",
+   "downtown": false,
    "price_cents": 1500,
    "items": [
     {
@@ -1382,6 +1456,7 @@
    "lat": 43.030053,
    "lng": -87.905358,
    "neighborhood": "Downtown",
+   "downtown": true,
    "price_cents": 1500,
    "items": [
     {
@@ -1398,6 +1473,7 @@
    "lat": 43.02514,
    "lng": -87.917968,
    "neighborhood": "Walker's Point",
+   "downtown": true,
    "price_cents": 1500,
    "items": [
     {
@@ -1414,6 +1490,7 @@
    "lat": 43.03111,
    "lng": -87.90551,
    "neighborhood": "Downtown",
+   "downtown": true,
    "price_cents": 1500,
    "items": [
     {
@@ -1434,6 +1511,7 @@
    "lat": 43.060634,
    "lng": -87.885936,
    "neighborhood": "East Side",
+   "downtown": true,
    "price_cents": 1500,
    "items": [
     {
@@ -1450,6 +1528,7 @@
    "lat": 43.040515,
    "lng": -87.905083,
    "neighborhood": "Downtown",
+   "downtown": true,
    "price_cents": 1500,
    "items": [
     {
@@ -1470,6 +1549,7 @@
    "lat": 42.974132,
    "lng": -87.875924,
    "neighborhood": "Saint Francis",
+   "downtown": false,
    "price_cents": 1500,
    "items": [
     {
@@ -1486,6 +1566,7 @@
    "lat": 43.032345,
    "lng": -87.907952,
    "neighborhood": "Downtown",
+   "downtown": true,
    "price_cents": 1500,
    "items": [
     {
@@ -1506,6 +1587,7 @@
    "lat": 43.045841,
    "lng": -87.898844,
    "neighborhood": "Downtown",
+   "downtown": true,
    "price_cents": 1500,
    "items": [
     {
@@ -1526,6 +1608,7 @@
    "lat": 43.039465,
    "lng": -87.906239,
    "neighborhood": "Downtown",
+   "downtown": true,
    "price_cents": 1500,
    "items": [
     {
@@ -1546,6 +1629,7 @@
    "lat": 43.041724,
    "lng": -87.902086,
    "neighborhood": "Downtown",
+   "downtown": true,
    "price_cents": 1600,
    "items": [
     {
@@ -1562,6 +1646,7 @@
    "lat": 43.036775,
    "lng": -87.988337,
    "neighborhood": "Bluemound Heights",
+   "downtown": false,
    "price_cents": 1600,
    "items": [
     {
@@ -1578,6 +1663,7 @@
    "lat": 43.177551,
    "lng": -87.964982,
    "neighborhood": "Brown Deer",
+   "downtown": false,
    "price_cents": 1600,
    "items": [
     {
@@ -1594,6 +1680,7 @@
    "lat": 42.998639,
    "lng": -87.901129,
    "neighborhood": "Bay View",
+   "downtown": false,
    "price_cents": 1600,
    "items": [
     {
@@ -1610,6 +1697,7 @@
    "lat": 43.049953,
    "lng": -87.895634,
    "neighborhood": "East Side",
+   "downtown": true,
    "price_cents": 1600,
    "items": [
     {
@@ -1630,6 +1718,7 @@
    "lat": 43.054122,
    "lng": -87.908173,
    "neighborhood": "Downtown",
+   "downtown": true,
    "price_cents": 1700,
    "items": [
     {
@@ -1646,6 +1735,7 @@
    "lat": 43.043305,
    "lng": -87.902918,
    "neighborhood": "Downtown",
+   "downtown": true,
    "price_cents": 1700,
    "items": [
     {
@@ -1662,6 +1752,7 @@
    "lat": 43.045077,
    "lng": -87.922388,
    "neighborhood": "Downtown",
+   "downtown": true,
    "price_cents": 1700,
    "items": [
     {
