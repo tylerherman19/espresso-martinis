@@ -76,13 +76,8 @@
    "lng": -87.915448,
    "neighborhood": "Downtown",
    "downtown": true,
-   "price_cents": 700,
+   "price_cents": 1200,
    "items": [
-    {
-     "item": "Heirloom Espresso Martini Liqueur",
-     "price_cents": 700,
-     "hh_price_cents": null
-    },
     {
      "item": "Bonded Espresso Martini",
      "price_cents": 1200,
