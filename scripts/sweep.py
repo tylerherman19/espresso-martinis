@@ -150,10 +150,12 @@ def is_downtown(lat, lng) -> bool:
 
 
 def osm_websites() -> list[str]:
-    query = ("[out:json][timeout:120];("
-             f'nwr["amenity"~"bar|pub|restaurant"]["website"]({MKE[0]},{MKE[1]},{MKE[2]},{MKE[3]});'
-             f'nwr["amenity"~"bar|pub|restaurant"]["contact:website"]({MKE[0]},{MKE[1]},{MKE[2]},{MKE[3]})'
-             ");out tags;")
+    # Simple equality filters only: the regex alternation form 400s on some
+    # Overpass backends. Same shape as the coffee collector's discovery.
+    b = f"{MKE[0]},{MKE[1]},{MKE[2]},{MKE[3]}"
+    parts = [f'nwr["amenity"="{a}"]["{t}"]({b});' for a in ("bar", "pub", "restaurant")
+             for t in ("website", "contact:website")]
+    query = "[out:json][timeout:120];(" + "".join(parts) + ");out tags;"
     for host in OVERPASS:
         try:
             payload = get(host, params={"data": query}, timeout=180).json()
