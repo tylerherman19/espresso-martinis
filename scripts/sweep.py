@@ -37,7 +37,8 @@ CLOVER_API = "https://www.clover.com/oloservice/v1/merchants"
 CLOVER_LINK = re.compile(r"clover\.com/online-ordering/([A-Za-z0-9._~-]+)", re.I)
 CLOVER_SEEDS = ["mke-fish--chicken-milwaukee", "mccocos-milwaukee", "aladdin-city-cafe-milwaukee",
                 "your-in-luck-eats-milwaukee", "asianrican-foods-milwaukee"]
-OVERPASS = ["https://overpass-api.de/api/interpreter", "https://overpass.kumi.systems/api/interpreter"]
+OVERPASS = ["https://overpass.kumi.systems/api/interpreter", "https://overpass-api.de/api/interpreter",
+            "https://overpass.private.coffee/api/interpreter"]
 
 
 def get(url, **kw):
@@ -154,7 +155,10 @@ def osm_websites() -> list[str]:
              ");out tags;")
     for host in OVERPASS:
         try:
-            els = requests.post(host, data={"data": query}, headers=UA, timeout=180).json().get("elements") or []
+            payload = get(host, params={"data": query}, timeout=180).json()
+            if payload.get("remark"):
+                print(f"overpass remark: {payload['remark'][:160]}", file=sys.stderr)
+            els = payload.get("elements") or []
         except Exception as exc:
             print(f"overpass {host}: {exc}", file=sys.stderr)
             continue
