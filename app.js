@@ -1,13 +1,14 @@
 (function () {
   const fmt = (cents) => (cents == null ? '?' : '$' + (cents / 100).toFixed(2).replace(/\.00$/, ''));
-  const state = { data: null, view: 'list', hood: '', sort: 'price-asc', map: null, layer: null };
+  const state = { data: null, view: 'list', hood: '', sort: 'downtown', map: null, layer: null };
 
   const $ = (id) => document.getElementById(id);
 
   function filtered() {
     let rows = state.data.martinis.slice();
     if (state.hood) rows = rows.filter((r) => (r.neighborhood || 'Unlabeled') === state.hood);
-    if (state.sort === 'price-asc') rows.sort((a, b) => (a.price_cents ?? 1e9) - (b.price_cents ?? 1e9) || a.name.localeCompare(b.name));
+    if (state.sort === 'downtown') rows.sort((a, b) => ((b.downtown ? 1 : 0) - (a.downtown ? 1 : 0)) || (a.price_cents ?? 1e9) - (b.price_cents ?? 1e9) || a.name.localeCompare(b.name));
+    else if (state.sort === 'price-asc') rows.sort((a, b) => (a.price_cents ?? 1e9) - (b.price_cents ?? 1e9) || a.name.localeCompare(b.name));
     else if (state.sort === 'price-desc') rows.sort((a, b) => (b.price_cents ?? -1) - (a.price_cents ?? -1) || a.name.localeCompare(b.name));
     else rows.sort((a, b) => a.name.localeCompare(b.name));
     return rows;

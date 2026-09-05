@@ -20,6 +20,9 @@ MKE = (42.92, -88.07, 43.20, -87.86)
 GRID_LAT, GRID_LNG, RADIUS_MI, PAGE_CAP = 0.05, 0.06, 3, 299
 MARTINI = re.compile(r"espresso", re.I)
 MARTINI_2 = re.compile(r"martini|\btini\b", re.I)
+# Downtown Milwaukee: Third Ward through Yankee Hill, river to the lake. User
+# steering 2026-09-05: downtown gets read first and leads the site.
+DT = (43.020, -87.930, 43.062, -87.870)
 NOMINATIM = "https://nominatim.openstreetmap.org/reverse"
 
 
@@ -110,6 +113,10 @@ def neighborhood(lat: float, lng: float) -> str | None:
     return addr.get("city") or addr.get("town") or addr.get("village") or hood
 
 
+def is_downtown(lat, lng) -> bool:
+    return lat is not None and lng is not None and DT[0] <= lat <= DT[2] and DT[1] <= lng <= DT[3]
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--limit", type=int, default=0)
@@ -117,7 +124,12 @@ def main() -> None:
     args = ap.parse_args()
 
     directory = toast_directory()
-    guids = sorted(directory)
+    guids = sorted(directory, key=lambda g: (
+        not is_downtown((directory[g].get("location") or {}).get("latitude"),
+                        (directory[g].get("location") or {}).get("longitude")), g))
+    n_dt = sum(1 for g in guids if is_downtown((directory[g].get("location") or {}).get("latitude"),
+                                               (directory[g].get("location") or {}).get("longitude")))
+    print(f"{n_dt} downtown restaurants scanned first", file=sys.stderr)
     if args.limit:
         guids = guids[: args.limit]
     hits = []
@@ -142,6 +154,7 @@ def main() -> None:
             "address": addr,
             "lat": lat, "lng": lng,
             "neighborhood": hood,
+            "downtown": is_downtown(lat, lng),
             "price_cents": cheapest,
             "items": sorted(items, key=lambda m: (m["price_cents"] is None, m["price_cents"] or 0)),
             "platform": "toast",
