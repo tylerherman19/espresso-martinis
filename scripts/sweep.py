@@ -42,7 +42,8 @@ OVERPASS = ["https://overpass.kumi.systems/api/interpreter", "https://overpass-a
 
 
 def get(url, **kw):
-    r = requests.get(url, headers=UA, timeout=30, **kw)
+    kw.setdefault("timeout", 30)
+    r = requests.get(url, headers=UA, **kw)
     r.raise_for_status()
     return r
 
