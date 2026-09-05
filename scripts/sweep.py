@@ -20,6 +20,9 @@ TOAST_API = "https://ws-api.toasttab.com/do-federated-gateway/v1/graphql"
 MKE = (42.92, -88.07, 43.20, -87.86)
 GRID_LAT, GRID_LNG, RADIUS_MI, PAGE_CAP = 0.05, 0.06, 3, 299
 MARTINI = re.compile(r"espresso", re.I)
+# Happy hour shows up as a menu or group named for it ("Happy Hour", "HH
+# Specials") or in the item name itself ("HH Espresso Martini").
+HAPPY = re.compile(r"happy\s*hour|\bhh\b", re.I)
 # Toast location names routinely append the street address ("Von Trier 2235
 # North Farwell Avenue") or repeat the whole name. Display cleanup only.
 TRAILING_ADDR = re.compile(r"\s+\d+[\w.-]*\s+[A-Za-z0-9 .'&-]*?"
@@ -88,9 +91,13 @@ def cents(v) -> int | None:
         return None
 
 
-def martini_items(guid: str) -> list[dict]:
-    """Espresso-martini items from a restaurant's online and register menus."""
+def martini_items(guid: str) -> tuple[list[dict], bool]:
+    """Espresso-martini items from a restaurant's online and register menus,
+    plus whether the restaurant runs a happy hour at all. Regular-menu and
+    happy-hour prices are kept apart: a spot's board price is its everyday
+    price, the hh price only shows when the happy-hour toggle is on."""
     seen: dict[str, dict] = {}
+    has_hh = False
     for visibility in (None, "POS"):
         vis = f',visibility:{visibility}' if visibility else ''
         q = ('{menusV3(input:{restaurantGuid:"%s"%s}){... on MenusResponse{menus{name groups{name '
@@ -101,7 +108,11 @@ def martini_items(guid: str) -> list[dict]:
             print(f"menu {guid}: {exc}", file=sys.stderr)
             continue
         for menu in menus:
+            menu_hh = bool(HAPPY.search(menu.get("name") or ""))
+            has_hh = has_hh or menu_hh
             for group in menu.get("groups") or []:
+                group_hh = menu_hh or bool(HAPPY.search(group.get("name") or ""))
+                has_hh = has_hh or group_hh
                 for item in group.get("items") or []:
                     name = (item.get("name") or "").strip()
                     if not (MARTINI.search(name) and MARTINI_2.search(name)):
@@ -109,16 +120,19 @@ def martini_items(guid: str) -> list[dict]:
                     # "SHOP ..." rows are retail shelf stock, not a poured drink.
                     if name.lower().startswith("shop "):
                         continue
+                    item_hh = group_hh or bool(HAPPY.search(name))
                     prices = [c for c in (cents(p) for p in item.get("prices") or []) if c]
                     price = cents(item.get("price"))
                     if price is None and prices:
                         price = min(prices)
                     key = re.sub(r"\s+", " ", name.lower())
-                    # Keep the cheapest listing of the same item across menus.
-                    if key not in seen or (price and (seen[key]["price_cents"] is None or price < seen[key]["price_cents"])):
-                        seen[key] = {"item": name, "price_cents": price}
+                    entry = seen.setdefault(key, {"item": name, "price_cents": None, "hh_price_cents": None})
+                    # Keep the cheapest listing of the same item per price kind.
+                    slot = "hh_price_cents" if item_hh else "price_cents"
+                    if price and (entry[slot] is None or price < entry[slot]):
+                        entry[slot] = price
         time.sleep(0.3)
-    return list(seen.values())
+    return list(seen.values()), has_hh
 
 
 def neighborhood(lat: float, lng: float) -> str | None:
@@ -219,9 +233,12 @@ def clover_martini_items(slug: str) -> tuple[dict, list[dict]] | None:
         price = node.get("price")
         if not isinstance(price, (int, float)) or price <= 0:
             price = None
+        price = int(price) if price else None
         key = re.sub(r"\s+", " ", name.lower())
-        if key not in seen or (price and (seen[key]["price_cents"] is None or price < seen[key]["price_cents"])):
-            seen[key] = {"item": name, "price_cents": int(price) if price else None}
+        entry = seen.setdefault(key, {"item": name, "price_cents": None, "hh_price_cents": None})
+        slot = "hh_price_cents" if HAPPY.search(name) else "price_cents"
+        if price and (entry[slot] is None or price < entry[slot]):
+            entry[slot] = price
     return merchant, list(seen.values())
 
 
@@ -243,20 +260,26 @@ def main() -> None:
     hits = []
     for i, guid in enumerate(guids, 1):
         rest = directory[guid]
-        items = martini_items(guid)
-        if items:
-            hits.append((rest, items))
+        items, has_hh = martini_items(guid)
+        if items or has_hh:
+            hits.append((rest, items, has_hh))
         if i % 50 == 0:
             print(f"{i}/{len(guids)} scanned, {len(hits)} with espresso martinis", file=sys.stderr)
 
     out = []
-    for rest, items in hits:
+    for rest, items, has_hh in hits:
+        if not items:
+            continue
         loc = rest.get("location") or {}
         lat, lng = loc.get("latitude"), loc.get("longitude")
         hood = neighborhood(lat, lng) if lat and lng else None
         time.sleep(1.1)  # Nominatim courtesy pace
         addr = ", ".join(x for x in [loc.get("address1"), loc.get("city"), loc.get("state")] if x)
-        cheapest = min((m["price_cents"] for m in items if m["price_cents"]), default=None)
+        hh_prices = [m["hh_price_cents"] for m in items if m.get("hh_price_cents")]
+        regular = [m["price_cents"] for m in items if m["price_cents"]]
+        # Board price is the everyday price; a happy-hour-only listing still
+        # gets the spot on the board at its hh price.
+        cheapest = min(regular) if regular else min(hh_prices, default=None)
         out.append({
             "name": clean_name(rest.get("name")),
             "address": addr,
@@ -265,6 +288,8 @@ def main() -> None:
             "downtown": is_downtown(lat, lng),
             "price_cents": cheapest,
             "items": sorted(items, key=lambda m: (m["price_cents"] is None, m["price_cents"] or 0)),
+            "happy_hour": has_hh or bool(hh_prices),
+            "hh_price_cents": min(hh_prices) if hh_prices else None,
             "platform": "toast",
             "guid": rest["guid"],
         })
@@ -297,19 +322,40 @@ def main() -> None:
         hood = neighborhood(lat, lng) if lat and lng else None
         if lat and lng:
             time.sleep(1.1)
+        hh_prices = [m["hh_price_cents"] for m in items if m.get("hh_price_cents")]
+        regular = [m["price_cents"] for m in items if m["price_cents"]]
         out.append({
             "name": name,
             "address": address,
             "lat": lat, "lng": lng,
             "neighborhood": hood,
             "downtown": is_downtown(lat, lng),
-            "price_cents": min((m["price_cents"] for m in items if m["price_cents"]), default=None),
+            "price_cents": min(regular) if regular else min(hh_prices, default=None),
             "items": sorted(items, key=lambda m: (m["price_cents"] is None, m["price_cents"] or 0)),
+            "happy_hour": bool(hh_prices),
+            "hh_price_cents": min(hh_prices) if hh_prices else None,
             "platform": "clover",
             "guid": slug,
         })
         print(f"clover hit: {name} ({len(items)} items)", file=sys.stderr)
     out.sort(key=lambda r: (r["price_cents"] is None, r["price_cents"] or 0, r["name"]))
+
+    # Hand-verified spots the platforms cannot see (no online ordering,
+    # website-only menus). A live platform hit for the same name wins.
+    manual_path = Path(__file__).resolve().parent.parent / "data" / "manual.json"
+    if manual_path.exists():
+        manual = json.loads(manual_path.read_text()).get("entries") or []
+        live_names = {r["name"].lower() for r in out}
+        added = 0
+        for entry in manual:
+            if entry["name"].lower() in live_names:
+                print(f"manual: {entry['name']} also on a platform now, keeping the live one", file=sys.stderr)
+                continue
+            out.append(entry)
+            added += 1
+        if added:
+            out.sort(key=lambda r: (r["price_cents"] is None, r["price_cents"] or 0, r["name"]))
+            print(f"manual: {added} hand-verified spots merged", file=sys.stderr)
 
     doc = {
         "generated_at": dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds"),
