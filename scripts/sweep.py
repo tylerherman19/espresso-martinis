@@ -120,6 +120,10 @@ def martini_items(guid: str) -> tuple[list[dict], bool]:
                     # "SHOP ..." rows are retail shelf stock, not a poured drink.
                     if name.lower().startswith("shop "):
                         continue
+                    # "... liqueur" rows are a pour of the bottled liqueur,
+                    # not the mixed cocktail (Explorium lists both).
+                    if "liqueur" in name.lower():
+                        continue
                     item_hh = group_hh or bool(HAPPY.search(name))
                     prices = [c for c in (cents(p) for p in item.get("prices") or []) if c]
                     price = cents(item.get("price"))
@@ -229,6 +233,9 @@ def clover_martini_items(slug: str) -> tuple[dict, list[dict]] | None:
     for node in menu.get("items") or []:
         name = (node.get("name") or "").strip()
         if not (MARTINI.search(name) and MARTINI_2.search(name)):
+            continue
+        # Bottled-liqueur pours are not the mixed cocktail.
+        if "liqueur" in name.lower():
             continue
         price = node.get("price")
         if not isinstance(price, (int, float)) or price <= 0:
