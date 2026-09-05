@@ -90,6 +90,9 @@ def martini_items(guid: str) -> list[dict]:
                     name = (item.get("name") or "").strip()
                     if not (MARTINI.search(name) and MARTINI_2.search(name)):
                         continue
+                    # "SHOP ..." rows are retail shelf stock, not a poured drink.
+                    if name.lower().startswith("shop "):
+                        continue
                     prices = [c for c in (cents(p) for p in item.get("prices") or []) if c]
                     price = cents(item.get("price"))
                     if price is None and prices:
