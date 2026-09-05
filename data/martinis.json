@@ -1,8 +1,8 @@
 {
- "generated_at": "2026-09-05T06:56:26+00:00",
+ "generated_at": "2026-09-05T13:40:06+00:00",
  "metro": "Milwaukee",
  "restaurants_scanned": 340,
- "count": 95,
+ "count": 96,
  "martinis": [
   {
    "name": "Mix N Rewind",
@@ -15,9 +15,12 @@
    "items": [
     {
      "item": "Martini - Espresso",
-     "price_cents": 500
+     "price_cents": 500,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": false,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "dfba8b49-1acf-439d-a06f-d535a55d5339"
   },
@@ -32,32 +35,14 @@
    "items": [
     {
      "item": "Espresso Martini",
-     "price_cents": 600
+     "price_cents": 600,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": false,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "41353d61-30cc-4d4f-82cc-95ee0f048fdb"
-  },
-  {
-   "name": "Oak Barrel Public House",
-   "address": "1033 N Doctor M.L.K. Jr Dr, Milwaukee, WI",
-   "lat": 43.043742,
-   "lng": -87.914774,
-   "neighborhood": "Downtown",
-   "downtown": true,
-   "price_cents": 600,
-   "items": [
-    {
-     "item": "HH Espresso Martini",
-     "price_cents": 600
-    },
-    {
-     "item": "Oak Espresso Martini",
-     "price_cents": 1300
-    }
-   ],
-   "platform": "toast",
-   "guid": "594edfe7-e437-42cb-b7d6-630ab9dd42fa"
   },
   {
    "name": "Bandero County Wood Grill",
@@ -70,13 +55,17 @@
    "items": [
     {
      "item": "NA Espresso Martini",
-     "price_cents": 700
+     "price_cents": 700,
+     "hh_price_cents": null
     },
     {
      "item": "Espresso Martini",
-     "price_cents": 1000
+     "price_cents": 1000,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": false,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "6fcfffd6-6437-45af-9905-50d72692e71d"
   },
@@ -91,17 +80,22 @@
    "items": [
     {
      "item": "Heirloom Espresso Martini Liqueur",
-     "price_cents": 700
+     "price_cents": 700,
+     "hh_price_cents": null
     },
     {
      "item": "Bonded Espresso Martini",
-     "price_cents": 1200
+     "price_cents": 1200,
+     "hh_price_cents": null
     },
     {
      "item": "Espresso Martini",
-     "price_cents": 1300
+     "price_cents": 1300,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": false,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "bda91505-ab8a-469d-b06d-99a2d8742c5a"
   },
@@ -116,13 +110,17 @@
    "items": [
     {
      "item": "Espresso Martini",
-     "price_cents": 700
+     "price_cents": 700,
+     "hh_price_cents": null
     },
     {
      "item": "Espresso Martini W/ Five Farms",
-     "price_cents": 800
+     "price_cents": 800,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": false,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "40806cfd-b961-4d09-a069-bdf126da194b"
   },
@@ -137,37 +135,47 @@
    "items": [
     {
      "item": "Espresso Martini",
-     "price_cents": 700
+     "price_cents": 700,
+     "hh_price_cents": null
     },
     {
      "item": "Salted caramel espresso martini",
-     "price_cents": 1050
+     "price_cents": 1050,
+     "hh_price_cents": null
     },
     {
      "item": "Peppermint mocha espresso martinis",
-     "price_cents": 1150
+     "price_cents": 1150,
+     "hh_price_cents": null
     },
     {
      "item": "Gingerbread espresso martini",
-     "price_cents": 1200
+     "price_cents": 1200,
+     "hh_price_cents": null
     },
     {
      "item": "Red velvet espresso martini",
-     "price_cents": 1250
+     "price_cents": 1250,
+     "hh_price_cents": null
     },
     {
      "item": "Strawberry Espresso Martini",
-     "price_cents": 1300
+     "price_cents": 1300,
+     "hh_price_cents": null
     },
     {
      "item": "Coconut Espresso Martini",
-     "price_cents": 1400
+     "price_cents": 1400,
+     "hh_price_cents": null
     },
     {
      "item": "Banana bread Espresso Martini",
-     "price_cents": 1400
+     "price_cents": 1400,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": false,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "fa1805cb-bbba-4138-b347-9e8d479d1239"
   },
@@ -182,13 +190,17 @@
    "items": [
     {
      "item": "Espresso martini",
-     "price_cents": 800
+     "price_cents": 800,
+     "hh_price_cents": null
     },
     {
      "item": "WS Meyers Espresso Martini",
-     "price_cents": 1000
+     "price_cents": 1000,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": false,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "c8bb4057-10aa-4fcf-b8f7-a7fedeb74b51"
   },
@@ -203,9 +215,12 @@
    "items": [
     {
      "item": "Barkers Espresso Martini",
-     "price_cents": 900
+     "price_cents": 900,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": false,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "5dea25ec-dff7-45c4-858a-463ca09edd51"
   },
@@ -220,9 +235,12 @@
    "items": [
     {
      "item": "Espresso Martini Chocolate Bar",
-     "price_cents": 995
+     "price_cents": 995,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": false,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "f5f80755-7af6-4fcd-80e6-2cec9a605fff"
   },
@@ -237,17 +255,22 @@
    "items": [
     {
      "item": "Espresso Martini",
-     "price_cents": 1000
+     "price_cents": 1000,
+     "hh_price_cents": null
     },
     {
      "item": "Cara Cara Espresso Martini",
-     "price_cents": 1200
+     "price_cents": 1200,
+     "hh_price_cents": null
     },
     {
      "item": "Sweet & Southern Espresso Martini",
-     "price_cents": 1200
+     "price_cents": 1200,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": false,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "bded2799-ec5d-4672-a25e-e2f0063ffb2c"
   },
@@ -262,9 +285,12 @@
    "items": [
     {
      "item": "Espresso Martini",
-     "price_cents": 1000
+     "price_cents": 1000,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": false,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "2c71fa4f-6b63-4c2c-8b01-5c3cb701b816"
   },
@@ -279,13 +305,17 @@
    "items": [
     {
      "item": "Espresso Martini",
-     "price_cents": 1000
+     "price_cents": 1000,
+     "hh_price_cents": null
     },
     {
      "item": "Espresso Martini Cocktail",
-     "price_cents": 1300
+     "price_cents": 1300,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": true,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "70e5bdc2-2e29-414f-9731-00b7d3139b5e"
   },
@@ -300,9 +330,12 @@
    "items": [
     {
      "item": "Espresso Martini",
-     "price_cents": 1000
+     "price_cents": 1000,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": false,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "24cc36b5-05a6-47fa-ac3d-394a6ec5fee5"
   },
@@ -317,9 +350,12 @@
    "items": [
     {
      "item": "Espresso Martini",
-     "price_cents": 1000
+     "price_cents": 1000,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": false,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "0f0b24cc-72de-4585-86dd-fa13b4086746"
   },
@@ -334,9 +370,12 @@
    "items": [
     {
      "item": "Espresso Martini",
-     "price_cents": 1000
+     "price_cents": 1000,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": false,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "528a1952-dfbb-4a62-8bfd-788720098817"
   },
@@ -351,9 +390,12 @@
    "items": [
     {
      "item": "Peanut Butter Espresso Martini",
-     "price_cents": 1100
+     "price_cents": 1100,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": false,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "69e2fbb2-ab85-4968-b185-f0ad16d195c9"
   },
@@ -368,9 +410,12 @@
    "items": [
     {
      "item": "Espresso Martini",
-     "price_cents": 1100
+     "price_cents": 1100,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": false,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "dded948c-058d-4b6a-972c-74f980097d9b"
   },
@@ -385,9 +430,12 @@
    "items": [
     {
      "item": "Espresso Martini",
-     "price_cents": 1100
+     "price_cents": 1100,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": false,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "8086b8ec-28f2-4af0-82fa-7a84d19b9f2f"
   },
@@ -402,9 +450,12 @@
    "items": [
     {
      "item": "Espresso Martini",
-     "price_cents": 1100
+     "price_cents": 1100,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": false,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "d6098a8a-59a7-4bd8-b3f4-2830f42208e4"
   },
@@ -419,9 +470,12 @@
    "items": [
     {
      "item": "Espresso Martini",
-     "price_cents": 1100
+     "price_cents": 1100,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": false,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "0818eada-df9b-4e92-898c-fbe644df4e0c"
   },
@@ -436,9 +490,12 @@
    "items": [
     {
      "item": "Espresso Martini",
-     "price_cents": 1200
+     "price_cents": 1200,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": false,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "ab70b930-cd34-4384-bcb2-0c21e116710d"
   },
@@ -453,9 +510,12 @@
    "items": [
     {
      "item": "Espresso Martini",
-     "price_cents": 1200
+     "price_cents": 1200,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": false,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "c2c0c530-090b-4bf5-bbfe-5735615d6eeb"
   },
@@ -470,13 +530,17 @@
    "items": [
     {
      "item": "Heirloom Espresso Martini",
-     "price_cents": 1200
+     "price_cents": 1200,
+     "hh_price_cents": null
     },
     {
      "item": "Nitro Espresso-tini",
-     "price_cents": 1500
+     "price_cents": 1500,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": false,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "4b5cfac8-47ae-4b83-b689-3154510d0b00"
   },
@@ -491,13 +555,17 @@
    "items": [
     {
      "item": "No-Stresso Espresso Martini",
-     "price_cents": 1200
+     "price_cents": 1200,
+     "hh_price_cents": null
     },
     {
      "item": "Espresso-Tini",
-     "price_cents": 1400
+     "price_cents": 1400,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": false,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "8ccdf22b-43c1-4fcd-82c1-b7ec9ac8d20e"
   },
@@ -512,13 +580,17 @@
    "items": [
     {
      "item": "No-Stresso Espresso Martini",
-     "price_cents": 1200
+     "price_cents": 1200,
+     "hh_price_cents": null
     },
     {
      "item": "Espresso-Tini",
-     "price_cents": 1400
+     "price_cents": 1400,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": false,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "f502ad38-7383-45e7-bd1b-555310047025"
   },
@@ -533,9 +605,12 @@
    "items": [
     {
      "item": "Espresso Martini",
-     "price_cents": 1200
+     "price_cents": 1200,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": false,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "b2c79948-2580-48b5-8d90-22a61c46c77e"
   },
@@ -550,9 +625,12 @@
    "items": [
     {
      "item": "Espresso Martini",
-     "price_cents": 1200
+     "price_cents": 1200,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": false,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "98b2b2bb-233f-4831-bfcb-611af2ab53b3"
   },
@@ -567,9 +645,12 @@
    "items": [
     {
      "item": "Espresso Martini",
-     "price_cents": 1200
+     "price_cents": 1200,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": false,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "2ca48494-2e3e-4f3d-9b46-40cb95318a10"
   },
@@ -584,9 +665,12 @@
    "items": [
     {
      "item": "espresso martini",
-     "price_cents": 1200
+     "price_cents": 1200,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": false,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "7cde7392-05f4-48bf-9723-4a75058c5615"
   },
@@ -601,13 +685,17 @@
    "items": [
     {
      "item": "THAT'S ME AND CHOCOLATE ESPRESSO TINI",
-     "price_cents": 1200
+     "price_cents": 1200,
+     "hh_price_cents": null
     },
     {
      "item": "THATS ME... Espresso Martini",
-     "price_cents": 1200
+     "price_cents": 1200,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": false,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "23a73642-acc0-4ece-bb68-a962111ce18f"
   },
@@ -622,21 +710,27 @@
    "items": [
     {
      "item": "BANANA FOSTER ESPRESSO MARTINI",
-     "price_cents": 1200
+     "price_cents": 1200,
+     "hh_price_cents": null
     },
     {
      "item": "Agave Espresso Martini",
-     "price_cents": 1400
+     "price_cents": 1400,
+     "hh_price_cents": null
     },
     {
      "item": "Tiramisu Espresso Martini",
-     "price_cents": 1500
+     "price_cents": 1500,
+     "hh_price_cents": null
     },
     {
      "item": "ESPRESSO MARTINI FLIGHT (3)",
-     "price_cents": 3500
+     "price_cents": 3500,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": true,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "edc46549-39ed-4c6d-90c8-90a9b984b8b2"
   },
@@ -651,13 +745,17 @@
    "items": [
     {
      "item": "NA Espresso Martini",
-     "price_cents": 1200
+     "price_cents": 1200,
+     "hh_price_cents": null
     },
     {
      "item": "Lucky's Espresso Martini",
-     "price_cents": 1400
+     "price_cents": 1400,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": false,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "f1733527-e671-49d6-b517-1e20ece3fa5b"
   },
@@ -672,17 +770,22 @@
    "items": [
     {
      "item": "Espresso Tini",
-     "price_cents": 1200
+     "price_cents": 1200,
+     "hh_price_cents": null
     },
     {
      "item": "Espresso Martini",
-     "price_cents": 1200
+     "price_cents": 1200,
+     "hh_price_cents": null
     },
     {
      "item": "TREE Espresso Tini",
-     "price_cents": 4400
+     "price_cents": 4400,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": false,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "2aaea823-7c24-46f8-b0ea-596b59fe4e12"
   },
@@ -697,9 +800,12 @@
    "items": [
     {
      "item": "Espresso Martini",
-     "price_cents": 1200
+     "price_cents": 1200,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": false,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "e043e47e-d1ce-4e1a-813f-7052f1dee6f9"
   },
@@ -714,9 +820,12 @@
    "items": [
     {
      "item": "Espresso Martini",
-     "price_cents": 1200
+     "price_cents": 1200,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": true,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "28d0a708-d012-4f5e-8de7-e16a3a35ffe5"
   },
@@ -731,9 +840,12 @@
    "items": [
     {
      "item": "Espresso Martini",
-     "price_cents": 1200
+     "price_cents": 1200,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": true,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "8074fed6-5506-4b43-9e17-ee6bf3483efc"
   },
@@ -748,13 +860,17 @@
    "items": [
     {
      "item": "Espresso Martini",
-     "price_cents": 1200
+     "price_cents": 1200,
+     "hh_price_cents": null
     },
     {
      "item": "Peppermint Espresso Martini",
-     "price_cents": 1200
+     "price_cents": 1200,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": false,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "767bdeaa-3dfa-420b-a41b-b8d41b7efdcf"
   },
@@ -769,9 +885,12 @@
    "items": [
     {
      "item": "Espresso Martini",
-     "price_cents": 1200
+     "price_cents": 1200,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": false,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "ca5f471f-1559-4316-b4d6-94f9beb6b318"
   },
@@ -786,9 +905,12 @@
    "items": [
     {
      "item": "Espresso Martini",
-     "price_cents": 1200
+     "price_cents": 1200,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": false,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "1023f22c-c6cc-4d55-9c01-beaaa3048593"
   },
@@ -803,9 +925,12 @@
    "items": [
     {
      "item": "Espresso Martini",
-     "price_cents": 1200
+     "price_cents": 1200,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": false,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "93dd720f-401d-4490-923c-e3c2c95a45b3"
   },
@@ -820,28 +945,14 @@
    "items": [
     {
      "item": "Espresso Martini",
-     "price_cents": 1200
+     "price_cents": 1200,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": false,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "8f86d221-522b-47fe-93eb-56287494fcad"
-  },
-  {
-   "name": "Vier North",
-   "address": "1832 E North Ave, Milwaukee, WI",
-   "lat": 43.0604,
-   "lng": -87.887068,
-   "neighborhood": "East Side",
-   "downtown": true,
-   "price_cents": 1200,
-   "items": [
-    {
-     "item": "Espresso Martini",
-     "price_cents": 1200
-    }
-   ],
-   "platform": "toast",
-   "guid": "3af0831e-39c0-4265-9747-5a0f7cd7d9e2"
   },
   {
    "name": "Ambassador Hotel Restaurants",
@@ -854,9 +965,12 @@
    "items": [
     {
      "item": "Espresso Martini",
-     "price_cents": 1300
+     "price_cents": 1300,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": false,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "0e711a01-61f9-48c5-b0ef-d38b41c95521"
   },
@@ -871,13 +985,17 @@
    "items": [
     {
      "item": "ESPRESSO MARTINI",
-     "price_cents": 1300
+     "price_cents": 1300,
+     "hh_price_cents": null
     },
     {
      "item": "NITRO ESPRESSO MARTINI",
-     "price_cents": 1400
+     "price_cents": 1400,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": true,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "8bc16568-e5d5-4303-88c9-4b0a243af9e5"
   },
@@ -892,13 +1010,17 @@
    "items": [
     {
      "item": "Espresso Martini (rail)",
-     "price_cents": 1300
+     "price_cents": 1300,
+     "hh_price_cents": null
     },
     {
      "item": "Espresso (Titos) Martini",
-     "price_cents": 1500
+     "price_cents": 1500,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": true,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "4dfd0c56-9208-4f8e-a01b-01834d4efbb4"
   },
@@ -913,9 +1035,12 @@
    "items": [
     {
      "item": "Espresso Martini",
-     "price_cents": 1300
+     "price_cents": 1300,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": false,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "4849ed18-5afb-4679-86d8-75985160ac00"
   },
@@ -930,9 +1055,12 @@
    "items": [
     {
      "item": "ESPRESSO MARTINI",
-     "price_cents": 1300
+     "price_cents": 1300,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": false,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "c211bc81-f7a3-4d83-96c3-51feee5c57d1"
   },
@@ -947,11 +1075,39 @@
    "items": [
     {
      "item": "ESPRESSO MARTINI",
-     "price_cents": 1300
+     "price_cents": 1300,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": false,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "22a1fca1-7589-4cd9-9701-b42042e71cfc"
+  },
+  {
+   "name": "Oak Barrel Public House",
+   "address": "1033 N Doctor M.L.K. Jr Dr, Milwaukee, WI",
+   "lat": 43.043742,
+   "lng": -87.914774,
+   "neighborhood": "Downtown",
+   "downtown": true,
+   "price_cents": 1300,
+   "items": [
+    {
+     "item": "Oak Espresso Martini",
+     "price_cents": 1300,
+     "hh_price_cents": null
+    },
+    {
+     "item": "HH Espresso Martini",
+     "price_cents": null,
+     "hh_price_cents": 600
+    }
+   ],
+   "happy_hour": true,
+   "hh_price_cents": 600,
+   "platform": "toast",
+   "guid": "594edfe7-e437-42cb-b7d6-630ab9dd42fa"
   },
   {
    "name": "Summer Of \u201885",
@@ -964,9 +1120,12 @@
    "items": [
     {
      "item": "Espresso Martini",
-     "price_cents": 1300
+     "price_cents": 1300,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": true,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "adda5638-a732-4f58-bf4c-175f62ba184f"
   },
@@ -981,9 +1140,12 @@
    "items": [
     {
      "item": "ESPRESSO MARTINI",
-     "price_cents": 1300
+     "price_cents": 1300,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": true,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "48e8e433-cf77-4910-9142-993290032124"
   },
@@ -998,13 +1160,17 @@
    "items": [
     {
      "item": "Espresso Martini",
-     "price_cents": 1300
+     "price_cents": 1300,
+     "hh_price_cents": null
     },
     {
      "item": "Cardamom Rose Espresso Martini",
-     "price_cents": 1300
+     "price_cents": 1300,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": false,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "acf81942-bb83-475b-9cdd-71b9aaad0a05"
   },
@@ -1019,9 +1185,12 @@
    "items": [
     {
      "item": "Espresso Martini",
-     "price_cents": 1300
+     "price_cents": 1300,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": false,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "8e5bd01e-e1cf-44e1-877c-6d926527814d"
   },
@@ -1036,9 +1205,12 @@
    "items": [
     {
      "item": "Espresso Martini - Barker mix",
-     "price_cents": 1300
+     "price_cents": 1300,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": false,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "2a87807f-4ab2-4362-b408-22d810cb1040"
   },
@@ -1053,9 +1225,12 @@
    "items": [
     {
      "item": "Espresso Martini",
-     "price_cents": 1400
+     "price_cents": 1400,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": false,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "9ad0f9c4-e2ff-4103-a872-7f9d6674487b"
   },
@@ -1070,9 +1245,12 @@
    "items": [
     {
      "item": "Espresso Martini",
-     "price_cents": 1400
+     "price_cents": 1400,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": false,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "7c9f2cf4-1d02-4fcd-b327-d9b2f93f1d31"
   },
@@ -1087,9 +1265,12 @@
    "items": [
     {
      "item": "Espresso Martini",
-     "price_cents": 1400
+     "price_cents": 1400,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": false,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "76dc54a5-9628-4f7b-90b6-6969c7a6ce58"
   },
@@ -1104,9 +1285,12 @@
    "items": [
     {
      "item": "Espresso-Tini",
-     "price_cents": 1400
+     "price_cents": 1400,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": false,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "17828793-87ea-4bdf-9546-8a9a4d2859b1"
   },
@@ -1121,9 +1305,12 @@
    "items": [
     {
      "item": "Espresso-Tini",
-     "price_cents": 1400
+     "price_cents": 1400,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": false,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "58ba3a7e-c5ce-488a-bda5-d6450de71b85"
   },
@@ -1138,9 +1325,12 @@
    "items": [
     {
      "item": "Espresso-Tini",
-     "price_cents": 1400
+     "price_cents": 1400,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": false,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "e706929d-5218-476a-b51c-6d951e9114cd"
   },
@@ -1155,9 +1345,12 @@
    "items": [
     {
      "item": "NITRO ESPRESSO MARTINI",
-     "price_cents": 1400
+     "price_cents": 1400,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": true,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "5e1aa149-8c4d-4eb1-91fc-626eae6de231"
   },
@@ -1172,9 +1365,12 @@
    "items": [
     {
      "item": "ESPRESSO MARTINI",
-     "price_cents": 1400
+     "price_cents": 1400,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": false,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "8daf54a7-1468-4c56-bd1e-1a81618cc83f"
   },
@@ -1189,9 +1385,12 @@
    "items": [
     {
      "item": "Espresso Martini",
-     "price_cents": 1400
+     "price_cents": 1400,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": false,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "9238fd2e-0121-43c4-b2a1-fc37b69f8bc8"
   },
@@ -1206,9 +1405,12 @@
    "items": [
     {
      "item": "Espresso Martini",
-     "price_cents": 1400
+     "price_cents": 1400,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": false,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "1c25cd08-fe63-4346-8a64-af4a331677a7"
   },
@@ -1223,9 +1425,12 @@
    "items": [
     {
      "item": "Espresso Martini",
-     "price_cents": 1400
+     "price_cents": 1400,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": false,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "4fe4a218-94a2-4342-a8a3-c3741b4a02f8"
   },
@@ -1240,9 +1445,12 @@
    "items": [
     {
      "item": "Espresso martini",
-     "price_cents": 1400
+     "price_cents": 1400,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": false,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "906a9a49-78a9-4fcd-a418-e915bb03130f"
   },
@@ -1257,9 +1465,12 @@
    "items": [
     {
      "item": "Espresso Martini",
-     "price_cents": 1400
+     "price_cents": 1400,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": false,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "dd5358d3-6b82-4d2e-b638-f12c98dc20bd"
   },
@@ -1274,9 +1485,12 @@
    "items": [
     {
      "item": "Espresso Martini",
-     "price_cents": 1400
+     "price_cents": 1400,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": false,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "c388b54e-a103-4433-9e31-9a2dfb0a77b0"
   },
@@ -1291,9 +1505,12 @@
    "items": [
     {
      "item": "Espresso Martini",
-     "price_cents": 1400
+     "price_cents": 1400,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": false,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "fac72711-9e39-43c3-a147-5cf32062d476"
   },
@@ -1308,9 +1525,12 @@
    "items": [
     {
      "item": "Espresso Martini",
-     "price_cents": 1400
+     "price_cents": 1400,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": false,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "67d45cd1-03d0-4283-bb5e-22cbada67542"
   },
@@ -1325,9 +1545,12 @@
    "items": [
     {
      "item": "Espresso Martini",
-     "price_cents": 1400
+     "price_cents": 1400,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": false,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "bb31e984-77f6-4751-b309-9d0be7117b9e"
   },
@@ -1342,9 +1565,12 @@
    "items": [
     {
      "item": "Espresso Martini",
-     "price_cents": 1400
+     "price_cents": 1400,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": false,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "a204faba-dc7c-4d21-b562-e89336f9f1c4"
   },
@@ -1359,9 +1585,12 @@
    "items": [
     {
      "item": "Espresso Martini",
-     "price_cents": 1400
+     "price_cents": 1400,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": false,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "ad73eb48-1f4b-4fb7-9e34-6958e472df3d"
   },
@@ -1376,11 +1605,34 @@
    "items": [
     {
      "item": "Espresso Martini",
-     "price_cents": 1400
+     "price_cents": 1400,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": false,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "7d9f403d-e4e1-4898-8877-14b2282076ee"
+  },
+  {
+   "name": "Vier North",
+   "address": "1832 E North Ave, Milwaukee, WI",
+   "lat": 43.0604,
+   "lng": -87.887068,
+   "neighborhood": "East Side",
+   "downtown": true,
+   "price_cents": 1400,
+   "items": [
+    {
+     "item": "Espresso Martini",
+     "price_cents": 1400,
+     "hh_price_cents": null
+    }
+   ],
+   "happy_hour": false,
+   "hh_price_cents": null,
+   "platform": "toast",
+   "guid": "3af0831e-39c0-4265-9747-5a0f7cd7d9e2"
   },
   {
    "name": "WhirlyBall - Brookfield Square, WI",
@@ -1393,9 +1645,12 @@
    "items": [
     {
      "item": "Espresso Martini",
-     "price_cents": 1400
+     "price_cents": 1400,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": false,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "035bfb6b-7648-4d5f-9050-e439c27f41e3"
   },
@@ -1410,9 +1665,12 @@
    "items": [
     {
      "item": "Espresso Martini",
-     "price_cents": 1500
+     "price_cents": 1500,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": false,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "fd25a3f8-ec2b-4103-b373-2c9b034fea9b"
   },
@@ -1427,9 +1685,12 @@
    "items": [
     {
      "item": "Espresso Martini",
-     "price_cents": 1500
+     "price_cents": 1500,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": false,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "2eb72b91-edf3-4d9d-9e9c-f0f2fcc61eb7"
   },
@@ -1444,9 +1705,12 @@
    "items": [
     {
      "item": "Espresso Martini",
-     "price_cents": 1500
+     "price_cents": 1500,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": false,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "66a4f8dd-42b4-42d4-9895-2e496c44dec7"
   },
@@ -1461,9 +1725,12 @@
    "items": [
     {
      "item": "Espresso Martini",
-     "price_cents": 1500
+     "price_cents": 1500,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": false,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "fe6ebf1f-18f9-4fc0-bf27-2d55ddbbb0f9"
   },
@@ -1478,9 +1745,17 @@
    "items": [
     {
      "item": "Espresso Martini",
-     "price_cents": 1500
+     "price_cents": 1500,
+     "hh_price_cents": null
+    },
+    {
+     "item": "Pumpkin Spice Espresso Martini",
+     "price_cents": 1600,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": false,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "18ef7ab1-88b4-4afb-8aa7-7edd05dcd25c"
   },
@@ -1495,13 +1770,17 @@
    "items": [
     {
      "item": "Martini Espresso",
-     "price_cents": 1500
+     "price_cents": 1500,
+     "hh_price_cents": null
     },
     {
      "item": "Martini Espresso Flight",
-     "price_cents": 2700
+     "price_cents": 2700,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": false,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "0508bfb7-fdfd-43d9-89ec-1c74acb07795"
   },
@@ -1516,9 +1795,12 @@
    "items": [
     {
      "item": "Espresso Martini",
-     "price_cents": 1500
+     "price_cents": 1500,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": false,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "c9c5e6ba-298d-4ac8-870c-23394d53fd77"
   },
@@ -1533,13 +1815,17 @@
    "items": [
     {
      "item": "Barker Espresso Martini",
-     "price_cents": 1500
+     "price_cents": 1500,
+     "hh_price_cents": null
     },
     {
      "item": "Ketel One Espresso Martini",
-     "price_cents": 1500
+     "price_cents": 1500,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": false,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "53e8820d-c857-45ae-baf8-d7fd32f83401"
   },
@@ -1554,9 +1840,12 @@
    "items": [
     {
      "item": "Midnight Hustle - Espresso Martini",
-     "price_cents": 1500
+     "price_cents": 1500,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": false,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "b70aa28b-5578-4772-95f2-b203bbf5547f"
   },
@@ -1571,13 +1860,17 @@
    "items": [
     {
      "item": "Espresso Martini",
-     "price_cents": 1500
+     "price_cents": 1500,
+     "hh_price_cents": null
     },
     {
      "item": "Irish Cream Espresso Martini",
-     "price_cents": 1900
+     "price_cents": 1900,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": false,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "3a345621-3f21-4cdb-939e-57df28579e7d"
   },
@@ -1592,13 +1885,17 @@
    "items": [
     {
      "item": "Chai Espresso Martini",
-     "price_cents": 1500
+     "price_cents": 1500,
+     "hh_price_cents": null
     },
     {
      "item": "Espresso Martini",
-     "price_cents": 1600
+     "price_cents": 1600,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": false,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "952ce099-9a61-4686-810e-6975c07bf9c0"
   },
@@ -1613,13 +1910,17 @@
    "items": [
     {
      "item": "Espresso Martini (Jack Me Up)",
-     "price_cents": 1500
+     "price_cents": 1500,
+     "hh_price_cents": null
     },
     {
      "item": "Espresso Martini",
-     "price_cents": 1600
+     "price_cents": 1600,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": true,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "262417a9-a73d-4238-aef9-213133c8872f"
   },
@@ -1634,9 +1935,12 @@
    "items": [
     {
      "item": "Espresso Martini",
-     "price_cents": 1600
+     "price_cents": 1600,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": false,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "281f1dcb-b8ef-4f0b-880c-03def9eb47a7"
   },
@@ -1651,11 +1955,36 @@
    "items": [
     {
      "item": "Hazelnut Espresso Martini",
-     "price_cents": 1600
+     "price_cents": 1600,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": false,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "13108d9a-91b8-4a5b-ae46-074fdb0c82e2"
+  },
+  {
+   "name": "Onesto",
+   "address": "221 S 2nd St, Milwaukee, WI",
+   "lat": 43.0288674,
+   "lng": -87.9127913,
+   "neighborhood": "Walker's Point",
+   "downtown": true,
+   "price_cents": 1600,
+   "items": [
+    {
+     "item": "Brown Sugar Espresso Martini",
+     "price_cents": 1600,
+     "hh_price_cents": null
+    }
+   ],
+   "happy_hour": false,
+   "hh_price_cents": null,
+   "platform": "website",
+   "guid": "manual:onesto",
+   "source_url": "https://onestomke.com/menus",
+   "verified_at": "2026-09-05"
   },
   {
    "name": "Pastiche Bistro & Wine Bar",
@@ -1668,9 +1997,12 @@
    "items": [
     {
      "item": "Espresso Martini",
-     "price_cents": 1600
+     "price_cents": 1600,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": false,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "64c74ae4-66e8-4bda-a5a1-e8e146185561"
   },
@@ -1685,9 +2017,12 @@
    "items": [
     {
      "item": "Espresso Martini",
-     "price_cents": 1600
+     "price_cents": 1600,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": false,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "6b82acdf-43a2-4a32-ab5f-a129dd466197"
   },
@@ -1702,13 +2037,17 @@
    "items": [
     {
      "item": "Espresso Martini",
-     "price_cents": 1600
+     "price_cents": 1600,
+     "hh_price_cents": null
     },
     {
      "item": "Peppermint Chocolate Espresso Martini",
-     "price_cents": 1600
+     "price_cents": 1600,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": false,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "e514bd16-b8fe-4496-8d5c-4971379c9c5f"
   },
@@ -1723,9 +2062,12 @@
    "items": [
     {
      "item": "Freddo Espresso Martini",
-     "price_cents": 1700
+     "price_cents": 1700,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": false,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "1be82a52-79a1-45f4-bf64-0f9b3af6a1ac"
   },
@@ -1740,9 +2082,12 @@
    "items": [
     {
      "item": "Turkish Espresso Martini",
-     "price_cents": 1700
+     "price_cents": 1700,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": false,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "31d957b4-7b0d-406f-b151-b27403e9867b"
   },
@@ -1757,9 +2102,12 @@
    "items": [
     {
      "item": "Espresso Martini",
-     "price_cents": 1700
+     "price_cents": 1700,
+     "hh_price_cents": null
     }
    ],
+   "happy_hour": false,
+   "hh_price_cents": null,
    "platform": "toast",
    "guid": "5b4cd395-1f29-4454-b5d1-84f414016155"
   }
