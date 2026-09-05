@@ -19,6 +19,10 @@ TOAST_API = "https://ws-api.toasttab.com/do-federated-gateway/v1/graphql"
 MKE = (42.92, -88.07, 43.20, -87.86)
 GRID_LAT, GRID_LNG, RADIUS_MI, PAGE_CAP = 0.05, 0.06, 3, 299
 MARTINI = re.compile(r"espresso", re.I)
+# Toast location names routinely append the street address ("Von Trier 2235
+# North Farwell Avenue") or repeat the whole name. Display cleanup only.
+TRAILING_ADDR = re.compile(r"\s+\d+[\w.-]*\s+[A-Za-z0-9 .'&-]*?"
+    r"(Street|St|Avenue|Ave|Road|Rd|Drive|Dr|Lane|Ln|Blvd|Boulevard|Way|Highway|Hwy|Court|Ct|Place|Pl|Northway|Parkway|Pkwy|Terrace|Circle)\.?$", re.I)
 MARTINI_2 = re.compile(r"martini|\btini\b", re.I)
 # Downtown Milwaukee: Third Ward through Yankee Hill, river to the lake. User
 # steering 2026-09-05: downtown gets read first and leads the site.
@@ -116,6 +120,19 @@ def neighborhood(lat: float, lng: float) -> str | None:
     return addr.get("city") or addr.get("town") or addr.get("village") or hood
 
 
+def clean_name(name: str) -> str:
+    name = re.sub(r"\s+", " ", name or "").strip()
+    half = len(name) // 2
+    if len(name) % 2 == 0 and name[:half] == name[half:]:
+        name = name[:half].rstrip()
+    words = name.split(" ")
+    if len(words) % 2 == 0:
+        n = len(words) // 2
+        if words[:n] == words[n:]:
+            name = " ".join(words[:n])
+    return TRAILING_ADDR.sub("", name).strip()
+
+
 def is_downtown(lat, lng) -> bool:
     return lat is not None and lng is not None and DT[0] <= lat <= DT[2] and DT[1] <= lng <= DT[3]
 
@@ -153,7 +170,7 @@ def main() -> None:
         addr = ", ".join(x for x in [loc.get("address1"), loc.get("city"), loc.get("state")] if x)
         cheapest = min((m["price_cents"] for m in items if m["price_cents"]), default=None)
         out.append({
-            "name": re.sub(r"\s+", " ", rest.get("name") or "").strip(),
+            "name": clean_name(rest.get("name")),
             "address": addr,
             "lat": lat, "lng": lng,
             "neighborhood": hood,
