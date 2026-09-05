@@ -1,0 +1,33 @@
+name: Sweep for espresso martinis
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '15 5 * * 3'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: martini-sweep
+  cancel-in-progress: false
+
+jobs:
+  sweep:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install requests
+      - name: Sweep and write data/martinis.json
+        run: python scripts/sweep.py
+      - name: Commit if changed
+        run: |
+          git config user.name 'martini-sweep[bot]'
+          git config user.email 'actions@github.com'
+          git add data/martinis.json
+          git diff --cached --quiet || git commit -m "Sweep $(date -u +%Y-%m-%d): espresso martini index refresh"
+          git push
