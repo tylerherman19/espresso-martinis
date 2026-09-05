@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Espresso Martini Wall | Milwaukee</title>
+<meta name="description" content="Where to get an espresso martini in Milwaukee, and what it costs.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+<style>
+:root { --paper:#F5F4F0; --ink:#1B1A17; --muted:#6F6A5E; --line:#DAD6CB; --accent:#2E5339; }
+* { box-sizing:border-box; }
+html { background:var(--paper); color:var(--ink); font-family:'Fraunces',Georgia,serif; }
+body { margin:0; min-width:320px; font-size:15px; }
+button,input { font:inherit; color:inherit; }
+.hidden { display:none !important; }
+#bar { position:sticky; top:0; z-index:500; background:var(--paper); border-bottom:1px solid var(--ink); padding:9px 12px; display:flex; gap:6px; align-items:center; }
+#bar .b { font-weight:600; font-size:15px; letter-spacing:-.01em; white-space:nowrap; }
+#bar .find { flex:1 1 auto; min-width:0; border:1px solid var(--ink); background:var(--paper); border-radius:0; padding:6px 8px; font-family:'IBM Plex Mono',monospace; font-size:11px; }
+#hh-btn { border:1px solid var(--ink); background:var(--paper); border-radius:0; padding:6px 8px; font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.05em; text-transform:uppercase; cursor:pointer; white-space:nowrap; }
+#hh-btn.on { background:var(--accent); border-color:var(--accent); color:var(--paper); }
+#map-btn { border:1px solid var(--ink); background:var(--ink); color:var(--paper); border-radius:0; padding:6px 8px; font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.05em; text-transform:uppercase; cursor:pointer; }
+.mast { text-align:center; padding:26px 14px 16px; border-bottom:3px double var(--ink); }
+.mast .k { font-family:'IBM Plex Mono',monospace; font-size:9.5px; letter-spacing:.22em; color:var(--accent); text-transform:uppercase; }
+.mast h1 { margin:6px 0 0; font-weight:500; font-size:clamp(30px,8vw,52px); letter-spacing:-.02em; line-height:1.03; }
+.mast .s { margin-top:8px; font-family:'IBM Plex Mono',monospace; font-size:9.5px; letter-spacing:.14em; color:var(--muted); text-transform:uppercase; }
+.band { background:var(--accent); color:var(--paper); padding:7px 12px; display:flex; align-items:baseline; gap:8px; border-top:1px solid var(--ink); }
+.band .bn { font-weight:500; font-size:16.5px; letter-spacing:.01em; }
+.band .bc { margin-left:auto; font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:.16em; opacity:.85; }
+.grid { display:grid; grid-template-columns:1fr 1fr; }
+.tile { position:relative; border-right:1px solid var(--ink); border-bottom:1px solid var(--ink); padding:12px 10px 10px; min-height:108px; cursor:pointer; background:var(--paper); text-align:left; border-top:0; border-left:0; }
+.tile:nth-child(2n) { border-right:0; }
+.tile:active { background:#EDEAE2; }
+.tile .td { font-family:'IBM Plex Mono',monospace; font-size:8px; letter-spacing:.16em; color:var(--muted); text-transform:uppercase; }
+.tile .tn { margin-top:4px; font-weight:500; font-size:14.5px; line-height:1.15; letter-spacing:-.01em; display:block; }
+.tile .tp { position:absolute; right:8px; bottom:8px; font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:14px; }
+.tile .hh-dot { position:absolute; left:10px; bottom:10px; font-family:'IBM Plex Mono',monospace; font-size:8px; letter-spacing:.1em; color:var(--accent); border:1px solid var(--accent); padding:0 3px; }
+#backdrop { position:fixed; inset:0; z-index:900; background:rgba(27,26,23,.35); }
+#sheet { position:fixed; left:0; right:0; bottom:0; z-index:950; background:var(--paper); border-top:1px solid var(--ink); box-shadow:0 -6px 0 rgba(27,26,23,.08); padding:16px 16px 22px; max-height:72vh; overflow:auto; }
+#sheet .sname { font-weight:600; font-size:21px; letter-spacing:-.01em; }
+#sheet .shood { font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); margin-top:2px; }
+#sheet .sitems { margin-top:12px; border-top:1px solid var(--line); padding-top:8px; }
+#sheet .sitem { display:flex; justify-content:space-between; gap:12px; font-size:14px; padding:3px 0; }
+#sheet .sitem b { font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:13px; white-space:nowrap; }
+#sheet .sitem b.hh { color:var(--accent); }
+#sheet .saddr { margin-top:10px; font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--muted); }
+#sheet .row2 { margin-top:12px; display:flex; gap:8px; }
+#sheet .pin-link, #sheet .close2 { font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; padding:7px 12px; cursor:pointer; border:1px solid var(--ink); background:var(--paper); }
+#sheet .pin-link { color:var(--accent); border-color:var(--accent); }
+#map-overlay { position:fixed; inset:0; z-index:1000; background:var(--paper); display:flex; flex-direction:column; }
+#map-overlay .overlay-bar { display:flex; align-items:center; gap:10px; padding:10px 12px; border-bottom:1px solid var(--ink); }
+#map-overlay .overlay-title { font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:var(--muted); }
+#map-overlay .close-map { margin-left:auto; border:1px solid var(--ink); background:var(--paper); font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.08em; text-transform:uppercase; padding:6px 12px; cursor:pointer; }
+#map { flex:1 1 auto; width:100%; }
+.price-pin { background:var(--paper); color:var(--ink); border:1.5px solid var(--ink); font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:10.5px; padding:2px 5px; white-space:nowrap; box-shadow:2px 2px 0 rgba(27,26,23,.18); }
+.price-pin.cheapest { background:var(--accent); color:var(--paper); border-color:var(--accent); }
+.footer { padding:20px 12px 40px; border-top:1px solid var(--ink); }
+.footer p { margin:0; font-size:12px; line-height:1.6; color:var(--muted); }
+</style>
+</head>
+<body>
+<div id="bar">
+  <span class="b">The Wall</span>
+  <input class="find" id="find" type="search" placeholder="Find a spot" aria-label="Find a spot">
+  <button id="hh-btn" type="button" aria-pressed="false">HH</button>
+  <button id="map-btn" type="button">Map</button>
+</div>
+<div class="mast">
+  <div class="k">Milwaukee</div>
+  <h1>The Espresso Martini Wall</h1>
+  <div class="s" id="stamp">LOADING</div>
+</div>
+<div id="wall"></div>
+<footer class="footer"><p>Prices as listed on each restaurant's own current menu. Not affiliated with, or endorsed by, any restaurant listed. If a menu changed today, the next sweep catches it.</p></footer>
+<div id="backdrop" class="hidden"></div>
+<div id="sheet" class="hidden"></div>
+<div id="map-overlay" class="hidden">
+  <div class="overlay-bar"><span class="overlay-title" id="map-title"></span><button class="close-map" id="close-map" type="button">Close</button></div>
+  <div id="map"></div>
+</div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script>
+const $ = s => document.querySelector(s);
+const money = c => '$' + (c/100).toFixed(c%100===0?0:2);
+const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+let SPOTS=[], HH=false, QUERY='', MAP=null, MARKERS={};
+const shownPrice = s => (HH && s.hh_price_cents) ? s.hh_price_cents : s.price_cents;
+const BOXES = {
+  'Deer District':[43.0430,43.0480,-87.9190,-87.9120], 'Theater District':[43.0370,43.0430,-87.9170,-87.9085],
+  'Third Ward':[43.0295,43.0370,-87.9125,-87.9000], "Walker's Point":[43.0160,43.0300,-87.9200,-87.9000],
+  'Brady Street':[43.0450,43.0565,-87.9100,-87.8850], 'North Avenue':[43.0565,43.0620,-87.9160,-87.8800],
+  'Downtown':[43.0350,43.0465,-87.9300,-87.8980]
+};
+const MATCH = ['Deer District','Theater District','Third Ward',"Walker's Point",'Brady Street','North Avenue','Downtown'];
+const CORE = ['Deer District','Theater District','Downtown','Third Ward',"Walker's Point",'Brady Street','North Avenue'];
+const districtOf = s => { for (const n of MATCH){const b=BOXES[n]; if(s.lat>=b[0]&&s.lat<=b[1]&&s.lng>=b[2]&&s.lng<=b[3]) return n;} return null; };
+const visible = s => {
+  if (HH && !s.happy_hour) return false;
+  const q=QUERY.trim().toLowerCase(); if(!q) return true;
+  return s.name.toLowerCase().includes(q)||(s.neighborhood||'').toLowerCase().includes(q)||(districtOf(s)||'').toLowerCase().includes(q)||s.items.some(it=>it.item.toLowerCase().includes(q));
+};
+function bandHtml(name,list){
+  return `<div class="band"><span class="bn">${esc(name)}</span><span class="bc">${list.length} SPOT${list.length===1?'':'S'}</span></div>`;
+}
+function tileHtml(s){
+  const p=shownPrice(s);
+  return `<button class="tile" data-guid="${s.guid}" type="button">
+    <span class="td">${esc(districtOf(s)||s.neighborhood||'')}</span>
+    <span class="tn">${esc(s.name)}</span>
+    ${s.happy_hour?'<span class="hh-dot">HH</span>':''}
+    <span class="tp">${money(p)}</span></button>`;
+}
+function renderWall(){
+  let html='';
+  const used=new Set();
+  CORE.forEach(n=>{
+    const l=SPOTS.filter(s=>districtOf(s)===n&&visible(s)).sort((a,b)=>shownPrice(a)-shownPrice(b)||a.name.localeCompare(b.name));
+    if(!l.length) return;
+    l.forEach(s=>used.add(s.guid));
+    html+=bandHtml(n,l)+'<div class="grid">'+l.map(tileHtml).join('')+'</div>';
+  });
+  const rest=SPOTS.filter(s=>!used.has(s.guid)&&visible(s));
+  const hoods={};
+  rest.forEach(s=>{const h=s.neighborhood||'Milwaukee';(hoods[h]=hoods[h]||[]).push(s);});
+  Object.keys(hoods).sort().forEach(h=>{ if(hoods[h].length>=3){
+    const l=hoods[h].sort((a,b)=>shownPrice(a)-shownPrice(b)||a.name.localeCompare(b.name));
+    html+=bandHtml(h,l)+'<div class="grid">'+l.map(tileHtml).join('')+'</div>';
+    delete hoods[h]; } });
+  const tail=[].concat(...Object.values(hoods)).sort((a,b)=>shownPrice(a)-shownPrice(b)||a.name.localeCompare(b.name));
+  if(tail.length) html+=bandHtml('Around the metro',tail)+'<div class="grid">'+tail.map(tileHtml).join('')+'</div>';
+  $('#wall').innerHTML=html||'<div style="padding:30px;text-align:center;color:var(--muted)">Nothing on the wall matches that.</div>';
+  document.querySelectorAll('.tile').forEach(t=>t.addEventListener('click',()=>openSpot(t.dataset.guid)));
+}
+function openSpot(guid){
+  const s=SPOTS.find(x=>x.guid===guid);
+  $('#backdrop').classList.remove('hidden');
+  const sh=$('#sheet');
+  sh.classList.remove('hidden');
+  sh.innerHTML=`<div class="sname">${esc(s.name)}</div>
+    <div class="shood">${esc(districtOf(s)||s.neighborhood||'Milwaukee')}</div>
+    <div class="sitems">${s.items.map(it=>{
+      const reg=it.price_cents?money(it.price_cents):''; const hhp=it.hh_price_cents?money(it.hh_price_cents)+' hh':'';
+      const isHH=HH&&it.hh_price_cents;
+      return `<div class="sitem"><span>${esc(it.item)}</span><b class="${isHH?'hh':''}">${isHH?hhp:(reg+(hhp?' · '+hhp:''))}</b></div>`;}).join('')}</div>
+    <div class="saddr">${esc(s.address||'')}</div>
+    <div class="row2"><button class="pin-link" data-pin="${s.guid}" type="button">Show on map</button><button class="close2" type="button">Close</button></div>`;
+  sh.querySelector('.pin-link').addEventListener('click',()=>{closeSpot();openMap(s.guid);});
+  sh.querySelector('.close2').addEventListener('click',closeSpot);
+}
+function closeSpot(){ $('#backdrop').classList.add('hidden'); $('#sheet').classList.add('hidden'); }
+$('#backdrop').addEventListener('click',closeSpot);
+function popupHtml(s){
+  return `<div style="font-weight:600;font-size:15px">${esc(s.name)}</div>`+
+    s.items.map(it=>{const reg=it.price_cents?money(it.price_cents):'';const hhp=it.hh_price_cents?money(it.hh_price_cents)+' hh':'';
+      const isHH=HH&&it.hh_price_cents;
+      return `<div style="margin-top:6px;font-size:13px;display:flex;justify-content:space-between;gap:12px"><span>${esc(it.item)}</span><b style="font-family:'IBM Plex Mono',monospace;font-size:12px;${isHH?'color:var(--accent)':''}">${isHH?hhp:(reg+(hhp?' · '+hhp:''))}</b></div>`;}).join('')+
+    `<div style="margin-top:7px;font-family:'IBM Plex Mono',monospace;font-size:10px;color:#6F6A5E">${esc(s.address||'')}</div>`;
+}
+function openMap(guid){
+  $('#map-overlay').classList.remove('hidden'); document.body.style.overflow='hidden';
+  if(!MAP){ MAP=L.map('map',{scrollWheelZoom:false});
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'}).addTo(MAP); }
+  Object.values(MARKERS).forEach(m=>m.remove()); MARKERS={};
+  const list=SPOTS.filter(visible);
+  const minP=Math.min(...list.map(shownPrice));
+  list.forEach(s=>{ const cheap=shownPrice(s)===minP;
+    const icon=L.divIcon({className:'',html:`<div class="price-pin${cheap?' cheapest':''}">${money(shownPrice(s))}</div>`,iconSize:null,iconAnchor:[20,14]});
+    MARKERS[s.guid]=L.marker([s.lat,s.lng],{icon}).addTo(MAP).bindPopup(popupHtml(s)); });
+  $('#map-title').textContent=`${list.length} spots, pinned`;
+  setTimeout(()=>{ MAP.invalidateSize();
+    if(guid&&MARKERS[guid]){ const s=list.find(x=>x.guid===guid); MAP.setView([s.lat,s.lng],15); MARKERS[guid].openPopup(); }
+    else MAP.fitBounds(L.latLngBounds(list.map(s=>[s.lat,s.lng])).pad(0.08)); },60);
+}
+function closeMap(){ $('#map-overlay').classList.add('hidden'); document.body.style.overflow=''; }
+$('#map-btn').addEventListener('click',()=>openMap());
+$('#close-map').addEventListener('click',closeMap);
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeMap();closeSpot();}});
+$('#hh-btn').addEventListener('click',()=>{HH=!HH;$('#hh-btn').classList.toggle('on',HH);$('#hh-btn').setAttribute('aria-pressed',HH);renderWall();});
+$('#find').addEventListener('input',e=>{QUERY=e.target.value;renderWall();});
+fetch('data/martinis.json?v='+Date.now()).then(r=>r.json()).then(d=>{
+  SPOTS=d.martinis;
+  const dt=new Date(d.generated_at);
+  const mon=dt.toLocaleString('en-US',{month:'short',timeZone:'America/Chicago'});
+  const day=Number(dt.toLocaleString('en-US',{day:'numeric',timeZone:'America/Chicago'}));
+  $('#stamp').textContent=`${SPOTS.length} SPOTS · UPDATED ${mon.toUpperCase()} ${day}`;
+  $('#hh-btn').innerHTML=`HH <sup>${SPOTS.filter(s=>s.happy_hour).length}</sup>`;
+  renderWall();
+});
+</script>
+</body>
+</html>
