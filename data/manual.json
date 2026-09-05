@@ -1,0 +1,23 @@
+{
+ "note": "Hand-verified spots the platform sweep cannot see (no online ordering, website-only menus). Merged into martinis.json on every run; a live platform hit for the same name wins.",
+ "entries": [
+  {
+   "name": "Onesto",
+   "address": "221 S 2nd St, Milwaukee, WI",
+   "lat": 43.0288674,
+   "lng": -87.9127913,
+   "neighborhood": "Walker's Point",
+   "downtown": true,
+   "price_cents": 1600,
+   "items": [
+    {"item": "Brown Sugar Espresso Martini", "price_cents": 1600, "hh_price_cents": null}
+   ],
+   "happy_hour": false,
+   "hh_price_cents": null,
+   "platform": "website",
+   "guid": "manual:onesto",
+   "source_url": "https://onestomke.com/menus",
+   "verified_at": "2026-09-05"
+  }
+ ]
+}
