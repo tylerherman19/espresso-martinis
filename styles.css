@@ -29,6 +29,12 @@ button:focus-visible, select:focus-visible { outline: 2px solid var(--ink); outl
 .tab-strip button sup { font-family: 'IBM Plex Mono', monospace; font-size: 9px; font-weight: 400; margin-left: 4px; opacity: .62; }
 .tab-strip button.active { font-weight: 700; color: var(--masthead-fg); box-shadow: inset 0 -3px 0 var(--masthead-fg); }
 .tab-spacer { flex: 1 1 auto; }
+.hh-toggle { flex: 0 0 auto; display: inline-flex; align-items: baseline; gap: 6px; margin-bottom: 6px; padding: 4px 6px; border: 1px solid var(--masthead-muted); color: var(--masthead-fg); font-size: 12.5px; white-space: nowrap; cursor: pointer; user-select: none; }
+.hh-toggle input { accent-color: var(--accent); margin: 0; }
+.hh-toggle sup { font-family: 'IBM Plex Mono', monospace; font-size: 9px; opacity: .62; margin-left: 2px; }
+.hh-toggle.on { border-color: var(--masthead-fg); font-weight: 600; }
+.hh-tag { font-family: 'IBM Plex Mono', monospace; font-size: 8.5px; letter-spacing: .1em; color: var(--accent); border: 1px solid var(--accent); padding: 0 3px; margin-left: 5px; vertical-align: 2px; }
+.leaflet-popup-content .pop-hh { margin-top: 7px; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .06em; color: var(--masthead-fg); }
 .tab-strip select { flex: 0 0 auto; background: var(--ink); color: var(--masthead-fg); border: 1px solid var(--masthead-muted); border-radius: 0; font-size: 12.5px; padding: 4px 6px; margin-bottom: 6px; max-width: 60vw; }
 .column-header { display: grid; grid-template-columns: clamp(26px, 3vw, 40px) minmax(0, 1fr) clamp(96px, 12vw, 132px) calc(clamp(44px, 5vw, 58px) - clamp(10px, 2vw, 22px)); gap: clamp(10px, 2vw, 22px); padding: 6px var(--gutter); margin-top: 8px; background: var(--paper); border-bottom: 1.5px solid var(--ink); color: var(--ink); font-family: 'IBM Plex Mono', monospace; font-size: 9px; letter-spacing: .13em; white-space: nowrap; }
 .column-header .col-c { text-align: right; }
