@@ -1,11 +1,11 @@
 {
- "generated_at": "2026-09-05T05:37:50+00:00",
+ "generated_at": "2026-09-05T06:04:25+00:00",
  "metro": "Milwaukee",
  "restaurants_scanned": 340,
  "count": 95,
  "martinis": [
   {
-   "name": "Mix N Rewind 5132 South Packard Avenue",
+   "name": "Mix N Rewind",
    "address": "5132 South Packard Avenue, Cudahy, WI",
    "lat": 42.951169,
    "lng": -87.859599,
@@ -22,7 +22,7 @@
    "guid": "dfba8b49-1acf-439d-a06f-d535a55d5339"
   },
   {
-   "name": "DIA Cafe - Greendale 6601 Northway",
+   "name": "DIA Cafe - Greendale",
    "address": "6601 Northway, Greendale, WI",
    "lat": 42.942068,
    "lng": -87.997245,
@@ -60,7 +60,7 @@
    "guid": "594edfe7-e437-42cb-b7d6-630ab9dd42fa"
   },
   {
-   "name": "Bandero County Wood Grill Bandero County Wood Grill",
+   "name": "Bandero County Wood Grill",
    "address": "n96w16865 Cumberland Court, Menomonee Falls, WI",
    "lat": 43.191399,
    "lng": -88.118853,
@@ -106,7 +106,7 @@
    "guid": "bda91505-ab8a-469d-b06d-99a2d8742c5a"
   },
   {
-   "name": "Homeplate Asylum 7520 W Donges Bay Rd",
+   "name": "Homeplate Asylum",
    "address": "7520 W Donges Bay Rd, Mequon, WI",
    "lat": 43.207517,
    "lng": -88.002732,
@@ -127,7 +127,7 @@
    "guid": "40806cfd-b961-4d09-a069-bdf126da194b"
   },
   {
-   "name": "Park Place Cafe 10843 W. Park Place",
+   "name": "Park Place Cafe",
    "address": "10843 W. Park Place, Milwaukee, WI",
    "lat": 43.148935,
    "lng": -88.045959,
@@ -210,7 +210,7 @@
    "guid": "5dea25ec-dff7-45c4-858a-463ca09edd51"
   },
   {
-   "name": "The Little Village Play Cafe 6505 West North Avenue",
+   "name": "The Little Village Play Cafe",
    "address": "6505 West North Avenue, Wauwatosa, WI",
    "lat": 43.060563,
    "lng": -87.99399,
@@ -341,7 +341,7 @@
    "guid": "528a1952-dfbb-4a62-8bfd-788720098817"
   },
   {
-   "name": "Area 51 Sports Bar & Grill 5121 West Howard Avenue",
+   "name": "Area",
    "address": "5121 West Howard Avenue, Milwaukee, WI",
    "lat": 42.97334,
    "lng": -87.97879,
@@ -358,7 +358,7 @@
    "guid": "69e2fbb2-ab85-4968-b185-f0ad16d195c9"
   },
   {
-   "name": "Lucky Clover Irish Pub 1048 N Doctor M.L.K. Jr Dr",
+   "name": "Lucky Clover Irish Pub",
    "address": "1048 N Doctor M.L.K. Jr Dr, Milwaukee, WI",
    "lat": 43.044057,
    "lng": -87.914126,
@@ -375,7 +375,7 @@
    "guid": "dded948c-058d-4b6a-972c-74f980097d9b"
   },
   {
-   "name": "The Mothership 2301 South Logan Avenue",
+   "name": "The Mothership",
    "address": "2301 South Logan Avenue, Bay View, WI",
    "lat": 43.002799,
    "lng": -87.89695,
@@ -392,7 +392,7 @@
    "guid": "8086b8ec-28f2-4af0-82fa-7a84d19b9f2f"
   },
   {
-   "name": "The Waddle Inn 6715 West North Avenue",
+   "name": "The Waddle Inn",
    "address": "6715 West North Avenue, Wauwatosa, WI",
    "lat": 43.060562,
    "lng": -87.996879,
@@ -426,7 +426,7 @@
    "guid": "0818eada-df9b-4e92-898c-fbe644df4e0c"
   },
   {
-   "name": "Blum Coffee Garden & Bluemel's Garden Center 4930 W Loomis Rd",
+   "name": "Blum Coffee Garden & Bluemel's Garden Center",
    "address": "4930 W Loomis Rd, Greenfield, WI",
    "lat": 42.954259,
    "lng": -87.97707,
@@ -443,7 +443,7 @@
    "guid": "ab70b930-cd34-4384-bcb2-0c21e116710d"
   },
   {
-   "name": "Brunch It Up - Milwaukee 714 N MILWAUKEE ST",
+   "name": "Brunch It Up - Milwaukee",
    "address": "714 N MILWAUKEE ST, MILWAUKEE, WI",
    "lat": 43.039225,
    "lng": -87.906267,
@@ -523,7 +523,7 @@
    "guid": "f502ad38-7383-45e7-bd1b-555310047025"
   },
   {
-   "name": "Copper 1019 North Doctor Martin Luther King Junior Drive",
+   "name": "Copper",
    "address": "1019 North Doctor Martin Luther King Junior Drive, Milwaukee, WI",
    "lat": 43.04345,
    "lng": -87.914709,
@@ -759,7 +759,7 @@
    "guid": "767bdeaa-3dfa-420b-a41b-b8d41b7efdcf"
   },
   {
-   "name": "Steny's - North Shore 5616 West Donges Bay Road",
+   "name": "Steny's - North Shore",
    "address": "5616 West Donges Bay Road, Mequon, WI",
    "lat": 43.207664,
    "lng": -87.979378,
@@ -793,7 +793,7 @@
    "guid": "1023f22c-c6cc-4d55-9c01-beaaa3048593"
   },
   {
-   "name": "Trattoria di Carlo 8469 South Howell Avenue",
+   "name": "Trattoria di Carlo",
    "address": "8469 South Howell Avenue, Oak Creek, WI",
    "lat": 42.89122,
    "lng": -87.9125,
@@ -827,7 +827,7 @@
    "guid": "8f86d221-522b-47fe-93eb-56287494fcad"
   },
   {
-   "name": "Vier North 1832 E North Ave",
+   "name": "Vier North",
    "address": "1832 E North Ave, Milwaukee, WI",
    "lat": 43.0604,
    "lng": -87.887068,
@@ -882,7 +882,7 @@
    "guid": "8bc16568-e5d5-4303-88c9-4b0a243af9e5"
   },
   {
-   "name": "Crawdaddy's on Greenfield 9427 west greenfield Ave",
+   "name": "Crawdaddy's on Greenfield",
    "address": "9427 west greenfield Ave, West Allis, WI",
    "lat": 43.016192,
    "lng": -88.029956,
@@ -903,7 +903,7 @@
    "guid": "4dfd0c56-9208-4f8e-a01b-01834d4efbb4"
   },
   {
-   "name": "District Fore 233 E Chicago St",
+   "name": "District Fore",
    "address": "233 E Chicago St, Milwaukee, WI",
    "lat": 43.032243,
    "lng": -87.908334,
@@ -954,7 +954,7 @@
    "guid": "22a1fca1-7589-4cd9-9701-b42042e71cfc"
   },
   {
-   "name": "Summer Of \u201885 2213 N. MLK Drive",
+   "name": "Summer Of \u201885",
    "address": "2213 N. MLK Drive, Milwaukee, WI",
    "lat": 43.05948,
    "lng": -87.914612,
@@ -971,7 +971,7 @@
    "guid": "adda5638-a732-4f58-bf4c-175f62ba184f"
   },
   {
-   "name": "The Spread 1137 North Doctor Martin Luther King Junior Drive",
+   "name": "The Spread",
    "address": "1137 North Doctor Martin Luther King Junior Drive, Milwaukee, WI",
    "lat": 43.045188,
    "lng": -87.914767,
@@ -1009,7 +1009,7 @@
    "guid": "acf81942-bb83-475b-9cdd-71b9aaad0a05"
   },
   {
-   "name": "Von Trier 2235 North Farwell Avenue",
+   "name": "Von Trier",
    "address": "2235 North Farwell Avenue, Milwaukee, WI",
    "lat": 43.059949,
    "lng": -87.885973,
@@ -1026,7 +1026,7 @@
    "guid": "8e5bd01e-e1cf-44e1-877c-6d926527814d"
   },
   {
-   "name": "Your Office 763 North Milwaukee St.",
+   "name": "Your Office",
    "address": "763 North Milwaukee Street, Milwaukee, WI",
    "lat": 43.040389,
    "lng": -87.907097,
@@ -1043,7 +1043,7 @@
    "guid": "2a87807f-4ab2-4362-b408-22d810cb1040"
   },
   {
-   "name": "Ann\u2019s Italian Restaurant 5969 S 108th Pl",
+   "name": "Ann\u2019s Italian Restaurant",
    "address": "5969 S 108th Pl, Hales Corners, WI",
    "lat": 42.93591,
    "lng": -88.049524,
@@ -1145,7 +1145,7 @@
    "guid": "e706929d-5218-476a-b51c-6d951e9114cd"
   },
   {
-   "name": "Crafty Cow - Wauwatosa 6519 W North Ave",
+   "name": "Crafty Cow - Wauwatosa",
    "address": "6519 W North Ave, Wauwatosa, WI",
    "lat": 43.060614,
    "lng": -87.993913,
@@ -1196,7 +1196,7 @@
    "guid": "9238fd2e-0121-43c4-b2a1-fc37b69f8bc8"
   },
   {
-   "name": "Harry's Bar & Grill 3549 N Oakland Ave",
+   "name": "Harry's Bar & Grill",
    "address": "3549 N Oakland Ave, Shorewood, WI",
    "lat": 43.083301,
    "lng": -87.88782,
@@ -1247,7 +1247,7 @@
    "guid": "906a9a49-78a9-4fcd-a418-e915bb03130f"
   },
   {
-   "name": "La Masa - Milwaukee Public Market 400 North Water Street",
+   "name": "La Masa - Milwaukee Public Market",
    "address": "400 North Water Street, Milwaukee, WI",
    "lat": 43.035197,
    "lng": -87.908011,
@@ -1332,7 +1332,7 @@
    "guid": "bb31e984-77f6-4751-b309-9d0be7117b9e"
   },
   {
-   "name": "SereniTea - Downer 2569 N Downer Ave",
+   "name": "SereniTea - Downer",
    "address": "2569 N Downer Ave, Milwaukee, WI",
    "lat": 43.065368,
    "lng": -87.878181,
@@ -1366,7 +1366,7 @@
    "guid": "ad73eb48-1f4b-4fb7-9e34-6958e472df3d"
   },
   {
-   "name": "The King & I Thai Restaurant 830 North Doctor Martin Luther King Jr Dr.",
+   "name": "The King & I Thai Restaurant",
    "address": "830 North Dr Martin Luther King Jr Dr., Milwaukee, WI",
    "lat": 43.040951,
    "lng": -87.914123,
@@ -1434,7 +1434,7 @@
    "guid": "2eb72b91-edf3-4d9d-9e9c-f0f2fcc61eb7"
   },
   {
-   "name": "Champps Americana 1240 S Moorland Rd",
+   "name": "Champps Americana",
    "address": "1240 S Moorland Rd, Brookfield, WI",
    "lat": 43.019109,
    "lng": -88.105988,
@@ -1451,7 +1451,7 @@
    "guid": "66a4f8dd-42b4-42d4-9895-2e496c44dec7"
   },
   {
-   "name": "DanDan - Milwaukee 360 East Erie Street",
+   "name": "DanDan - Milwaukee",
    "address": "360 East Erie Street, Milwaukee, WI",
    "lat": 43.030053,
    "lng": -87.905358,
@@ -1506,7 +1506,7 @@
    "guid": "0508bfb7-fdfd-43d9-89ec-1c74acb07795"
   },
   {
-   "name": "Smokin' Jacks BBQ Murray Ave 2311 North Murray Avenue",
+   "name": "Smokin' Jacks BBQ Murray Ave",
    "address": "2311 North Murray Avenue, Milwaukee, WI",
    "lat": 43.060634,
    "lng": -87.885936,
@@ -1544,7 +1544,7 @@
    "guid": "53e8820d-c857-45ae-baf8-d7fd32f83401"
   },
   {
-   "name": "St. Francis Brewery and Restaurant 3825 S Kinnickinnic Ave",
+   "name": "St. Francis Brewery and Restaurant",
    "address": "3825 S Kinnickinnic Ave, St Francis, WI",
    "lat": 42.974132,
    "lng": -87.875924,
@@ -1582,7 +1582,7 @@
    "guid": "3a345621-3f21-4cdb-939e-57df28579e7d"
   },
   {
-   "name": "The Knick 1030 e juneau ave",
+   "name": "The Knick",
    "address": "1030 e juneau ave, Milwaukee, WI",
    "lat": 43.045841,
    "lng": -87.898844,
