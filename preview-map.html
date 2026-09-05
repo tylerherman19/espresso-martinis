@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Espresso Martinis, Mapped | Milwaukee</title>
+<meta name="description" content="Where to get an espresso martini in Milwaukee, and what it costs.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+<style>
+:root { --paper:#F5F4F0; --ink:#1B1A17; --muted:#6F6A5E; --line:#DAD6CB; --accent:#2E5339; }
+* { box-sizing:border-box; }
+html,body { margin:0; height:100%; background:var(--paper); color:var(--ink); font-family:'Fraunces',Georgia,serif; }
+button,input { font:inherit; color:inherit; }
+.hidden { display:none !important; }
+#topbar { position:fixed; top:0; left:0; right:0; z-index:600; background:var(--paper); border-bottom:1px solid var(--ink); }
+#brandrow { display:flex; align-items:baseline; gap:8px; padding:8px 14px 6px; }
+#brandrow .b { font-weight:600; font-size:18px; letter-spacing:-.01em; }
+#brandrow .s { font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:.18em; color:var(--accent); }
+#chips { display:flex; gap:6px; overflow-x:auto; padding:0 14px 8px; scrollbar-width:none; }
+#chips::-webkit-scrollbar { display:none; }
+#chips button { flex:0 0 auto; border:1px solid var(--ink); background:var(--paper); border-radius:0; font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.08em; text-transform:uppercase; padding:5px 9px; cursor:pointer; white-space:nowrap; }
+#chips button.active { background:var(--ink); color:var(--paper); }
+#map { position:fixed; top:78px; left:0; right:0; bottom:150px; }
+.price-pin { background:var(--paper); color:var(--ink); border:1.5px solid var(--ink); font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:10.5px; padding:2px 5px; white-space:nowrap; box-shadow:2px 2px 0 rgba(27,26,23,.18); }
+.price-pin.cheapest { background:var(--accent); color:var(--paper); border-color:var(--accent); }
+#sheet { position:fixed; left:0; right:0; bottom:0; z-index:600; background:var(--paper); border-top:1px solid var(--ink); box-shadow:0 -4px 0 rgba(27,26,23,.06); padding:10px 14px; height:150px; overflow:hidden; }
+.sl-title { font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:.2em; color:var(--accent); text-transform:uppercase; margin-bottom:6px; }
+.sl-line { display:flex; justify-content:space-between; align-items:baseline; gap:12px; padding:2px 0; font-size:13.5px; }
+.sl-line .sl-what { color:var(--muted); font-family:'IBM Plex Mono',monospace; font-size:9.5px; letter-spacing:.08em; text-transform:uppercase; white-space:nowrap; }
+.sl-line .sl-where { min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.sl-line .sl-price { font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:12.5px; white-space:nowrap; }
+.sl-line .sl-price.hh { color:var(--accent); }
+#sheet-tools { display:flex; gap:6px; margin-top:8px; }
+#sheet-tools .find { flex:1 1 auto; min-width:0; border:1px solid var(--ink); background:var(--paper); border-radius:0; padding:6px 9px; font-family:'IBM Plex Mono',monospace; font-size:11.5px; }
+#hh-btn { border:1px solid var(--ink); background:var(--paper); border-radius:0; padding:6px 9px; font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.06em; text-transform:uppercase; cursor:pointer; white-space:nowrap; }
+#hh-btn.on { background:var(--accent); border-color:var(--accent); color:var(--paper); }
+#spotcard .sc-back { border:none; background:none; font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); cursor:pointer; padding:0 0 4px; }
+#spotcard .sc-name { font-weight:600; font-size:17px; }
+#spotcard .sc-hood { font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); margin-top:1px; }
+#spotcard .sc-items { margin-top:5px; max-height:44px; overflow:hidden; }
+#spotcard .sc-item { display:flex; justify-content:space-between; gap:12px; font-size:12.5px; padding:1px 0; }
+#spotcard .sc-item b { font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:11.5px; }
+#spotcard .sc-item b.hh { color:var(--accent); }
+#spotcard .sc-addr { margin-top:4px; font-family:'IBM Plex Mono',monospace; font-size:9.5px; color:var(--muted); }
+</style>
+</head>
+<body>
+<div id="topbar">
+  <div id="brandrow"><span class="b">Espresso Martinis</span><span class="s">MILWAUKEE</span></div>
+  <div id="chips"></div>
+</div>
+<div id="map"></div>
+<div id="sheet">
+  <div id="sheet-home">
+    <div class="sl-title">The short list</div>
+    <div id="sl"></div>
+    <div id="sheet-tools">
+      <input class="find" id="find" type="search" placeholder="Find a spot or district" aria-label="Find a spot or district">
+      <button id="hh-btn" type="button" aria-pressed="false">Happy hour</button>
+    </div>
+  </div>
+  <div id="spotcard" class="hidden"></div>
+</div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script>
+const $ = s => document.querySelector(s);
+const money = c => '$' + (c/100).toFixed(c%100===0?0:2);
+const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+let SPOTS=[], HH=false, QUERY='', MAP, MARKERS={}, ACTIVE='ALL';
+const shownPrice = s => (HH && s.hh_price_cents) ? s.hh_price_cents : s.price_cents;
+const BOXES = {
+  'Deer District':[43.0430,43.0480,-87.9190,-87.9120],
+  'Theater District':[43.0370,43.0430,-87.9170,-87.9085],
+  'Third Ward':[43.0295,43.0370,-87.9125,-87.9000],
+  "Walker's Point":[43.0160,43.0300,-87.9200,-87.9000],
+  'Brady Street':[43.0450,43.0565,-87.9100,-87.8850],
+  'North Avenue':[43.0565,43.0620,-87.9160,-87.8800],
+  'Downtown':[43.0350,43.0465,-87.9300,-87.8980]
+};
+const ORDER = ['Deer District','Theater District','Third Ward',"Walker's Point",'Brady Street','North Avenue','Downtown'];
+const districtOf = s => { for (const n of ORDER){const b=BOXES[n]; if(s.lat>=b[0]&&s.lat<=b[1]&&s.lng>=b[2]&&s.lng<=b[3]) return n;} return null; };
+function filtered(){
+  const q = QUERY.trim().toLowerCase();
+  return SPOTS.filter(s => {
+    if (HH && !s.happy_hour) return false;
+    if (ACTIVE==='METRO' && districtOf(s)) return false;
+    if (ACTIVE!=='ALL' && ACTIVE!=='METRO' && districtOf(s)!==ACTIVE) return false;
+    if (!q) return true;
+    return s.name.toLowerCase().includes(q) || (s.neighborhood||'').toLowerCase().includes(q) || (districtOf(s)||'').toLowerCase().includes(q) || s.items.some(it=>it.item.toLowerCase().includes(q));
+  });
+}
+function renderPins(){
+  Object.values(MARKERS).forEach(m=>m.remove()); MARKERS={};
+  const list = filtered();
+  if(!list.length) return;
+  const minP = Math.min(...list.map(shownPrice));
+  list.forEach(s=>{
+    const cheap = shownPrice(s)===minP;
+    const icon = L.divIcon({className:'', html:`<div class="price-pin${cheap?' cheapest':''}">${money(shownPrice(s))}</div>`, iconSize:null, iconAnchor:[20,14]});
+    MARKERS[s.guid] = L.marker([s.lat,s.lng],{icon}).addTo(MAP).on('click',()=>showSpot(s.guid));
+  });
+  MAP.fitBounds(L.latLngBounds(list.map(s=>[s.lat,s.lng])).pad(0.1));
+}
+function showSpot(guid){
+  const s = SPOTS.find(x=>x.guid===guid);
+  $('#sheet-home').classList.add('hidden');
+  const c = $('#spotcard');
+  c.classList.remove('hidden');
+  c.innerHTML = `<button class="sc-back" type="button">&#8592; The short list</button>
+    <div class="sc-name">${esc(s.name)}</div>
+    <div class="sc-hood">${esc(districtOf(s)||s.neighborhood||'Milwaukee')}</div>
+    <div class="sc-items">${s.items.map(it=>{
+      const reg=it.price_cents?money(it.price_cents):''; const hhp=it.hh_price_cents?money(it.hh_price_cents)+' hh':'';
+      const isHH=HH&&it.hh_price_cents;
+      return `<div class="sc-item"><span>${esc(it.item)}</span><b class="${isHH?'hh':''}">${isHH?hhp:(reg+(hhp?' · '+hhp:''))}</b></div>`;
+    }).join('')}</div>
+    <div class="sc-addr">${esc(s.address||'')}</div>`;
+  c.querySelector('.sc-back').addEventListener('click',()=>{c.classList.add('hidden');$('#sheet-home').classList.remove('hidden');});
+  MAP.setView([s.lat,s.lng], Math.max(MAP.getZoom(),15));
+}
+function renderShortlist(){
+  const byPrice=[...SPOTS].sort((a,b)=>a.price_cents-b.price_cents);
+  const cheap=byPrice[0], core=byPrice.find(s=>districtOf(s));
+  const hh=SPOTS.filter(s=>s.hh_price_cents).sort((a,b)=>a.hh_price_cents-b.hh_price_cents)[0];
+  let h='';
+  h+=`<div class="sl-line"><span class="sl-what">Cheapest pour</span><span class="sl-where">${esc(cheap.name)}</span><span class="sl-price">${money(cheap.price_cents)}</span></div>`;
+  if(core&&core!==cheap) h+=`<div class="sl-line"><span class="sl-what">Cheapest core</span><span class="sl-where">${esc(core.name)}</span><span class="sl-price">${money(core.price_cents)}</span></div>`;
+  if(hh) h+=`<div class="sl-line"><span class="sl-what">Happy hour</span><span class="sl-where">${esc(hh.name)}</span><span class="sl-price hh">${money(hh.hh_price_cents)} hh</span></div>`;
+  $('#sl').innerHTML=h;
+}
+fetch('data/martinis.json?v='+Date.now()).then(r=>r.json()).then(d=>{
+  SPOTS=d.martinis;
+  MAP=L.map('map',{scrollWheelZoom:false,zoomControl:true});
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'}).addTo(MAP);
+  const chips=$('#chips');
+  ['ALL',...ORDER.slice(0,6),'Downtown','METRO'].forEach(n=>{
+    const b=document.createElement('button'); b.type='button'; b.textContent=n==='METRO'?'Metro':n;
+    if(n==='ALL') b.classList.add('active');
+    b.addEventListener('click',()=>{ACTIVE=n;chips.querySelectorAll('button').forEach(x=>x.classList.toggle('active',x===b));renderPins();});
+    chips.appendChild(b);
+  });
+  $('#hh-btn').innerHTML=`Happy hour <sup>${SPOTS.filter(s=>s.happy_hour).length}</sup>`;
+  $('#hh-btn').addEventListener('click',()=>{HH=!HH;$('#hh-btn').classList.toggle('on',HH);$('#hh-btn').setAttribute('aria-pressed',HH);renderPins();});
+  $('#find').addEventListener('input',e=>{QUERY=e.target.value;renderPins();});
+  renderShortlist(); renderPins();
+});
+</script>
+</body>
+</html>
