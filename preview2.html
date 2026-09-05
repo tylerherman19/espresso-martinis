@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Espresso Martini Index | Milwaukee</title>
+<meta name="description" content="Where to get an espresso martini in Milwaukee, and what it costs.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+<style>
+:root {
+  --paper: #F5F4F0;
+  --ink: #1B1A17;
+  --muted: #6F6A5E;
+  --line: #DAD6CB;
+  --accent: #2E5339;
+  --gutter: clamp(16px, 4vw, 48px);
+}
+* { box-sizing: border-box; }
+html { background: var(--paper); color: var(--ink); font-family: 'Fraunces', Georgia, serif; }
+body { margin: 0; min-width: 320px; font-size: 15px; }
+button, input { font: inherit; color: inherit; }
+button:focus-visible, input:focus-visible, a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.hidden { display: none !important; }
+::selection { background: var(--accent); color: var(--paper); }
+
+.masthead { text-align: center; padding: 34px var(--gutter) 0; }
+.masthead .kicker { font-family: 'IBM Plex Mono', monospace; font-size: 9.5px; letter-spacing: .22em; color: var(--accent); text-transform: uppercase; }
+.masthead h1 { margin: 8px 0 0; font-weight: 500; font-size: clamp(34px, 8.5vw, 56px); letter-spacing: -.02em; line-height: 1.02; }
+.masthead .stamp { margin-top: 10px; font-family: 'IBM Plex Mono', monospace; font-size: 9.5px; letter-spacing: .14em; color: var(--muted); text-transform: uppercase; }
+.masthead .rule { margin: 18px auto 0; max-width: 640px; border-top: 1px solid var(--ink); border-bottom: 3px double var(--ink); height: 5px; }
+
+.shortlist { margin: 22px auto 0; max-width: 640px; border: 1px solid var(--ink); padding: 12px 16px; text-align: left; }
+.shortlist .sl-title { font-family: 'IBM Plex Mono', monospace; font-size: 9px; letter-spacing: .2em; color: var(--accent); text-transform: uppercase; margin-bottom: 8px; }
+.shortlist .sl-line { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 3px 0; font-size: 14.5px; }
+.shortlist .sl-line .sl-what { color: var(--muted); font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .08em; text-transform: uppercase; white-space: nowrap; }
+.shortlist .sl-line .sl-where { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.shortlist .sl-line .sl-price { font-family: 'IBM Plex Mono', monospace; font-weight: 600; font-size: 13px; white-space: nowrap; }
+.shortlist .sl-line .sl-price.hh { color: var(--accent); }
+
+.controls { position: sticky; top: 0; z-index: 400; background: var(--paper); margin: 20px auto 0; max-width: 640px; padding: 10px var(--gutter); border-bottom: 1px solid var(--line); display: flex; gap: 8px; align-items: center; }
+.controls .find { flex: 1 1 auto; min-width: 0; border: 1px solid var(--ink); border-radius: 0; background: var(--paper); padding: 7px 10px; font-family: 'IBM Plex Mono', monospace; font-size: 12px; }
+.controls .find::placeholder { color: var(--muted); }
+.controls .hh-btn { flex: 0 0 auto; border: 1px solid var(--ink); background: var(--paper); padding: 7px 10px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; cursor: pointer; white-space: nowrap; }
+.controls .hh-btn.on { background: var(--accent); border-color: var(--accent); color: var(--paper); }
+.controls .map-btn { flex: 0 0 auto; border: 1px solid var(--ink); background: var(--ink); color: var(--paper); padding: 7px 10px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; cursor: pointer; }
+
+.menu { max-width: 640px; margin: 0 auto; padding: 0 var(--gutter); }
+.course { margin-top: 30px; }
+.course-head { display: flex; align-items: baseline; gap: 10px; border-top: 1px solid var(--ink); border-bottom: 3px double var(--ink); padding: 8px 0 7px; }
+.course-head h2 { margin: 0; font-weight: 500; font-size: 19px; letter-spacing: -.01em; }
+.course-head .count { margin-left: auto; font-family: 'IBM Plex Mono', monospace; font-size: 9.5px; letter-spacing: .14em; color: var(--muted); }
+.entry { border-bottom: 1px solid var(--line); }
+.entry .line { display: flex; align-items: baseline; gap: 8px; padding: 11px 0 3px; cursor: pointer; }
+.entry .name { font-weight: 500; font-size: 16.5px; letter-spacing: -.01em; }
+.entry .dots { flex: 1 1 auto; border-bottom: 1px dotted var(--muted); transform: translateY(-3px); min-width: 16px; }
+.entry .price { font-family: 'IBM Plex Mono', monospace; font-weight: 600; font-size: 14px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.entry .price .hh-mark { color: var(--accent); font-size: 10px; letter-spacing: .08em; }
+.entry .sub { padding: 0 0 11px; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .1em; color: var(--muted); text-transform: uppercase; }
+.entry .detail { display: none; padding: 2px 0 14px; }
+.entry.open .detail { display: block; }
+.entry .detail .item { display: flex; justify-content: space-between; gap: 12px; padding: 3px 0; font-size: 14px; }
+.entry .detail .item .p { font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.entry .detail .item .p.hh { color: var(--accent); font-weight: 600; }
+.entry .detail .addr { margin-top: 8px; font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; color: var(--muted); letter-spacing: .04em; }
+.entry .detail .pin-link { margin-top: 8px; display: inline-block; font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); background: none; border: none; border-bottom: 1px solid var(--accent); padding: 0 0 1px; cursor: pointer; }
+.menu .empty { padding: 34px 0; text-align: center; color: var(--muted); font-size: 14px; }
+
+.footer { max-width: 640px; margin: 44px auto 0; padding: 22px var(--gutter) 46px; border-top: 3px double var(--ink); }
+.footer p { margin: 0; font-size: 12.5px; line-height: 1.65; color: var(--muted); }
+
+#map-overlay { position: fixed; inset: 0; z-index: 1000; background: var(--paper); display: flex; flex-direction: column; }
+#map-overlay .overlay-bar { display: flex; align-items: center; gap: 10px; padding: 10px var(--gutter); border-bottom: 1px solid var(--ink); }
+#map-overlay .overlay-title { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); }
+#map-overlay .close-map { margin-left: auto; border: 1px solid var(--ink); background: var(--paper); font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; padding: 6px 12px; cursor: pointer; }
+#map { flex: 1 1 auto; width: 100%; }
+.price-pin { background: var(--paper); color: var(--ink); border: 1.5px solid var(--ink); font-family: 'IBM Plex Mono', monospace; font-weight: 600; font-size: 10.5px; padding: 2px 5px; white-space: nowrap; box-shadow: 2px 2px 0 rgba(27,26,23,.18); }
+.price-pin.cheapest { background: var(--accent); color: var(--paper); border-color: var(--accent); }
+.leaflet-popup-content-wrapper, .leaflet-popup-tip { background: var(--paper) !important; color: var(--ink) !important; border-radius: 0 !important; border: 1px solid var(--ink); box-shadow: 4px 4px 0 rgba(27,26,23,.18) !important; }
+.leaflet-popup-content { margin: 10px 12px !important; font-family: 'Fraunces', Georgia, serif !important; }
+.leaflet-popup-content .pop-name { font-weight: 600; font-size: 15px; }
+.leaflet-popup-content .pop-hood { font-family: 'IBM Plex Mono', monospace; font-size: 9px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-top: 2px; }
+.leaflet-popup-content .pop-item { margin-top: 7px; font-size: 13px; display: flex; justify-content: space-between; gap: 14px; }
+.leaflet-popup-content .pop-item b { font-family: 'IBM Plex Mono', monospace; font-weight: 600; font-size: 12px; font-variant-numeric: tabular-nums; }
+.leaflet-popup-content .pop-item b.hh { color: var(--accent); }
+.leaflet-popup-content .pop-addr { margin-top: 7px; font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--muted); }
+</style>
+</head>
+<body>
+<header class="masthead">
+  <div class="kicker">A Price Index</div>
+  <h1>Espresso Martinis</h1>
+  <div class="stamp" id="stamp">LOADING</div>
+  <div class="rule"></div>
+  <div class="shortlist" id="shortlist"></div>
+</header>
+
+<div class="controls">
+  <input class="find" id="find" type="search" placeholder="Find a spot or neighborhood" aria-label="Find a spot or neighborhood">
+  <button class="hh-btn" id="hh-btn" type="button" aria-pressed="false">Happy hour</button>
+  <button class="map-btn" id="open-map" type="button">Map</button>
+</div>
+
+<main class="menu" id="menu"></main>
+
+<footer class="footer">
+  <p>Prices as listed on each restaurant's own current menu. Not affiliated with, or endorsed by, any restaurant listed. If a menu changed today, the next sweep catches it.</p>
+</footer>
+
+<div id="map-overlay" class="hidden">
+  <div class="overlay-bar">
+    <span class="overlay-title" id="map-title">The whole list, pinned</span>
+    <button class="close-map" id="close-map" type="button">Close</button>
+  </div>
+  <div id="map"></div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script>
+const $ = s => document.querySelector(s);
+const money = c => '$' + (c / 100).toFixed((c % 100 === 0) ? 0 : 2);
+const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+let SPOTS = [], HH_MODE = false, QUERY = '', MAP = null, MARKERS = {};
+
+const shownPrice = s => (HH_MODE && s.hh_price_cents) ? s.hh_price_cents : s.price_cents;
+const inBox = (s, lat0, lat1, lng0, lng1) => s.lat >= lat0 && s.lat <= lat1 && s.lng >= lng0 && s.lng <= lng1;
+
+const MATCH_ORDER = ['Deer District', 'Theater District', 'Third Ward', "Walker's Point", 'Brady Street', 'North Avenue', 'Downtown'];
+const DISPLAY_ORDER = ['Deer District', 'Theater District', 'Downtown', 'Third Ward', "Walker's Point", 'Brady Street', 'North Avenue'];
+const BOXES = {
+  'Deer District': [43.0430, 43.0480, -87.9190, -87.9120],
+  'Theater District': [43.0370, 43.0430, -87.9170, -87.9085],
+  'Third Ward': [43.0295, 43.0370, -87.9125, -87.9000],
+  "Walker's Point": [43.0160, 43.0300, -87.9200, -87.9000],
+  'Brady Street': [43.0450, 43.0565, -87.9100, -87.8850],
+  'North Avenue': [43.0565, 43.0620, -87.9160, -87.8800],
+  'Downtown': [43.0350, 43.0465, -87.9300, -87.8980]
+};
+const districtOf = s => {
+  for (const name of MATCH_ORDER) {
+    const b = BOXES[name];
+    if (inBox(s, b[0], b[1], b[2], b[3])) return name;
+  }
+  return null;
+};
+
+function filtered() {
+  const q = QUERY.trim().toLowerCase();
+  return SPOTS.filter(s => {
+    if (HH_MODE && !s.happy_hour) return false;
+    if (!q) return true;
+    return s.name.toLowerCase().includes(q) ||
+      (s.neighborhood || '').toLowerCase().includes(q) ||
+      (districtOf(s) || '').toLowerCase().includes(q) ||
+      s.items.some(it => it.item.toLowerCase().includes(q));
+  });
+}
+
+function renderShortlist() {
+  const byPrice = [...SPOTS].sort((a, b) => a.price_cents - b.price_cents);
+  const cheap = byPrice[0];
+  const cheapCore = byPrice.find(s => districtOf(s));
+  const hh = SPOTS.filter(s => s.hh_price_cents).sort((a, b) => a.hh_price_cents - b.hh_price_cents)[0];
+  let html = '<div class="sl-title">The short list</div>';
+  html += `<div class="sl-line"><span class="sl-what">Cheapest pour</span><span class="sl-where">${esc(cheap.name)}</span><span class="sl-price">${money(cheap.price_cents)}</span></div>`;
+  if (cheapCore && cheapCore !== cheap) html += `<div class="sl-line"><span class="sl-what">Cheapest in the core</span><span class="sl-where">${esc(cheapCore.name)}</span><span class="sl-price">${money(cheapCore.price_cents)}</span></div>`;
+  if (hh) html += `<div class="sl-line"><span class="sl-what">Happy hour pour</span><span class="sl-where">${esc(hh.name)}</span><span class="sl-price hh">${money(hh.hh_price_cents)} hh</span></div>`;
+  $('#shortlist').innerHTML = html;
+}
+
+function entryHtml(s, showHood) {
+  const p = shownPrice(s);
+  const hhMark = (HH_MODE && s.hh_price_cents) ? ' <span class="hh-mark">HH</span>' : '';
+  const cheapest = s.items.filter(it => it.price_cents).sort((a, b) => a.price_cents - b.price_cents)[0];
+  const subBits = [];
+  if (showHood) subBits.push(s.neighborhood || 'Milwaukee');
+  if (cheapest) subBits.push(cheapest.item);
+  if (s.happy_hour && !HH_MODE) subBits.push('happy hour');
+  return `<div class="entry" data-guid="${s.guid}">
+    <div class="line"><span class="name">${esc(s.name)}</span><span class="dots"></span><span class="price">${money(p)}${hhMark}</span></div>
+    <div class="sub">${esc(subBits.join(' · '))}</div>
+    <div class="detail">
+      ${s.items.map(it => {
+        const reg = it.price_cents ? money(it.price_cents) : '';
+        const hhp = it.hh_price_cents ? money(it.hh_price_cents) + ' hh' : '';
+        const isHH = HH_MODE && it.hh_price_cents;
+        const disp = isHH ? hhp : (reg + (hhp ? ' · ' + hhp : ''));
+        return `<div class="item"><span>${esc(it.item)}</span><span class="p${isHH ? ' hh' : ''}">${disp}</span></div>`;
+      }).join('')}
+      <div class="addr">${esc(s.address || '')}</div>
+      <button class="pin-link" data-pin="${s.guid}" type="button">Show on map</button>
+    </div>
+  </div>`;
+}
+
+function sectionHtml(title, list, showHood) {
+  list.sort((a, b) => shownPrice(a) - shownPrice(b) || a.name.localeCompare(b.name));
+  return `<section class="course"><div class="course-head"><h2>${esc(title)}</h2><span class="count">${list.length} SPOT${list.length === 1 ? '' : 'S'}</span></div>` +
+    list.map(s => entryHtml(s, showHood)).join('') + '</section>';
+}
+
+function renderMenu() {
+  const list = filtered();
+  const menu = $('#menu');
+  if (!list.length) { menu.innerHTML = '<div class="empty">Nothing on the menu matches that.</div>'; return; }
+  let html = '';
+  const used = new Set();
+  DISPLAY_ORDER.forEach(name => {
+    const inD = list.filter(s => districtOf(s) === name);
+    if (!inD.length) return;
+    inD.forEach(s => used.add(s.guid));
+    html += sectionHtml(name, inD, false);
+  });
+  const rest = list.filter(s => !used.has(s.guid));
+  const hoodGroups = {};
+  rest.forEach(s => { const h = s.neighborhood || 'Milwaukee'; (hoodGroups[h] = hoodGroups[h] || []).push(s); });
+  const big = Object.keys(hoodGroups).filter(h => hoodGroups[h].length >= 3).sort();
+  big.forEach(h => { html += sectionHtml(h, hoodGroups[h], false); delete hoodGroups[h]; });
+  const metro = [].concat(...Object.values(hoodGroups));
+  if (metro.length) html += sectionHtml('Around the metro', metro, true);
+  menu.innerHTML = html;
+  menu.querySelectorAll('.entry .line, .entry .sub').forEach(el => {
+    el.addEventListener('click', () => el.closest('.entry').classList.toggle('open'));
+  });
+  menu.querySelectorAll('.pin-link').forEach(el => {
+    el.addEventListener('click', ev => { ev.stopPropagation(); openMap(el.dataset.pin); });
+  });
+}
+
+function popupHtml(s) {
+  return `<div class="pop-name">${esc(s.name)}</div><div class="pop-hood">${esc(districtOf(s) || s.neighborhood || '')}</div>` +
+    s.items.map(it => {
+      const reg = it.price_cents ? money(it.price_cents) : '';
+      const hhp = it.hh_price_cents ? money(it.hh_price_cents) + ' hh' : '';
+      const isHH = HH_MODE && it.hh_price_cents;
+      return `<div class="pop-item"><span>${esc(it.item)}</span><b class="${isHH ? 'hh' : ''}">${isHH ? hhp : (reg + (hhp ? ' · ' + hhp : ''))}</b></div>`;
+    }).join('') +
+    `<div class="pop-addr">${esc(s.address || '')}</div>`;
+}
+
+function openMap(guid) {
+  $('#map-overlay').classList.remove('hidden');
+  document.body.style.overflow = 'hidden';
+  if (!MAP) {
+    MAP = L.map('map', { scrollWheelZoom: false });
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19, attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>' }).addTo(MAP);
+  }
+  Object.values(MARKERS).forEach(m => m.remove());
+  MARKERS = {};
+  const list = filtered();
+  const minP = Math.min(...list.map(shownPrice));
+  list.forEach(s => {
+    const cheap = shownPrice(s) === minP;
+    const icon = L.divIcon({ className: '', html: `<div class="price-pin${cheap ? ' cheapest' : ''}">${money(shownPrice(s))}</div>`, iconSize: null, iconAnchor: [20, 14] });
+    MARKERS[s.guid] = L.marker([s.lat, s.lng], { icon }).addTo(MAP).bindPopup(popupHtml(s));
+  });
+  $('#map-title').textContent = `${list.length} spot${list.length === 1 ? '' : 's'}, pinned`;
+  setTimeout(() => {
+    MAP.invalidateSize();
+    if (guid && MARKERS[guid]) {
+      const s = list.find(x => x.guid === guid);
+      MAP.setView([s.lat, s.lng], 15);
+      MARKERS[guid].openPopup();
+    } else {
+      MAP.fitBounds(L.latLngBounds(list.map(s => [s.lat, s.lng])).pad(0.08));
+    }
+  }, 60);
+}
+
+function closeMap() {
+  $('#map-overlay').classList.add('hidden');
+  document.body.style.overflow = '';
+}
+
+$('#hh-btn').addEventListener('click', () => {
+  HH_MODE = !HH_MODE;
+  $('#hh-btn').classList.toggle('on', HH_MODE);
+  $('#hh-btn').setAttribute('aria-pressed', HH_MODE);
+  renderMenu();
+});
+$('#find').addEventListener('input', e => { QUERY = e.target.value; renderMenu(); });
+$('#open-map').addEventListener('click', () => openMap());
+$('#close-map').addEventListener('click', closeMap);
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMap(); });
+
+fetch('data/martinis.json?v=' + Date.now()).then(r => r.json()).then(d => {
+  SPOTS = d.martinis;
+  const dt = new Date(d.generated_at);
+  const mon = dt.toLocaleString('en-US', { month: 'short', timeZone: 'America/Chicago' });
+  const day = Number(dt.toLocaleString('en-US', { day: 'numeric', timeZone: 'America/Chicago' }));
+  $('#stamp').textContent = `MILWAUKEE · ${SPOTS.length} SPOTS · UPDATED ${mon.toUpperCase()} ${day}`;
+  $('#hh-btn').innerHTML = `Happy hour <sup>${SPOTS.filter(s => s.happy_hour).length}</sup>`;
+  renderShortlist();
+  renderMenu();
+});
+</script>
+</body>
+</html>
