@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import concurrent.futures
 import datetime as dt
 import itertools
 import json
@@ -28,6 +29,15 @@ MARTINI_2 = re.compile(r"martini|\btini\b", re.I)
 # steering 2026-09-05: downtown gets read first and leads the site.
 DT = (43.020, -87.930, 43.062, -87.870)
 NOMINATIM = "https://nominatim.openstreetmap.org/reverse"
+# Clover online ordering: white-label, merchant's own prices, public JSON, no
+# auth or bot wall (retested 2026-09-05). No public directory exists, so
+# restaurants are found by scanning the websites OSM lists for Milwaukee
+# bars/restaurants for ordering links, plus a hand-seeded slug list.
+CLOVER_API = "https://www.clover.com/oloservice/v1/merchants"
+CLOVER_LINK = re.compile(r"clover\.com/online-ordering/([A-Za-z0-9._~-]+)", re.I)
+CLOVER_SEEDS = ["mke-fish--chicken-milwaukee", "mccocos-milwaukee", "aladdin-city-cafe-milwaukee",
+                "your-in-luck-eats-milwaukee", "asianrican-foods-milwaukee"]
+OVERPASS = ["https://overpass-api.de/api/interpreter", "https://overpass.kumi.systems/api/interpreter"]
 
 
 def get(url, **kw):
@@ -137,6 +147,77 @@ def is_downtown(lat, lng) -> bool:
     return lat is not None and lng is not None and DT[0] <= lat <= DT[2] and DT[1] <= lng <= DT[3]
 
 
+def osm_websites() -> list[str]:
+    query = ("[out:json][timeout:120];("
+             f'nwr["amenity"~"bar|pub|restaurant"]["website"]({MKE[0]},{MKE[1]},{MKE[2]},{MKE[3]});'
+             f'nwr["amenity"~"bar|pub|restaurant"]["contact:website"]({MKE[0]},{MKE[1]},{MKE[2]},{MKE[3]})'
+             ");out tags;")
+    for host in OVERPASS:
+        try:
+            els = requests.post(host, data={"data": query}, headers=UA, timeout=180).json().get("elements") or []
+        except Exception as exc:
+            print(f"overpass {host}: {exc}", file=sys.stderr)
+            continue
+        urls = set()
+        for el in els:
+            tags = el.get("tags") or {}
+            url = tags.get("website") or tags.get("contact:website")
+            if url and url.startswith("http"):
+                urls.add(url)
+        return sorted(urls)
+    return []
+
+
+def clover_slugs() -> dict[str, str]:
+    """slug -> website it was found on, seeds plus OSM website link scan."""
+    found = {slug: "seed" for slug in CLOVER_SEEDS}
+    urls = osm_websites()
+    print(f"osm: {len(urls)} bar/restaurant websites to scan for Clover links", file=sys.stderr)
+    def probe(url):
+        try:
+            html = requests.get(url, headers=UA, timeout=12).text[:400000]
+        except Exception:
+            return []
+        return CLOVER_LINK.findall(html)
+    with concurrent.futures.ThreadPoolExecutor(max_workers=5) as pool:
+        for url, slugs in zip(urls, pool.map(probe, urls)):
+            for slug in slugs:
+                found.setdefault(slug, url)
+    print(f"clover: {len(found)} ordering pages found", file=sys.stderr)
+    return found
+
+
+def geocode(address: str):
+    try:
+        rows = get(NOMINATIM.replace("reverse", "search"),
+                   params={"q": address, "format": "jsonv2", "limit": 1, "countrycodes": "us"}).json()
+    except Exception:
+        return None, None
+    if not rows:
+        return None, None
+    return float(rows[0]["lat"]), float(rows[0]["lon"])
+
+
+def clover_martini_items(slug: str) -> tuple[dict, list[dict]] | None:
+    merchant = get(CLOVER_API + f"/{slug}", params={"slug": "true"}).json()
+    if not merchant.get("merchantUuid"):
+        return None
+    menu = get(CLOVER_API + f"/{merchant['merchantUuid']}/menu").json()
+    categories = menu.get("categories") or {}
+    seen: dict[str, dict] = {}
+    for node in menu.get("items") or []:
+        name = (node.get("name") or "").strip()
+        if not (MARTINI.search(name) and MARTINI_2.search(name)):
+            continue
+        price = node.get("price")
+        if not isinstance(price, (int, float)) or price <= 0:
+            price = None
+        key = re.sub(r"\s+", " ", name.lower())
+        if key not in seen or (price and (seen[key]["price_cents"] is None or price < seen[key]["price_cents"])):
+            seen[key] = {"item": name, "price_cents": int(price) if price else None}
+    return merchant, list(seen.values())
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--limit", type=int, default=0)
@@ -180,6 +261,47 @@ def main() -> None:
             "platform": "toast",
             "guid": rest["guid"],
         })
+    out.sort(key=lambda r: (r["price_cents"] is None, r["price_cents"] or 0, r["name"]))
+
+    for slug, found_on in clover_slugs().items():
+        try:
+            result = clover_martini_items(slug)
+        except Exception as exc:
+            print(f"clover {slug}: {exc}", file=sys.stderr)
+            continue
+        if not result:
+            continue
+        merchant, items = result
+        if not items:
+            continue
+        addr = merchant.get("address") or {}
+        lat = lng = None
+        loc = merchant.get("location") or {}
+        if isinstance(loc.get("latitude"), (int, float)):
+            lat, lng = loc["latitude"], loc["longitude"]
+        name = clean_name(merchant.get("name"))
+        dupe = any(name.lower() == r["name"].lower() for r in out)
+        if dupe:
+            continue
+        address = ", ".join(x for x in [addr.get("address1"), addr.get("city"), addr.get("state")] if x)
+        if lat is None and address:
+            lat, lng = geocode(address)
+            time.sleep(1.1)  # Nominatim courtesy pace
+        hood = neighborhood(lat, lng) if lat and lng else None
+        if lat and lng:
+            time.sleep(1.1)
+        out.append({
+            "name": name,
+            "address": address,
+            "lat": lat, "lng": lng,
+            "neighborhood": hood,
+            "downtown": is_downtown(lat, lng),
+            "price_cents": min((m["price_cents"] for m in items if m["price_cents"]), default=None),
+            "items": sorted(items, key=lambda m: (m["price_cents"] is None, m["price_cents"] or 0)),
+            "platform": "clover",
+            "guid": slug,
+        })
+        print(f"clover hit: {name} ({len(items)} items)", file=sys.stderr)
     out.sort(key=lambda r: (r["price_cents"] is None, r["price_cents"] or 0, r["name"]))
 
     doc = {
