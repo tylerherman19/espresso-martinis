@@ -46,7 +46,7 @@ function renderWall(){
     delete hoods[h]; } });
   const tail=[].concat(...Object.values(hoods)).sort((a,b)=>shownPrice(a)-shownPrice(b)||a.name.localeCompare(b.name));
   if(tail.length) html+=bandHtml('Around the metro',tail)+'<div class="grid">'+tail.map(tileHtml).join('')+'</div>';
-  $('#wall').innerHTML=html||'<div style="padding:30px;text-align:center;color:var(--muted)">Nothing on the wall matches that.</div>';
+  $('#wall').innerHTML=html||'<div style="padding:32px 12px;text-align:center;color:var(--muted)">Nothing on the wall matches that.</div>';
   document.querySelectorAll('.tile').forEach(t=>t.addEventListener('click',()=>openSpot(t.dataset.guid)));
 }
 function openSpot(guid){
@@ -71,8 +71,8 @@ function popupHtml(s){
   return `<div style="font-weight:600;font-size:15px">${esc(s.name)}</div>`+
     s.items.map(it=>{const reg=it.price_cents?money(it.price_cents):'';const hhp=it.hh_price_cents?money(it.hh_price_cents)+' hh':'';
       const isHH=HH&&it.hh_price_cents;
-      return `<div style="margin-top:6px;font-size:13px;display:flex;justify-content:space-between;gap:12px"><span>${esc(it.item)}</span><b style="font-family:'IBM Plex Mono',monospace;font-size:12px;${isHH?'color:var(--accent)':''}">${isHH?hhp:(reg+(hhp?' · '+hhp:''))}</b></div>`;}).join('')+
-    `<div style="margin-top:7px;font-family:'IBM Plex Mono',monospace;font-size:10px;color:#6F6A5E">${esc(s.address||'')}</div>`;
+      return `<div style="margin-top:8px;font-size:12px;display:flex;justify-content:space-between;gap:12px"><span>${esc(it.item)}</span><b style="font-family:'IBM Plex Mono',monospace;font-size:14px;${isHH?'color:var(--accent)':''}">${isHH?hhp:(reg+(hhp?' · '+hhp:''))}</b></div>`;}).join('')+
+    `<div style="margin-top:12px;font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:#6F6A5E">${esc(s.address||'')}</div>`;
 }
 function openMap(guid){
   $('#map-overlay').classList.remove('hidden'); document.body.style.overflow='hidden';
