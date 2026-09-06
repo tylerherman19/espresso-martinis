@@ -17,37 +17,38 @@ const visible = s => {
   const q=QUERY.trim().toLowerCase(); if(!q) return true;
   return s.name.toLowerCase().includes(q)||(s.neighborhood||'').toLowerCase().includes(q)||(districtOf(s)||'').toLowerCase().includes(q)||s.items.some(it=>it.item.toLowerCase().includes(q));
 };
+let SECTN=0;
 function bandHtml(name,list){
-  return `<div class="band"><span class="bn">${esc(name)}</span><span class="bc">${list.length} SPOT${list.length===1?'':'S'}</span></div>`;
+  SECTN++;
+  return `<div class="sect"><span class="si">${String(SECTN).padStart(2,'0')}</span><span class="sn">${esc(name)}</span><span class="sc">${list.length} SPOT${list.length===1?'':'S'}</span></div>`;
 }
 function tileHtml(s){
   const p=shownPrice(s);
-  return `<button class="tile" data-guid="${s.guid}" type="button">
-    <span class="td">${esc(districtOf(s)||s.neighborhood||'')}</span>
-    <span class="tn">${esc(s.name)}</span>
-    ${s.happy_hour?'<span class="hh-dot">HH</span>':''}
-    <span class="tp">${money(p)}</span></button>`;
+  return `<button class="row" data-guid="${s.guid}" type="button">
+    <span class="rn">${esc(s.name)}</span>${s.happy_hour?'<span class="hh">HH</span>':''}
+    <span class="rp">${money(p)}</span></button>`;
 }
 function renderWall(){
+  SECTN=0;
   let html='';
   const used=new Set();
   CORE.forEach(n=>{
     const l=SPOTS.filter(s=>districtOf(s)===n&&visible(s)).sort((a,b)=>shownPrice(a)-shownPrice(b)||a.name.localeCompare(b.name));
     if(!l.length) return;
     l.forEach(s=>used.add(s.guid));
-    html+=bandHtml(n,l)+'<div class="grid">'+l.map(tileHtml).join('')+'</div>';
+    html+=bandHtml(n,l)+'<div class="list">'+l.map(tileHtml).join('')+'</div>';
   });
   const rest=SPOTS.filter(s=>!used.has(s.guid)&&visible(s));
   const hoods={};
   rest.forEach(s=>{const h=s.neighborhood||'Milwaukee';(hoods[h]=hoods[h]||[]).push(s);});
   Object.keys(hoods).sort().forEach(h=>{ if(hoods[h].length>=3){
     const l=hoods[h].sort((a,b)=>shownPrice(a)-shownPrice(b)||a.name.localeCompare(b.name));
-    html+=bandHtml(h,l)+'<div class="grid">'+l.map(tileHtml).join('')+'</div>';
+    html+=bandHtml(h,l)+'<div class="list">'+l.map(tileHtml).join('')+'</div>';
     delete hoods[h]; } });
   const tail=[].concat(...Object.values(hoods)).sort((a,b)=>shownPrice(a)-shownPrice(b)||a.name.localeCompare(b.name));
-  if(tail.length) html+=bandHtml('Around the metro',tail)+'<div class="grid">'+tail.map(tileHtml).join('')+'</div>';
+  if(tail.length) html+=bandHtml('Around the metro',tail)+'<div class="list">'+tail.map(tileHtml).join('')+'</div>';
   $('#wall').innerHTML=html||'<div style="padding:32px 12px;text-align:center;color:var(--muted)">Nothing on the wall matches that.</div>';
-  document.querySelectorAll('.tile').forEach(t=>t.addEventListener('click',()=>openSpot(t.dataset.guid)));
+  document.querySelectorAll('.row').forEach(t=>t.addEventListener('click',()=>openSpot(t.dataset.guid)));
 }
 function openSpot(guid){
   const s=SPOTS.find(x=>x.guid===guid);
