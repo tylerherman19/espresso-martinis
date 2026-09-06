@@ -2,6 +2,7 @@ const $ = s => document.querySelector(s);
 const money = c => '$' + (c/100).toFixed(c%100===0?0:2);
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 let SPOTS=[], HH=false, QUERY='', MAP=null, MARKERS={};
+const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches || location.search.includes('still');
 const shownPrice = s => (HH && s.hh_price_cents) ? s.hh_price_cents : s.price_cents;
 const BOXES = {
   'Deer District':[43.0430,43.0480,-87.9190,-87.9120], 'Theater District':[43.0370,43.0430,-87.9170,-87.9085],
@@ -47,14 +48,57 @@ function renderWall(){
     delete hoods[h]; } });
   const tail=[].concat(...Object.values(hoods)).sort((a,b)=>shownPrice(a)-shownPrice(b)||a.name.localeCompare(b.name));
   if(tail.length) html+=bandHtml('Around the metro',tail)+'<div class="list">'+tail.map(tileHtml).join('')+'</div>';
-  $('#wall').innerHTML=html||'<div style="padding:32px 12px;text-align:center;color:var(--muted)">Nothing on the wall matches that.</div>';
-  document.querySelectorAll('.row').forEach(t=>t.addEventListener('click',()=>openSpot(t.dataset.guid)));
+  const wall=$('#wall');
+  wall.innerHTML=html||'<div style="padding:32px 12px;text-align:center;color:var(--muted)">Nothing on the wall matches that.</div>';
+  wall.querySelectorAll('.row').forEach(t=>t.addEventListener('click',()=>openSpot(t.dataset.guid)));
+  staggerIn(wall);
+  watchSections();
+}
+function staggerIn(wall){
+  const els=[...wall.querySelectorAll('.sect,.row')];
+  if(REDUCED){ return; }
+  wall.classList.add('entering');
+  els.forEach((el,i)=>{ el.style.transitionDelay=(Math.min(i,24)*14)+'ms'; });
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{
+    els.forEach(el=>el.classList.add('in'));
+    setTimeout(()=>{
+      wall.classList.remove('entering');
+      els.forEach(el=>{ el.classList.remove('in'); el.style.transitionDelay=''; });
+    }, 24*14+280);
+  }));
+}
+let SEC_OBS=null;
+function watchSections(){
+  if(SEC_OBS) SEC_OBS.disconnect();
+  const barH=document.getElementById('bar').offsetHeight;
+  SEC_OBS=new IntersectionObserver(es=>{
+    es.forEach(e=>e.target.classList.toggle('stuck', !e.isIntersecting && e.boundingClientRect.top<=barH+1));
+  },{rootMargin:`-${barH+1}px 0px 0px 0px`, threshold:0});
+  document.querySelectorAll('#wall .sect').forEach(s=>SEC_OBS.observe(s));
+}
+function tickStat(el,to,fmt){
+  if(REDUCED){ el._v=to; el.textContent=fmt(to); return; }
+  const from=el._v||0, t0=performance.now(), dur=520;
+  function f(t){
+    const k=Math.min(1,(t-t0)/dur), e=1-Math.pow(1-k,3);
+    el.textContent=fmt(Math.round(from+(to-from)*e));
+    if(k<1) requestAnimationFrame(f); else el._v=to;
+  }
+  requestAnimationFrame(f);
+}
+function updateStats(animate){
+  const list=SPOTS.filter(visible);
+  const spots=list.length;
+  const cheapest=list.length?Math.min(...list.map(shownPrice)):0;
+  const hh=list.filter(s=>s.happy_hour).length;
+  const set=(id,to,fmt)=>{ const el=$(id); if(animate) tickStat(el,to,fmt); else { el._v=to; el.textContent=fmt(to); } };
+  set('#stat-spots',spots,v=>String(v));
+  set('#stat-cheapest',cheapest,v=>money(Math.round(v/100)*100));
+  set('#stat-hh',hh,v=>String(v));
 }
 function openSpot(guid){
   const s=SPOTS.find(x=>x.guid===guid);
-  $('#backdrop').classList.remove('hidden');
-  const sh=$('#sheet');
-  sh.classList.remove('hidden');
+  const bd=$('#backdrop'), sh=$('#sheet');
   sh.innerHTML=`<div class="sname">${esc(s.name)}</div>
     <div class="shood">${esc(districtOf(s)||s.neighborhood||'Milwaukee')}</div>
     <div class="sitems">${s.items.map(it=>{
@@ -65,8 +109,16 @@ function openSpot(guid){
     <div class="row2"><button class="pin-link" data-pin="${s.guid}" type="button">Show on map</button><button class="close2" type="button">Close</button></div>`;
   sh.querySelector('.pin-link').addEventListener('click',()=>{closeSpot();openMap(s.guid);});
   sh.querySelector('.close2').addEventListener('click',closeSpot);
+  bd.classList.remove('hidden'); sh.classList.remove('hidden');
+  void sh.offsetHeight;
+  bd.classList.add('open'); sh.classList.add('open');
 }
-function closeSpot(){ $('#backdrop').classList.add('hidden'); $('#sheet').classList.add('hidden'); }
+function closeSpot(){
+  const bd=$('#backdrop'), sh=$('#sheet');
+  if(sh.classList.contains('hidden')) return;
+  bd.classList.remove('open'); sh.classList.remove('open');
+  setTimeout(()=>{ bd.classList.add('hidden'); sh.classList.add('hidden'); }, REDUCED?0:320);
+}
 $('#backdrop').addEventListener('click',closeSpot);
 function popupHtml(s){
   return `<div style="font-weight:600;font-size:15px">${esc(s.name)}</div>`+
@@ -76,7 +128,9 @@ function popupHtml(s){
     `<div style="margin-top:12px;font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:#6F6A5E">${esc(s.address||'')}</div>`;
 }
 function openMap(guid){
-  $('#map-overlay').classList.remove('hidden'); document.body.style.overflow='hidden';
+  const ov=$('#map-overlay');
+  ov.classList.remove('hidden'); document.body.style.overflow='hidden';
+  void ov.offsetHeight; ov.classList.add('open');
   if(!MAP){ MAP=L.map('map',{scrollWheelZoom:false});
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'}).addTo(MAP); }
   Object.values(MARKERS).forEach(m=>m.remove()); MARKERS={};
@@ -87,21 +141,49 @@ function openMap(guid){
     MARKERS[s.guid]=L.marker([s.lat,s.lng],{icon}).addTo(MAP).bindPopup(popupHtml(s)); });
   $('#map-title').textContent=`${list.length} spots, pinned`;
   setTimeout(()=>{ MAP.invalidateSize();
-    if(guid&&MARKERS[guid]){ const s=list.find(x=>x.guid===guid); MAP.setView([s.lat,s.lng],15); MARKERS[guid].openPopup(); }
-    else MAP.fitBounds(L.latLngBounds(list.map(s=>[s.lat,s.lng])).pad(0.08)); },60);
+    if(guid&&MARKERS[guid]){ const s=list.find(x=>x.guid===guid); MAP.setView([s.lat,s.lng],15); MARKERS[s.guid].openPopup(); }
+    else MAP.fitBounds(L.latLngBounds(list.map(s=>[s.lat,s.lng])).pad(0.08)); },80);
 }
-function closeMap(){ $('#map-overlay').classList.add('hidden'); document.body.style.overflow=''; }
+function closeMap(){
+  const ov=$('#map-overlay');
+  if(ov.classList.contains('hidden')) return;
+  ov.classList.remove('open'); document.body.style.overflow='';
+  setTimeout(()=>ov.classList.add('hidden'), REDUCED?0:220);
+}
 $('#map-btn').addEventListener('click',()=>openMap());
 $('#close-map').addEventListener('click',closeMap);
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeMap();closeSpot();}});
-$('#hh-btn').addEventListener('click',()=>{HH=!HH;$('#hh-btn').classList.toggle('on',HH);$('#hh-btn').setAttribute('aria-pressed',HH);renderWall();});
-$('#find').addEventListener('input',e=>{QUERY=e.target.value;renderWall();});
+$('#hh-btn').addEventListener('click',()=>{
+  HH=!HH; $('#hh-btn').classList.toggle('on',HH); $('#hh-btn').setAttribute('aria-pressed',HH);
+  renderWall(); updateStats(true);
+});
+let FIND_T=null;
+$('#find').addEventListener('input',e=>{
+  QUERY=e.target.value;
+  clearTimeout(FIND_T);
+  FIND_T=setTimeout(()=>{ renderWall(); updateStats(false); },120);
+});
+function watchScroll(){
+  const mast=document.querySelector('.mast'), bar=document.getElementById('bar');
+  let ticking=false;
+  addEventListener('scroll',()=>{
+    if(ticking) return; ticking=true;
+    requestAnimationFrame(()=>{
+      document.body.classList.toggle('scrolled', mast.getBoundingClientRect().bottom<=bar.offsetHeight+8);
+      ticking=false;
+    });
+  },{passive:true});
+}
+function setBarH(){ document.documentElement.style.setProperty('--bar-h', document.getElementById('bar').offsetHeight+'px'); }
+addEventListener('resize',setBarH);
+setBarH();
+watchScroll();
 fetch('data/martinis.json?v='+Date.now()).then(r=>r.json()).then(d=>{
   SPOTS=d.martinis;
   const dt=new Date(d.generated_at);
-  const mon=dt.toLocaleString('en-US',{month:'short',timeZone:'America/Chicago'});
-  const day=Number(dt.toLocaleString('en-US',{day:'numeric',timeZone:'America/Chicago'}));
-  $('#stamp').textContent=`${SPOTS.length} SPOTS · UPDATED ${mon.toUpperCase()} ${day}`;
+  const dateStr=dt.toLocaleDateString('en-US',{weekday:'long',month:'short',day:'numeric',year:'numeric',timeZone:'America/Chicago'});
+  $('#dt-date').textContent=dateStr;
   $('#hh-btn').innerHTML=`HH <sup>${SPOTS.filter(s=>s.happy_hour).length}</sup>`;
   renderWall();
+  updateStats(true);
 });
