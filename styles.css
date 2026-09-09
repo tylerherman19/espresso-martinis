@@ -11,6 +11,10 @@ body.scrolled #bar .b { opacity:1; transform:none; }
 #hh-btn { border:1px solid var(--ink); background:var(--paper); border-radius:0; padding:8px; font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.05em; text-transform:uppercase; cursor:pointer; white-space:nowrap; }
 #hh-btn.on { background:var(--accent); border-color:var(--accent); color:var(--paper); }
 #map-btn { border:1px solid var(--ink); background:var(--ink); color:var(--paper); border-radius:0; padding:8px; font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.05em; text-transform:uppercase; cursor:pointer; }
+#bar { overflow-x:auto; }
+#bar .tab { border:1px solid var(--ink); background:var(--paper); border-radius:0; padding:8px; font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.05em; text-transform:uppercase; cursor:pointer; white-space:nowrap; }
+#bar .tab.on { background:var(--ink); color:var(--paper); }
+@media (max-width:560px){ #bar .tab { font-size:9px; padding:8px 6px; } #bar .find { font-size:9px; } }
 .mast { padding:20px 12px 0; text-align:center; }
 .mast .rule { border-top:3px solid var(--ink); }
 .mast .rule2 { border-top:1px solid var(--ink); margin-top:3px; }
@@ -51,6 +55,9 @@ body.scrolled #bar .b { opacity:1; transform:none; }
 #sheet .sitem b { font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:14px; white-space:nowrap; }
 #sheet .sitem b.hh { color:var(--accent); }
 #sheet .saddr { margin-top:12px; font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:var(--muted); }
+#sheet .snotes { margin-top:8px; font-size:12.5px; line-height:1.5; color:var(--muted); font-style:italic; }
+#sheet .ssrc { margin-top:8px; font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.06em; }
+#sheet .ssrc a { color:var(--accent); }
 #sheet .row2 { margin-top:16px; display:flex; gap:8px; }
 #sheet .pin-link, #sheet .close2 { font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; padding:8px 12px; cursor:pointer; border:1px solid var(--ink); background:var(--paper); }
 #sheet .pin-link { color:var(--accent); border-color:var(--accent); }

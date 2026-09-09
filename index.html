@@ -3,17 +3,19 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>The Espresso Martini Wall | Milwaukee</title>
-<meta name="description" content="Every Milwaukee espresso martini we can price, organized by district.">
+<title>Milwaukee Drinks</title>
+<meta name="description" content="Milwaukee drink prices, organized by district: espresso martinis and Spotted Cow.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-<link rel="stylesheet" href="styles.css?v=7">
+<link rel="stylesheet" href="styles.css?v=8">
 </head>
 <body>
 <nav id="bar">
   <span class="b" id="bar-brand">The Wall</span>
+  <button id="tab-martinis" class="tab on" type="button">Espresso Martinis</button>
+  <button id="tab-cow" class="tab" type="button">Spotted Cow</button>
   <input id="find" class="find" type="search" placeholder="Find a spot" aria-label="Find a spot">
   <button id="hh-btn" type="button" aria-pressed="false">HH</button>
   <button id="map-btn" type="button">Map</button>
@@ -21,7 +23,7 @@
 <header class="mast">
   <div class="rule"></div><div class="rule2"></div>
   <div class="dt"><span>Milwaukee, Wis.</span><span id="dt-date">&nbsp;</span><span>No. 7</span></div>
-  <h1>The Espresso<br>Martini Wall</h1>
+  <h1>Milwaukee<br>Drinks</h1>
   <div class="idx">
     <div><b id="stat-spots">0</b><span>spots</span></div>
     <div><b id="stat-cheapest">$0</b><span>cheapest</span></div>
@@ -35,8 +37,8 @@
   <div class="overlay-bar"><span class="overlay-title" id="map-title">Map</span><button class="close-map" id="close-map" type="button">Close</button></div>
   <div id="map"></div>
 </div>
-<footer class="footer"><p>Prices pulled from online menus and ordering platforms. Happy-hour pricing when the venue posts one. A sweep, not a guarantee: menus change, platforms lag, and the register is the final word.</p></footer>
+<footer class="footer"><p>Tracking espresso martinis and Spotted Cow across Milwaukee. Prices pulled from online menus and ordering platforms. Happy-hour pricing when the venue posts one. A sweep, not a guarantee: menus change, platforms lag, and the register is the final word.</p></footer>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script src="app.js?v=7"></script>
+<script src="app.js?v=8"></script>
 </body>
 </html>

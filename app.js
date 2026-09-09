@@ -2,8 +2,12 @@ const $ = s => document.querySelector(s);
 const money = c => '$' + (c/100).toFixed(c%100===0?0:2);
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 let SPOTS=[], HH=false, QUERY='', MAP=null, MARKERS={};
+let TAB='martinis';
+const DATA={martinis:[],cow:[]};
 const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches || location.search.includes('still');
 const shownPrice = s => (HH && s.hh_price_cents) ? s.hh_price_cents : s.price_cents;
+const sortPrice = s => { const p=shownPrice(s); return p==null?Infinity:p; };
+const priceLabel = s => { const p=shownPrice(s); return p==null?'\u2014':money(p); };
 const BOXES = {
   'Deer District':[43.0430,43.0480,-87.9190,-87.9120], 'Theater District':[43.0370,43.0430,-87.9170,-87.9085],
   'Third Ward':[43.0295,43.0370,-87.9125,-87.9000], "Walker's Point":[43.0160,43.0300,-87.9200,-87.9000],
@@ -24,17 +28,16 @@ function bandHtml(name,list){
   return `<div class="sect"><span class="si">${String(SECTN).padStart(2,'0')}</span><span class="sn">${esc(name)}</span><span class="sc">${list.length} SPOT${list.length===1?'':'S'}</span></div>`;
 }
 function tileHtml(s){
-  const p=shownPrice(s);
   return `<button class="row" data-guid="${s.guid}" type="button">
     <span class="rn">${esc(s.name)}</span>${s.happy_hour?'<span class="hh">HH</span>':''}
-    <span class="rp">${money(p)}</span></button>`;
+    <span class="rp">${priceLabel(s)}</span></button>`;
 }
 function renderWall(){
   SECTN=0;
   let html='';
   const used=new Set();
   CORE.forEach(n=>{
-    const l=SPOTS.filter(s=>districtOf(s)===n&&visible(s)).sort((a,b)=>shownPrice(a)-shownPrice(b)||a.name.localeCompare(b.name));
+    const l=SPOTS.filter(s=>districtOf(s)===n&&visible(s)).sort((a,b)=>sortPrice(a)-sortPrice(b)||a.name.localeCompare(b.name));
     if(!l.length) return;
     l.forEach(s=>used.add(s.guid));
     html+=bandHtml(n,l)+'<div class="list">'+l.map(tileHtml).join('')+'</div>';
@@ -43,10 +46,10 @@ function renderWall(){
   const hoods={};
   rest.forEach(s=>{const h=s.neighborhood||'Milwaukee';(hoods[h]=hoods[h]||[]).push(s);});
   Object.keys(hoods).sort().forEach(h=>{ if(hoods[h].length>=3){
-    const l=hoods[h].sort((a,b)=>shownPrice(a)-shownPrice(b)||a.name.localeCompare(b.name));
+    const l=hoods[h].sort((a,b)=>sortPrice(a)-sortPrice(b)||a.name.localeCompare(b.name));
     html+=bandHtml(h,l)+'<div class="list">'+l.map(tileHtml).join('')+'</div>';
     delete hoods[h]; } });
-  const tail=[].concat(...Object.values(hoods)).sort((a,b)=>shownPrice(a)-shownPrice(b)||a.name.localeCompare(b.name));
+  const tail=[].concat(...Object.values(hoods)).sort((a,b)=>sortPrice(a)-sortPrice(b)||a.name.localeCompare(b.name));
   if(tail.length) html+=bandHtml('Around the metro',tail)+'<div class="list">'+tail.map(tileHtml).join('')+'</div>';
   const wall=$('#wall');
   wall.innerHTML=html||'<div style="padding:32px 12px;text-align:center;color:var(--muted)">Nothing on the wall matches that.</div>';
@@ -89,11 +92,12 @@ function tickStat(el,to,fmt){
 function updateStats(animate){
   const list=SPOTS.filter(visible);
   const spots=list.length;
-  const cheapest=list.length?Math.min(...list.map(shownPrice)):0;
+  const prices=list.map(shownPrice).filter(p=>p!=null);
+  const cheapest=prices.length?Math.min(...prices):null;
   const hh=list.filter(s=>s.happy_hour).length;
   const set=(id,to,fmt)=>{ const el=$(id); if(animate) tickStat(el,to,fmt); else { el._v=to; el.textContent=fmt(to); } };
   set('#stat-spots',spots,v=>String(v));
-  set('#stat-cheapest',cheapest,v=>money(Math.round(v/100)*100));
+  set('#stat-cheapest',cheapest||0,()=>cheapest==null?'\u2014':money(cheapest));
   set('#stat-hh',hh,v=>String(v));
 }
 function openSpot(guid){
@@ -106,6 +110,8 @@ function openSpot(guid){
       const isHH=HH&&it.hh_price_cents;
       return `<div class="sitem"><span>${esc(it.item)}</span><b class="${isHH?'hh':''}">${isHH?hhp:(reg+(hhp?' · '+hhp:''))}</b></div>`;}).join('')}</div>
     <div class="saddr">${esc(s.address||'')}</div>
+    ${s.notes?`<div class="snotes">${esc(s.notes)}</div>`:''}
+    ${s.source_url?`<div class="ssrc"><a href="${esc(s.source_url).replace(/"/g,'&quot;')}" target="_blank" rel="noopener">menu source</a></div>`:''}
     <div class="row2"><button class="pin-link" data-pin="${s.guid}" type="button">Show on map</button><button class="close2" type="button">Close</button></div>`;
   sh.querySelector('.pin-link').addEventListener('click',()=>{closeSpot();openMap(s.guid);});
   sh.querySelector('.close2').addEventListener('click',closeSpot);
@@ -135,9 +141,10 @@ function openMap(guid){
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'}).addTo(MAP); }
   Object.values(MARKERS).forEach(m=>m.remove()); MARKERS={};
   const list=SPOTS.filter(visible);
-  const minP=Math.min(...list.map(shownPrice));
-  list.forEach(s=>{ const cheap=shownPrice(s)===minP;
-    const icon=L.divIcon({className:'',html:`<div class="price-pin${cheap?' cheapest':''}">${money(shownPrice(s))}</div>`,iconSize:null,iconAnchor:[20,14]});
+  const mprices=list.map(shownPrice).filter(p=>p!=null);
+  const minP=mprices.length?Math.min(...mprices):null;
+  list.forEach(s=>{ const cheap=minP!=null&&shownPrice(s)===minP;
+    const icon=L.divIcon({className:'',html:`<div class="price-pin${cheap?' cheapest':''}">${priceLabel(s)}</div>`,iconSize:null,iconAnchor:[20,14]});
     MARKERS[s.guid]=L.marker([s.lat,s.lng],{icon}).addTo(MAP).bindPopup(popupHtml(s)); });
   $('#map-title').textContent=`${list.length} spots, pinned`;
   setTimeout(()=>{ MAP.invalidateSize();
@@ -178,12 +185,28 @@ function setBarH(){ document.documentElement.style.setProperty('--bar-h', docume
 addEventListener('resize',setBarH);
 setBarH();
 watchScroll();
-fetch('data/martinis.json?v='+Date.now()).then(r=>r.json()).then(d=>{
-  SPOTS=d.martinis;
-  const dt=new Date(d.generated_at);
+function updateTabUI(){
+  $('#tab-martinis').classList.toggle('on',TAB==='martinis');
+  $('#tab-cow').classList.toggle('on',TAB==='cow');
+  $('#hh-btn').innerHTML=`HH <sup>${DATA[TAB].filter(s=>s.happy_hour).length}</sup>`;
+}
+function setTab(t){
+  if(TAB===t||!DATA[t].length) return;
+  TAB=t; SPOTS=DATA[TAB]; closeMap(); closeSpot();
+  updateTabUI(); renderWall(); updateStats(true);
+}
+$('#tab-martinis').addEventListener('click',()=>setTab('martinis'));
+$('#tab-cow').addEventListener('click',()=>setTab('cow'));
+Promise.all([
+  fetch('data/martinis.json?v='+Date.now()).then(r=>r.json()),
+  fetch('data/cow.json?v='+Date.now()).then(r=>r.json())
+]).then(([m,c])=>{
+  DATA.martinis=m.martinis; DATA.cow=c.cows;
+  SPOTS=DATA[TAB];
+  const dt=new Date(m.generated_at);
   const dateStr=dt.toLocaleDateString('en-US',{weekday:'long',month:'short',day:'numeric',year:'numeric',timeZone:'America/Chicago'});
   $('#dt-date').textContent=dateStr;
-  $('#hh-btn').innerHTML=`HH <sup>${SPOTS.filter(s=>s.happy_hour).length}</sup>`;
+  updateTabUI();
   renderWall();
   updateStats(true);
 });
