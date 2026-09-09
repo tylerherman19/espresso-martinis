@@ -1,403 +1,689 @@
 {
- "generated_at": "2026-09-09T03:38:50.337775+00:00",
- "metro": "Milwaukee",
- "count": 18,
- "cows": [
-  {
-   "name": "On Tap Bar & Restaurant",
-   "address": "1203 N 10th St, Milwaukee, WI 53205 (Pabst Brewery complex)",
-   "lat": 43.04606,
-   "lng": -87.9248,
-   "neighborhood": "Downtown",
-   "downtown": true,
-   "price_cents": 700,
-   "items": [
+  "generated_at": "2026-09-09T03:47:46.092553+00:00",
+  "metro": "Milwaukee",
+  "count": 31,
+  "cows": [
     {
-     "item": "Spotted Cow — draft (16 oz $7 / 20 oz $9)",
-     "price_cents": 700,
-     "hh_price_cents": null
-    }
-   ],
-   "happy_hour": true,
-   "hh_price_cents": null,
-   "platform": "research",
-   "guid": "cow:on-tap-bar-restaurant",
-   "notes": "Happy hour (daily 2–6 PM) covers PBR and old fashioneds — not Spotted Cow.",
-   "source_url": "https://ontapmilwaukee.com/uploads/menu_images/pdf_16a4235c56687ff7d731518ef0d6a9e7.pdf"
-  },
-  {
-   "name": "Sinabro",
-   "address": "316 N Milwaukee St, Milwaukee, WI",
-   "lat": 43.03442,
-   "lng": -87.90566,
-   "neighborhood": "Third Ward",
-   "downtown": true,
-   "price_cents": null,
-   "items": [
+      "name": "On Tap Bar & Restaurant",
+      "address": "1203 N 10th St, Milwaukee, WI 53205 (Pabst Brewery complex)",
+      "lat": 43.04606,
+      "lng": -87.9248,
+      "neighborhood": "Downtown",
+      "downtown": true,
+      "price_cents": 700,
+      "items": [
+        {
+          "item": "Spotted Cow — draft (16 oz $7 / 20 oz $9)",
+          "price_cents": 700,
+          "hh_price_cents": null
+        }
+      ],
+      "happy_hour": true,
+      "hh_price_cents": null,
+      "platform": "research",
+      "guid": "cow:on-tap-bar-restaurant",
+      "notes": "Happy hour (daily 2–6 PM) covers PBR and old fashioneds — not Spotted Cow.",
+      "source_url": "https://ontapmilwaukee.com/uploads/menu_images/pdf_16a4235c56687ff7d731518ef0d6a9e7.pdf"
+    },
     {
-     "item": "Spotted Cow — draft",
-     "price_cents": null,
-     "hh_price_cents": null
-    }
-   ],
-   "happy_hour": false,
-   "hh_price_cents": null,
-   "platform": "research",
-   "guid": "cow:sinabro",
-   "notes": "On tap; price not published.",
-   "source_url": "https://www.beaconjournal.com/story/entertainment/dining/2024/09/23/sinabro-korean-restaurant-comfort-cooking-in-milwaukee-third-ward/75150508007/"
-  },
-  {
-   "name": "Shake Shack Milwaukee",
-   "address": "220 E Buffalo St, Milwaukee, WI 53202",
-   "lat": 43.03418,
-   "lng": -87.90853,
-   "neighborhood": "Third Ward",
-   "downtown": true,
-   "price_cents": null,
-   "items": [
+      "name": "Sinabro",
+      "address": "316 N Milwaukee St, Milwaukee, WI",
+      "lat": 43.03442,
+      "lng": -87.90566,
+      "neighborhood": "Third Ward",
+      "downtown": true,
+      "price_cents": null,
+      "items": [
+        {
+          "item": "Spotted Cow — draft",
+          "price_cents": null,
+          "hh_price_cents": null
+        }
+      ],
+      "happy_hour": false,
+      "hh_price_cents": null,
+      "platform": "research",
+      "guid": "cow:sinabro",
+      "notes": "On tap; price not published.",
+      "source_url": "https://www.beaconjournal.com/story/entertainment/dining/2024/09/23/sinabro-korean-restaurant-comfort-cooking-in-milwaukee-third-ward/75150508007/"
+    },
     {
-     "item": "Spotted Cow — draft",
-     "price_cents": null,
-     "hh_price_cents": null
-    }
-   ],
-   "happy_hour": false,
-   "hh_price_cents": null,
-   "platform": "research",
-   "guid": "cow:shake-shack-milwaukee",
-   "notes": "On tap; price not published.",
-   "source_url": "https://lb2.onmilwaukee.com/articles/first-look-shake-shack-milwaukee"
-  },
-  {
-   "name": "Onesto",
-   "address": "221 N Broadway, Milwaukee, WI 53202",
-   "lat": 43.0332,
-   "lng": -87.90759,
-   "neighborhood": "Third Ward",
-   "downtown": true,
-   "price_cents": null,
-   "items": [
+      "name": "Shake Shack Milwaukee",
+      "address": "220 E Buffalo St, Milwaukee, WI 53202",
+      "lat": 43.03418,
+      "lng": -87.90853,
+      "neighborhood": "Third Ward",
+      "downtown": true,
+      "price_cents": null,
+      "items": [
+        {
+          "item": "Spotted Cow — draft",
+          "price_cents": null,
+          "hh_price_cents": null
+        }
+      ],
+      "happy_hour": false,
+      "hh_price_cents": null,
+      "platform": "research",
+      "guid": "cow:shake-shack-milwaukee",
+      "notes": "On tap; price not published.",
+      "source_url": "https://lb2.onmilwaukee.com/articles/first-look-shake-shack-milwaukee"
+    },
     {
-     "item": "Spotted Cow",
-     "price_cents": null,
-     "hh_price_cents": null
-    }
-   ],
-   "happy_hour": false,
-   "hh_price_cents": null,
-   "platform": "research",
-   "guid": "cow:onesto",
-   "notes": "",
-   "source_url": "http://places.singleplatform.com/onesto/menu"
-  },
-  {
-   "name": "Agave South West Bar & Grill",
-   "address": "800 N Plankinton Ave, Milwaukee, WI",
-   "lat": 43.04044,
-   "lng": -87.91218,
-   "neighborhood": "Downtown",
-   "downtown": true,
-   "price_cents": 400,
-   "items": [
+      "name": "Onesto",
+      "address": "221 N Broadway, Milwaukee, WI 53202",
+      "lat": 43.0332,
+      "lng": -87.90759,
+      "neighborhood": "Third Ward",
+      "downtown": true,
+      "price_cents": null,
+      "items": [
+        {
+          "item": "Spotted Cow",
+          "price_cents": null,
+          "hh_price_cents": null
+        }
+      ],
+      "happy_hour": false,
+      "hh_price_cents": null,
+      "platform": "research",
+      "guid": "cow:onesto",
+      "notes": "",
+      "source_url": "http://places.singleplatform.com/onesto/menu"
+    },
     {
-     "item": "Spotted Cow",
-     "price_cents": 400,
-     "hh_price_cents": null
-    }
-   ],
-   "happy_hour": false,
-   "hh_price_cents": null,
-   "platform": "research",
-   "guid": "cow:agave-south-west-bar-grill",
-   "notes": "",
-   "source_url": "http://places.singleplatform.com/agave-south-west-bar--grill/menu"
-  },
-  {
-   "name": "Smoke Shack",
-   "address": "332 N Milwaukee St, Milwaukee, WI 53202",
-   "lat": 43.03472,
-   "lng": -87.90575,
-   "neighborhood": "Third Ward",
-   "downtown": true,
-   "price_cents": 550,
-   "items": [
+      "name": "Agave South West Bar & Grill",
+      "address": "800 N Plankinton Ave, Milwaukee, WI",
+      "lat": 43.04044,
+      "lng": -87.91218,
+      "neighborhood": "Downtown",
+      "downtown": true,
+      "price_cents": 400,
+      "items": [
+        {
+          "item": "Spotted Cow",
+          "price_cents": 400,
+          "hh_price_cents": null
+        }
+      ],
+      "happy_hour": false,
+      "hh_price_cents": null,
+      "platform": "research",
+      "guid": "cow:agave-south-west-bar-grill",
+      "notes": "",
+      "source_url": "http://places.singleplatform.com/agave-south-west-bar--grill/menu"
+    },
     {
-     "item": "Spotted Cow — draft",
-     "price_cents": 550,
-     "hh_price_cents": null
-    }
-   ],
-   "happy_hour": false,
-   "hh_price_cents": null,
-   "platform": "research",
-   "guid": "cow:smoke-shack",
-   "notes": "",
-   "source_url": "http://places.singleplatform.com/smoke-shack-22/menu"
-  },
-  {
-   "name": "The Wicked Hop",
-   "address": "345 N Broadway, Milwaukee, WI",
-   "lat": 43.03485,
-   "lng": -87.90778,
-   "neighborhood": "Third Ward",
-   "downtown": true,
-   "price_cents": null,
-   "items": [
+      "name": "Smoke Shack",
+      "address": "332 N Milwaukee St, Milwaukee, WI 53202",
+      "lat": 43.03472,
+      "lng": -87.90575,
+      "neighborhood": "Third Ward",
+      "downtown": true,
+      "price_cents": 550,
+      "items": [
+        {
+          "item": "Spotted Cow — draft",
+          "price_cents": 550,
+          "hh_price_cents": null
+        }
+      ],
+      "happy_hour": false,
+      "hh_price_cents": null,
+      "platform": "research",
+      "guid": "cow:smoke-shack",
+      "notes": "",
+      "source_url": "http://places.singleplatform.com/smoke-shack-22/menu"
+    },
     {
-     "item": "Spotted Cow",
-     "price_cents": null,
-     "hh_price_cents": null
-    }
-   ],
-   "happy_hour": true,
-   "hh_price_cents": null,
-   "platform": "research",
-   "guid": "cow:the-wicked-hop",
-   "notes": "Happy hour: $1 off all beer/cider, all day Monday and Tue–Fri 11 AM–7 PM. Also pours a $6 “Beermoooosa”.",
-   "source_url": "http://places.singleplatform.com/the-wicked-hop--jackalope/menu"
-  },
-  {
-   "name": "East Town Kitchen & Bar",
-   "address": "323 E Wisconsin Ave, Milwaukee, WI 53202",
-   "lat": 43.03843,
-   "lng": -87.90698,
-   "neighborhood": "Downtown",
-   "downtown": true,
-   "price_cents": 800,
-   "items": [
+      "name": "The Wicked Hop",
+      "address": "345 N Broadway, Milwaukee, WI",
+      "lat": 43.03485,
+      "lng": -87.90778,
+      "neighborhood": "Third Ward",
+      "downtown": true,
+      "price_cents": null,
+      "items": [
+        {
+          "item": "Spotted Cow",
+          "price_cents": null,
+          "hh_price_cents": null
+        }
+      ],
+      "happy_hour": true,
+      "hh_price_cents": null,
+      "platform": "research",
+      "guid": "cow:the-wicked-hop",
+      "notes": "Happy hour: $1 off all beer/cider, all day Monday and Tue–Fri 11 AM–7 PM. Also pours a $6 “Beermoooosa”.",
+      "source_url": "http://places.singleplatform.com/the-wicked-hop--jackalope/menu"
+    },
     {
-     "item": "Spotted Cow — draft",
-     "price_cents": 800,
-     "hh_price_cents": null
-    }
-   ],
-   "happy_hour": true,
-   "hh_price_cents": null,
-   "platform": "research",
-   "guid": "cow:east-town-kitchen-bar",
-   "notes": "Happy-hour menu lists $5 draft beer; not confirmed whether Spotted Cow is included.",
-   "source_url": "http://places.singleplatform.com/millioke/menu"
-  },
-  {
-   "name": "Good Life",
-   "address": "731 N Water St, Milwaukee, WI 53202",
-   "lat": 43.03934,
-   "lng": -87.90922,
-   "neighborhood": "Downtown",
-   "downtown": true,
-   "price_cents": 400,
-   "items": [
+      "name": "East Town Kitchen & Bar",
+      "address": "323 E Wisconsin Ave, Milwaukee, WI 53202",
+      "lat": 43.03843,
+      "lng": -87.90698,
+      "neighborhood": "Downtown",
+      "downtown": true,
+      "price_cents": 800,
+      "items": [
+        {
+          "item": "Spotted Cow — draft",
+          "price_cents": 800,
+          "hh_price_cents": null
+        }
+      ],
+      "happy_hour": true,
+      "hh_price_cents": null,
+      "platform": "research",
+      "guid": "cow:east-town-kitchen-bar",
+      "notes": "Happy-hour menu lists $5 draft beer; not confirmed whether Spotted Cow is included.",
+      "source_url": "http://places.singleplatform.com/millioke/menu"
+    },
     {
-     "item": "Spotted Cow",
-     "price_cents": 400,
-     "hh_price_cents": null
-    }
-   ],
-   "happy_hour": false,
-   "hh_price_cents": null,
-   "platform": "research",
-   "guid": "cow:good-life",
-   "notes": "",
-   "source_url": "http://places.singleplatform.com/good-life/menu"
-  },
-  {
-   "name": "Valhalla",
-   "address": "1111 N Old World 3rd St, Milwaukee, WI",
-   "lat": 43.04466,
-   "lng": -87.91488,
-   "neighborhood": "Downtown",
-   "downtown": true,
-   "price_cents": null,
-   "items": [
+      "name": "Good Life",
+      "address": "731 N Water St, Milwaukee, WI 53202",
+      "lat": 43.03934,
+      "lng": -87.90922,
+      "neighborhood": "Downtown",
+      "downtown": true,
+      "price_cents": 400,
+      "items": [
+        {
+          "item": "Spotted Cow",
+          "price_cents": 400,
+          "hh_price_cents": null
+        }
+      ],
+      "happy_hour": false,
+      "hh_price_cents": null,
+      "platform": "research",
+      "guid": "cow:good-life",
+      "notes": "",
+      "source_url": "http://places.singleplatform.com/good-life/menu"
+    },
     {
-     "item": "Spotted Cow — draft",
-     "price_cents": null,
-     "hh_price_cents": null
-    }
-   ],
-   "happy_hour": false,
-   "hh_price_cents": null,
-   "platform": "research",
-   "guid": "cow:valhalla",
-   "notes": "Status unverified — sourced from an old opening article.",
-   "source_url": "https://lb2.onmilwaukee.com/articles/valhalla-open-on-old-world-third"
-  },
-  {
-   "name": "Mader's Restaurant",
-   "address": "1041 N Old World 3rd St, Milwaukee, WI",
-   "lat": 43.04387,
-   "lng": -87.91482,
-   "neighborhood": "Downtown",
-   "downtown": true,
-   "price_cents": null,
-   "items": [
+      "name": "Valhalla",
+      "address": "1111 N Old World 3rd St, Milwaukee, WI",
+      "lat": 43.04466,
+      "lng": -87.91488,
+      "neighborhood": "Downtown",
+      "downtown": true,
+      "price_cents": null,
+      "items": [
+        {
+          "item": "Spotted Cow — draft",
+          "price_cents": null,
+          "hh_price_cents": null
+        }
+      ],
+      "happy_hour": false,
+      "hh_price_cents": null,
+      "platform": "research",
+      "guid": "cow:valhalla",
+      "notes": "Status unverified — sourced from an old opening article.",
+      "source_url": "https://lb2.onmilwaukee.com/articles/valhalla-open-on-old-world-third"
+    },
     {
-     "item": "Spotted Cow — draft",
-     "price_cents": null,
-     "hh_price_cents": null
-    }
-   ],
-   "happy_hour": false,
-   "hh_price_cents": null,
-   "platform": "research",
-   "guid": "cow:mader-s-restaurant",
-   "notes": "",
-   "source_url": "http://urbnexplorer.com/where-to-eat-and-drink-in-milwaukee/"
-  },
-  {
-   "name": "Milwaukee Brat House",
-   "address": "1013 N Old World 3rd St, Milwaukee, WI 53203",
-   "lat": 43.04327,
-   "lng": -87.91489,
-   "neighborhood": "Downtown",
-   "downtown": true,
-   "price_cents": null,
-   "items": [
+      "name": "Mader's Restaurant",
+      "address": "1041 N Old World 3rd St, Milwaukee, WI",
+      "lat": 43.04387,
+      "lng": -87.91482,
+      "neighborhood": "Downtown",
+      "downtown": true,
+      "price_cents": null,
+      "items": [
+        {
+          "item": "Spotted Cow — draft",
+          "price_cents": null,
+          "hh_price_cents": null
+        }
+      ],
+      "happy_hour": false,
+      "hh_price_cents": null,
+      "platform": "research",
+      "guid": "cow:mader-s-restaurant",
+      "notes": "",
+      "source_url": "http://urbnexplorer.com/where-to-eat-and-drink-in-milwaukee/"
+    },
     {
-     "item": "Spotted Cow",
-     "price_cents": null,
-     "hh_price_cents": null
-    }
-   ],
-   "happy_hour": false,
-   "hh_price_cents": null,
-   "platform": "research",
-   "guid": "cow:milwaukee-brat-house",
-   "notes": "A 2017 review mentioned a 2-for-1 deal; treat as stale.",
-   "source_url": "https://www.tripadvisor.co.nz/ShowUserReviews-g60097-d2521287-r492882656-Milwaukee_Brat_House-Milwaukee_Wisconsin.html"
-  },
-  {
-   "name": "The Wurst Bar",
-   "address": "400 N Water St (Milwaukee Public Market), Milwaukee, WI",
-   "lat": 43.03526,
-   "lng": -87.90811,
-   "neighborhood": "Third Ward",
-   "downtown": true,
-   "price_cents": null,
-   "items": [
+      "name": "Milwaukee Brat House",
+      "address": "1013 N Old World 3rd St, Milwaukee, WI 53203",
+      "lat": 43.04327,
+      "lng": -87.91489,
+      "neighborhood": "Downtown",
+      "downtown": true,
+      "price_cents": null,
+      "items": [
+        {
+          "item": "Spotted Cow",
+          "price_cents": null,
+          "hh_price_cents": null
+        }
+      ],
+      "happy_hour": false,
+      "hh_price_cents": null,
+      "platform": "research",
+      "guid": "cow:milwaukee-brat-house",
+      "notes": "A 2017 review mentioned a 2-for-1 deal; treat as stale.",
+      "source_url": "https://www.tripadvisor.co.nz/ShowUserReviews-g60097-d2521287-r492882656-Milwaukee_Brat_House-Milwaukee_Wisconsin.html"
+    },
     {
-     "item": "Spotted Cow — draft",
-     "price_cents": null,
-     "hh_price_cents": null
-    }
-   ],
-   "happy_hour": true,
-   "hh_price_cents": null,
-   "platform": "research",
-   "guid": "cow:the-wurst-bar",
-   "notes": "Happy hour Mon–Fri 2:30–5:30 PM: $1 off taps, half-price cans/bottles.",
-   "source_url": "https://OnMilwaukee.com/articles/hidden-gem-the-wurst-bar"
-  },
-  {
-   "name": "Drink Wisconsinbly Pub",
-   "address": "320 W Highland Ave, Milwaukee, WI 53203",
-   "lat": 43.04471,
-   "lng": -87.9154,
-   "neighborhood": "Deer District",
-   "downtown": true,
-   "price_cents": 600,
-   "items": [
+      "name": "The Wurst Bar",
+      "address": "400 N Water St (Milwaukee Public Market), Milwaukee, WI",
+      "lat": 43.03526,
+      "lng": -87.90811,
+      "neighborhood": "Third Ward",
+      "downtown": true,
+      "price_cents": null,
+      "items": [
+        {
+          "item": "Spotted Cow — draft",
+          "price_cents": null,
+          "hh_price_cents": null
+        }
+      ],
+      "happy_hour": true,
+      "hh_price_cents": null,
+      "platform": "research",
+      "guid": "cow:the-wurst-bar",
+      "notes": "Happy hour Mon–Fri 2:30–5:30 PM: $1 off taps, half-price cans/bottles.",
+      "source_url": "https://OnMilwaukee.com/articles/hidden-gem-the-wurst-bar"
+    },
     {
-     "item": "Spotted Cow — draft",
-     "price_cents": 600,
-     "hh_price_cents": null
-    }
-   ],
-   "happy_hour": false,
-   "hh_price_cents": null,
-   "platform": "research",
-   "guid": "cow:drink-wisconsinbly-pub",
-   "notes": "$6 as the “Dew And A Moo” combo with a Tullamore D.E.W. shot.",
-   "source_url": "https://menucollectors.com/drink-wisconsinbly-pub-53203-menu/"
-  },
-  {
-   "name": "Dorsia",
-   "address": "1307 E Brady St, Milwaukee, WI",
-   "lat": 43.05275,
-   "lng": -87.89515,
-   "neighborhood": "Brady Street",
-   "downtown": false,
-   "price_cents": null,
-   "items": [
+      "name": "Drink Wisconsinbly Pub",
+      "address": "320 W Highland Ave, Milwaukee, WI 53203",
+      "lat": 43.04471,
+      "lng": -87.9154,
+      "neighborhood": "Deer District",
+      "downtown": true,
+      "price_cents": 600,
+      "items": [
+        {
+          "item": "Spotted Cow — draft",
+          "price_cents": 600,
+          "hh_price_cents": null
+        }
+      ],
+      "happy_hour": false,
+      "hh_price_cents": null,
+      "platform": "research",
+      "guid": "cow:drink-wisconsinbly-pub",
+      "notes": "$6 as the “Dew And A Moo” combo with a Tullamore D.E.W. shot.",
+      "source_url": "https://menucollectors.com/drink-wisconsinbly-pub-53203-menu/"
+    },
     {
-     "item": "Spotted Cow",
-     "price_cents": null,
-     "hh_price_cents": 400
-    }
-   ],
-   "happy_hour": true,
-   "hh_price_cents": 400,
-   "platform": "research",
-   "guid": "cow:dorsia",
-   "notes": "Happy hour Mon–Fri 4–6 PM: $4 Spotted Cow.",
-   "source_url": "http://onmilwaukee.com/articles/must-try-milwaukee-happy-hour"
-  },
-  {
-   "name": "Pfister Hotel Lobby Lounge",
-   "address": "424 E Wisconsin Ave (Pfister Hotel), Milwaukee, WI",
-   "lat": 43.03943,
-   "lng": -87.90573,
-   "neighborhood": "Downtown",
-   "downtown": true,
-   "price_cents": null,
-   "items": [
+      "name": "Dorsia",
+      "address": "1307 E Brady St, Milwaukee, WI",
+      "lat": 43.05275,
+      "lng": -87.89515,
+      "neighborhood": "Brady Street",
+      "downtown": false,
+      "price_cents": null,
+      "items": [
+        {
+          "item": "Spotted Cow",
+          "price_cents": null,
+          "hh_price_cents": 400
+        }
+      ],
+      "happy_hour": true,
+      "hh_price_cents": 400,
+      "platform": "research",
+      "guid": "cow:dorsia",
+      "notes": "Happy hour Mon–Fri 4–6 PM: $4 Spotted Cow.",
+      "source_url": "http://onmilwaukee.com/articles/must-try-milwaukee-happy-hour"
+    },
     {
-     "item": "Spotted Cow",
-     "price_cents": null,
-     "hh_price_cents": null
-    }
-   ],
-   "happy_hour": false,
-   "hh_price_cents": null,
-   "platform": "research",
-   "guid": "cow:pfister-hotel-lobby-lounge",
-   "notes": "",
-   "source_url": "https://Www.Tripadvisor.ca/ShowUserReviews-g60097-d2627345-r638992928-Pfister_Hotel_Lobby_Lounge-Milwaukee_Wisconsin.html"
-  },
-  {
-   "name": "Café Benelux",
-   "address": "346 N Broadway, Milwaukee, WI",
-   "lat": 43.03489,
-   "lng": -87.90697,
-   "neighborhood": "Third Ward",
-   "downtown": true,
-   "price_cents": null,
-   "items": [
+      "name": "Pfister Hotel Lobby Lounge",
+      "address": "424 E Wisconsin Ave (Pfister Hotel), Milwaukee, WI",
+      "lat": 43.03943,
+      "lng": -87.90573,
+      "neighborhood": "Downtown",
+      "downtown": true,
+      "price_cents": null,
+      "items": [
+        {
+          "item": "Spotted Cow",
+          "price_cents": null,
+          "hh_price_cents": null
+        }
+      ],
+      "happy_hour": false,
+      "hh_price_cents": null,
+      "platform": "research",
+      "guid": "cow:pfister-hotel-lobby-lounge",
+      "notes": "",
+      "source_url": "https://Www.Tripadvisor.ca/ShowUserReviews-g60097-d2627345-r638992928-Pfister_Hotel_Lobby_Lounge-Milwaukee_Wisconsin.html"
+    },
     {
-     "item": "Spotted Cow",
-     "price_cents": null,
-     "hh_price_cents": null
-    }
-   ],
-   "happy_hour": false,
-   "hh_price_cents": null,
-   "platform": "research",
-   "guid": "cow:caf-benelux",
-   "notes": "Confirmed via Untappd check-in; price not published.",
-   "source_url": "https://untappd.com/user/hannahfriedland/photos"
-  },
-  {
-   "name": "Gin Rickey",
-   "address": "2308 W Wisconsin Ave, Milwaukee, WI (Ambassador Hotel)",
-   "lat": 43.03908,
-   "lng": -87.94248,
-   "neighborhood": "Avenues West",
-   "downtown": false,
-   "price_cents": null,
-   "items": [
+      "name": "Café Benelux",
+      "address": "346 N Broadway, Milwaukee, WI",
+      "lat": 43.03489,
+      "lng": -87.90697,
+      "neighborhood": "Third Ward",
+      "downtown": true,
+      "price_cents": null,
+      "items": [
+        {
+          "item": "Spotted Cow",
+          "price_cents": null,
+          "hh_price_cents": null
+        }
+      ],
+      "happy_hour": false,
+      "hh_price_cents": null,
+      "platform": "research",
+      "guid": "cow:caf-benelux",
+      "notes": "Confirmed via Untappd check-in; price not published.",
+      "source_url": "https://untappd.com/user/hannahfriedland/photos"
+    },
     {
-     "item": "Spotted Cow",
-     "price_cents": null,
-     "hh_price_cents": null
+      "name": "Gin Rickey",
+      "address": "2308 W Wisconsin Ave, Milwaukee, WI (Ambassador Hotel)",
+      "lat": 43.03908,
+      "lng": -87.94248,
+      "neighborhood": "Avenues West",
+      "downtown": false,
+      "price_cents": null,
+      "items": [
+        {
+          "item": "Spotted Cow",
+          "price_cents": null,
+          "hh_price_cents": null
+        }
+      ],
+      "happy_hour": false,
+      "hh_price_cents": null,
+      "platform": "research",
+      "guid": "cow:gin-rickey",
+      "notes": "",
+      "source_url": "https://ambassadorhotelmke.com/gin-rickey"
+    },
+    {
+      "name": "SafeHouse",
+      "address": "779 N Front St, Milwaukee, WI 53202",
+      "lat": 43.04058,
+      "lng": -87.91032,
+      "neighborhood": "Downtown",
+      "downtown": true,
+      "price_cents": null,
+      "items": [
+        {
+          "item": "Spotted Cow — draft",
+          "price_cents": null,
+          "hh_price_cents": null
+        }
+      ],
+      "happy_hour": false,
+      "hh_price_cents": null,
+      "platform": "research",
+      "guid": "cow:safehouse",
+      "notes": "Listed under “Draft Beers” on the official current menu; price not published.",
+      "source_url": "https://www.safe-house.com/milwaukee-restaurant-menu"
+    },
+    {
+      "name": "The MECCA Sports Bar and Grill",
+      "address": "1134 N Vel R. Phillips Ave, Milwaukee, WI",
+      "lat": 43.04517,
+      "lng": -87.9156,
+      "neighborhood": "Deer District",
+      "downtown": true,
+      "price_cents": 800,
+      "items": [
+        {
+          "item": "Spotted Cow — draft",
+          "price_cents": 800,
+          "hh_price_cents": null
+        }
+      ],
+      "happy_hour": false,
+      "hh_price_cents": null,
+      "platform": "research",
+      "guid": "cow:the-mecca-sports-bar-and-grill",
+      "notes": "Spring 2022 menu lists draft Spotted Cow at $8 — may be stale. No happy-hour discount found.",
+      "source_url": "https://assets.ctfassets.net/vto13970ddms/7nDIfsJTMMhu3uLIej772B/c6f5f997cb10241ef37134c88665a70f/MeccaMenu_UPDATE_Spring_2022_v10.pdf"
+    },
+    {
+      "name": "Punch Bowl Social",
+      "address": "1122 Vel R. Phillips Ave, Milwaukee, WI 53203",
+      "lat": 43.04377,
+      "lng": -87.91594,
+      "neighborhood": "Deer District",
+      "downtown": true,
+      "price_cents": 700,
+      "items": [
+        {
+          "item": "Spotted Cow — draft",
+          "price_cents": 700,
+          "hh_price_cents": null
+        }
+      ],
+      "happy_hour": false,
+      "hh_price_cents": null,
+      "platform": "research",
+      "guid": "cow:punch-bowl-social",
+      "notes": "Menu mirrors (~3 years old) list draft Spotted Cow at $7 — may be stale. No happy-hour detail found.",
+      "source_url": "https://menucollectors.com/punch-bowl-social-milwaukee-53203-menu/"
+    },
+    {
+      "name": "Mason Street Grill",
+      "address": "425 E Mason St, Milwaukee, WI",
+      "lat": 43.03993,
+      "lng": -87.90559,
+      "neighborhood": "Downtown",
+      "downtown": true,
+      "price_cents": 600,
+      "items": [
+        {
+          "item": "Spotted Cow — bottled",
+          "price_cents": 600,
+          "hh_price_cents": null
+        }
+      ],
+      "happy_hour": false,
+      "hh_price_cents": null,
+      "platform": "research",
+      "guid": "cow:mason-street-grill",
+      "notes": "Bottled format at $6 — first confirmed bottle/can in the dataset. Happy hour (Mon–Fri 4–7 PM) covers drafts only, not Spotted Cow.",
+      "source_url": "https://autoreserve.com/en/restaurants/JBQuGsFF53g2XERAqLeg"
+    },
+    {
+      "name": "Who's On Third",
+      "address": "1007 N Old World 3rd St, Milwaukee, WI",
+      "lat": 43.04642,
+      "lng": -87.91441,
+      "neighborhood": "Downtown",
+      "downtown": true,
+      "price_cents": null,
+      "items": [
+        {
+          "item": "Spotted Cow — draft",
+          "price_cents": null,
+          "hh_price_cents": null
+        }
+      ],
+      "happy_hour": false,
+      "hh_price_cents": null,
+      "platform": "research",
+      "guid": "cow:whos-on-third",
+      "notes": "On draft per an Aug 2026 Untappd check-in; price not published. Weaker than a menu.",
+      "source_url": "https://untappd.com/user/ewall19/checkin/1597999725"
+    },
+    {
+      "name": "AJ Bombers",
+      "address": "1247 N Water St, Milwaukee, WI 53202",
+      "lat": 43.04683,
+      "lng": -87.91147,
+      "neighborhood": "Downtown",
+      "downtown": true,
+      "price_cents": null,
+      "items": [
+        {
+          "item": "Spotted Cow — draft",
+          "price_cents": null,
+          "hh_price_cents": null
+        }
+      ],
+      "happy_hour": false,
+      "hh_price_cents": null,
+      "platform": "research",
+      "guid": "cow:aj-bombers",
+      "notes": "On tap per an Aug 2025 customer review; price not published. Weaker than a menu.",
+      "source_url": "https://www.tripadvisor.in/ShowUserReviews-g60097-d1454298-r1027542425-AJ_Bombers-Milwaukee_Wisconsin.html"
+    },
+    {
+      "name": "Swingin' Door Exchange",
+      "address": "219 E Michigan St, Milwaukee, WI",
+      "lat": 43.03734,
+      "lng": -87.90827,
+      "neighborhood": "Downtown",
+      "downtown": true,
+      "price_cents": null,
+      "items": [
+        {
+          "item": "Spotted Cow — draft",
+          "price_cents": null,
+          "hh_price_cents": null
+        }
+      ],
+      "happy_hour": false,
+      "hh_price_cents": null,
+      "platform": "research",
+      "guid": "cow:swingin-door-exchange",
+      "notes": "Tap list anchored by New Glarus per news articles; price not published. Secondary sources, not an official menu.",
+      "source_url": "https://www.mashed.com/1862298/swingin-door-exchange-saloon-and-eatery-milwaukee-wisconsin-lake-michigan/"
+    },
+    {
+      "name": "Camp Bar (Third Ward)",
+      "address": "525 E Menomonee St, Milwaukee, WI 53202",
+      "lat": 43.03155,
+      "lng": -87.90359,
+      "neighborhood": "Third Ward",
+      "downtown": true,
+      "price_cents": null,
+      "items": [
+        {
+          "item": "Spotted Cow — draft",
+          "price_cents": null,
+          "hh_price_cents": null
+        }
+      ],
+      "happy_hour": false,
+      "hh_price_cents": null,
+      "platform": "research",
+      "guid": "cow:camp-bar-third-ward",
+      "notes": "Local guide recommends ordering it on draft here; price not published. Deer District location (Deer Camp MKE) not confirmed.",
+      "source_url": "https://www.zola.com/wedding/natalie_and_john/poi"
+    },
+    {
+      "name": "Harbor House",
+      "address": "550 N Harbor Dr, Milwaukee, WI",
+      "lat": 43.03773,
+      "lng": -87.89514,
+      "neighborhood": "Downtown",
+      "downtown": true,
+      "price_cents": null,
+      "items": [
+        {
+          "item": "Spotted Cow — draft",
+          "price_cents": null,
+          "hh_price_cents": null
+        }
+      ],
+      "happy_hour": false,
+      "hh_price_cents": null,
+      "platform": "research",
+      "guid": "cow:harbor-house",
+      "notes": "On tap per a Yelp review and an Untappd check-in; plain-pour price not published. Weak evidence.",
+      "source_url": "https://restaurantguru.com/Harbor-House-Milwaukee/menu"
+    },
+    {
+      "name": "Uncle Buck's on Third",
+      "address": "1125 N Old World 3rd St, Milwaukee, WI",
+      "lat": 43.04493,
+      "lng": -87.91469,
+      "neighborhood": "Deer District",
+      "downtown": true,
+      "price_cents": null,
+      "items": [
+        {
+          "item": "Spotted Cow",
+          "price_cents": null,
+          "hh_price_cents": null
+        }
+      ],
+      "happy_hour": false,
+      "hh_price_cents": null,
+      "platform": "research",
+      "guid": "cow:uncle-bucks-on-third",
+      "notes": "Reviewer mentions drinking Spotted Cow here; format and price unknown. Weak evidence — single review.",
+      "source_url": "https://Wanderlog.com/place/details/1120607"
+    },
+    {
+      "name": "Third Ward Beer Garden",
+      "address": "147 N Broadway, Milwaukee, WI (Catalano Square Park)",
+      "lat": 43.03134,
+      "lng": -87.90717,
+      "neighborhood": "Third Ward",
+      "downtown": true,
+      "price_cents": null,
+      "items": [
+        {
+          "item": "Spotted Cow",
+          "price_cents": null,
+          "hh_price_cents": null
+        }
+      ],
+      "happy_hour": false,
+      "hh_price_cents": null,
+      "platform": "research",
+      "guid": "cow:third-ward-beer-garden",
+      "notes": "Seasonal pop-up; venue page lists Spotted Cow. Format, price, and current-season status unknown. Weak evidence.",
+      "source_url": "http://thirdwardbeergarden.com/"
+    },
+    {
+      "name": "The Harp Irish Pub",
+      "address": "113 E Juneau Ave, Milwaukee, WI 53202",
+      "lat": 43.04547,
+      "lng": -87.91275,
+      "neighborhood": "Downtown",
+      "downtown": true,
+      "price_cents": null,
+      "items": [
+        {
+          "item": "Spotted Cow",
+          "price_cents": null,
+          "hh_price_cents": null
+        }
+      ],
+      "happy_hour": false,
+      "hh_price_cents": null,
+      "platform": "research",
+      "guid": "cow:the-harp-irish-pub",
+      "notes": "Aug 2026 Untappd check-in; format and price unknown. Weak evidence — single check-in.",
+      "source_url": "https://Untappd.com/user/ewall19"
+    },
+    {
+      "name": "Major Goolsby's",
+      "address": "340 W Kilbourn Ave, Milwaukee, WI",
+      "lat": 43.04175,
+      "lng": -87.91559,
+      "neighborhood": "Downtown",
+      "downtown": true,
+      "price_cents": null,
+      "items": [
+        {
+          "item": "Spotted Cow",
+          "price_cents": null,
+          "hh_price_cents": null
+        }
+      ],
+      "happy_hour": false,
+      "hh_price_cents": null,
+      "platform": "research",
+      "guid": "cow:major-goolsbys",
+      "notes": "Check-ins conflict on format (can vs. draft), so format left unspecified; price not published.",
+      "source_url": "https://untappd.com/user/bob_ruhl_8266"
     }
-   ],
-   "happy_hour": false,
-   "hh_price_cents": null,
-   "platform": "research",
-   "guid": "cow:gin-rickey",
-   "notes": "",
-   "source_url": "https://ambassadorhotelmke.com/gin-rickey"
-  }
- ]
+  ]
 }
