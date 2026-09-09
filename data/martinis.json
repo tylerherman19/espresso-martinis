@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-09-05T13:40:06+00:00",
+ "generated_at": "2026-09-09T09:59:46+00:00",
  "metro": "Milwaukee",
  "restaurants_scanned": 340,
  "count": 96,
@@ -68,31 +68,6 @@
    "hh_price_cents": null,
    "platform": "toast",
    "guid": "6fcfffd6-6437-45af-9905-50d72692e71d"
-  },
-  {
-   "name": "Explorium Distilled Deer District",
-   "address": "333 W Juneau Ave, Milwaukee, WI",
-   "lat": 43.045308,
-   "lng": -87.915448,
-   "neighborhood": "Downtown",
-   "downtown": true,
-   "price_cents": 1200,
-   "items": [
-    {
-     "item": "Bonded Espresso Martini",
-     "price_cents": 1200,
-     "hh_price_cents": null
-    },
-    {
-     "item": "Espresso Martini",
-     "price_cents": 1300,
-     "hh_price_cents": null
-    }
-   ],
-   "happy_hour": false,
-   "hh_price_cents": null,
-   "platform": "toast",
-   "guid": "bda91505-ab8a-469d-b06d-99a2d8742c5a"
   },
   {
    "name": "Homeplate Asylum",
@@ -610,6 +585,31 @@
    "guid": "b2c79948-2580-48b5-8d90-22a61c46c77e"
   },
   {
+   "name": "Explorium Distilled Deer District",
+   "address": "333 W Juneau Ave, Milwaukee, WI",
+   "lat": 43.045308,
+   "lng": -87.915448,
+   "neighborhood": "Downtown",
+   "downtown": true,
+   "price_cents": 1200,
+   "items": [
+    {
+     "item": "Bonded Espresso Martini",
+     "price_cents": 1200,
+     "hh_price_cents": null
+    },
+    {
+     "item": "Espresso Martini",
+     "price_cents": 1300,
+     "hh_price_cents": null
+    }
+   ],
+   "happy_hour": false,
+   "hh_price_cents": null,
+   "platform": "toast",
+   "guid": "bda91505-ab8a-469d-b06d-99a2d8742c5a"
+  },
+  {
    "name": "Fenwick's Pub & Patio",
    "address": "6300 West Mequon Road, Mequon, WI",
    "lat": 43.222131,
@@ -693,41 +693,6 @@
    "hh_price_cents": null,
    "platform": "toast",
    "guid": "23a73642-acc0-4ece-bb68-a962111ce18f"
-  },
-  {
-   "name": "Kompali Taqueria",
-   "address": "1205 East Brady Street, Milwaukee, WI",
-   "lat": 43.052805,
-   "lng": -87.896602,
-   "neighborhood": "East Side",
-   "downtown": true,
-   "price_cents": 1200,
-   "items": [
-    {
-     "item": "BANANA FOSTER ESPRESSO MARTINI",
-     "price_cents": 1200,
-     "hh_price_cents": null
-    },
-    {
-     "item": "Agave Espresso Martini",
-     "price_cents": 1400,
-     "hh_price_cents": null
-    },
-    {
-     "item": "Tiramisu Espresso Martini",
-     "price_cents": 1500,
-     "hh_price_cents": null
-    },
-    {
-     "item": "ESPRESSO MARTINI FLIGHT (3)",
-     "price_cents": 3500,
-     "hh_price_cents": null
-    }
-   ],
-   "happy_hour": true,
-   "hh_price_cents": null,
-   "platform": "toast",
-   "guid": "edc46549-39ed-4c6d-90c8-90a9b984b8b2"
   },
   {
    "name": "Lucky Joes",
@@ -1145,6 +1110,26 @@
    "guid": "48e8e433-cf77-4910-9142-993290032124"
   },
   {
+   "name": "Vier North",
+   "address": "1832 E North Ave, Milwaukee, WI",
+   "lat": 43.0604,
+   "lng": -87.887068,
+   "neighborhood": "East Side",
+   "downtown": true,
+   "price_cents": 1300,
+   "items": [
+    {
+     "item": "Espresso Martini",
+     "price_cents": 1300,
+     "hh_price_cents": null
+    }
+   ],
+   "happy_hour": false,
+   "hh_price_cents": null,
+   "platform": "toast",
+   "guid": "3af0831e-39c0-4265-9747-5a0f7cd7d9e2"
+  },
+  {
    "name": "Virtue Coffee Valor Wine",
    "address": "1234 Milwaukee Avenue, South Milwaukee, WI",
    "lat": 42.911075,
@@ -1208,6 +1193,41 @@
    "hh_price_cents": null,
    "platform": "toast",
    "guid": "2a87807f-4ab2-4362-b408-22d810cb1040"
+  },
+  {
+   "name": "Kompali Taqueria",
+   "address": "1205 East Brady Street, Milwaukee, WI",
+   "lat": 43.052805,
+   "lng": -87.896602,
+   "neighborhood": "East Side",
+   "downtown": true,
+   "price_cents": 1350,
+   "items": [
+    {
+     "item": "BANANA FOSTER ESPRESSO MARTINI",
+     "price_cents": 1350,
+     "hh_price_cents": null
+    },
+    {
+     "item": "Agave Espresso Martini",
+     "price_cents": 1400,
+     "hh_price_cents": null
+    },
+    {
+     "item": "Tiramisu Espresso Martini",
+     "price_cents": 1500,
+     "hh_price_cents": null
+    },
+    {
+     "item": "ESPRESSO MARTINI FLIGHT (3)",
+     "price_cents": 3500,
+     "hh_price_cents": null
+    }
+   ],
+   "happy_hour": true,
+   "hh_price_cents": null,
+   "platform": "toast",
+   "guid": "edc46549-39ed-4c6d-90c8-90a9b984b8b2"
   },
   {
    "name": "Ann\u2019s Italian Restaurant",
@@ -1610,26 +1630,6 @@
    "guid": "7d9f403d-e4e1-4898-8877-14b2282076ee"
   },
   {
-   "name": "Vier North",
-   "address": "1832 E North Ave, Milwaukee, WI",
-   "lat": 43.0604,
-   "lng": -87.887068,
-   "neighborhood": "East Side",
-   "downtown": true,
-   "price_cents": 1400,
-   "items": [
-    {
-     "item": "Espresso Martini",
-     "price_cents": 1400,
-     "hh_price_cents": null
-    }
-   ],
-   "happy_hour": false,
-   "hh_price_cents": null,
-   "platform": "toast",
-   "guid": "3af0831e-39c0-4265-9747-5a0f7cd7d9e2"
-  },
-  {
    "name": "WhirlyBall - Brookfield Square, WI",
    "address": "185 South Moorland Rd, Brookfield, WI",
    "lat": 43.029798,
@@ -1741,11 +1741,6 @@
     {
      "item": "Espresso Martini",
      "price_cents": 1500,
-     "hh_price_cents": null
-    },
-    {
-     "item": "Pumpkin Spice Espresso Martini",
-     "price_cents": 1600,
      "hh_price_cents": null
     }
    ],
