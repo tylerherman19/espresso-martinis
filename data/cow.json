@@ -1,7 +1,7 @@
 {
  "generated_at": "2026-09-09T03:55:13.504003+00:00",
  "metro": "Milwaukee",
- "count": 54,
+ "count": 53,
  "cows": [
   {
    "name": "On Tap Bar & Restaurant",
@@ -1102,28 +1102,6 @@
    "guid": "cow:chard",
    "notes": "Menu mirror lists it; format and price not stated.",
    "source_url": "http://places.singleplatform.com/chard/menu"
-  },
-  {
-   "name": "Hotel Metro bar (METRO)",
-   "address": "411 E Mason St, Milwaukee, WI",
-   "lat": 43.03976,
-   "lng": -87.90633,
-   "neighborhood": "Downtown",
-   "downtown": true,
-   "price_cents": 50,
-   "items": [
-    {
-     "item": "Spotted Cow",
-     "price_cents": 50,
-     "hh_price_cents": null
-    }
-   ],
-   "happy_hour": false,
-   "hh_price_cents": null,
-   "platform": "research",
-   "guid": "cow:hotel-metro-bar-metro",
-   "notes": "Menu lists a $0.50 Spotted Cow chaser add-on to a Bloody Mary — not a standalone pour.",
-   "source_url": "http://places.singleplatform.com/hotel-metro-milwaukee/menu"
   },
   {
    "name": "The Outsider",
