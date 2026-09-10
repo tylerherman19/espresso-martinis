@@ -1,76 +1,82 @@
 # Milwaukee Drinks — design system
 
-The reference for this rebuild is a modern consumer ticketing site (light mode,
-white chrome on a cool gray page, one saturated interactive color, heavy
-geometric display type, generous whitespace, soft-radius cards). We borrowed its
-*arrangement* — sticky chrome, a copy-left / art-right hero, a stat band, a
-search-and-filter section, then content — and not its skin. The palette is
-Milwaukee blue and brass, chosen for this project.
+The site is set like a bar's own menu, not like a web app. Two rooms share one
+structure and swap atmosphere when you change the drink:
 
-Every color, size, radius and duration used in `styles.css` comes from this file.
-If a new component needs a value that is not here, add it here first.
+- **Espresso Martinis** — a hotel cocktail lounge in daylight. Warm ivory paper,
+  espresso ink, brass.
+- **Spotted Cow** — a good pub in the afternoon. Cream paper, oak ink, amber.
 
-## Color tokens (named by job, never by hue)
+Both are light. The swap is a real change of room — paper, ink, accent, the map's
+own warmth and the ornament all move together over 600ms — but the grid, the type
+scale and the spacing never move. That is what keeps it feeling like one place.
 
-| Token | Value | Job |
-| --- | --- | --- |
-| `--bg` | `#F1F4F8` | Page ground |
-| `--surface` | `#FFFFFF` | Cards, chrome, inputs |
-| `--surface-sunk` | `#E9EEF5` | Chip rests, table zebra, map frame |
-| `--ink` | `#0B1B33` | Headlines, primary text |
-| `--ink-2` | `#33455F` | Body copy |
-| `--muted` | `#6B7C93` | Labels, meta, captions |
-| `--line` | `#DCE3EC` | Hairlines, card borders |
-| `--primary` | `#145CC6` | The one interactive color: links, buttons, active state, focus, pins |
-| `--primary-strong` | `#0E4098` | Pressed / hover of primary |
-| `--primary-soft` | `#E6EDFA` | Primary tint backgrounds (active chip, hero strip) |
-| `--brass` | `#9C6F1C` | The one data accent: lowest price and happy-hour pricing **only** |
-| `--brass-soft` | `#F6EEDB` | Brass tint, used once per group at most |
+Every value used in `styles.css` is below. A component that needs a value not
+listed here adds it here first.
 
-Discipline: `--primary` marks anything you can *do*. `--brass` marks a *fact
-about money* (a best price, a happy-hour price). Nothing else is ever colored.
+## Color tokens
+
+Named by job. Each theme carries exactly one accent, and the accent is only ever
+used for a fact about money — a price under the median, a happy-hour price — or
+for the one control that is currently active.
+
+| Token | Martini | Spotted Cow | Job |
+| --- | --- | --- | --- |
+| `--paper` | `#F6F2EC` | `#F5F1E6` | The page |
+| `--paper-lift` | `#FCFAF6` | `#FBF8F0` | Raised surfaces: bar, panel, field |
+| `--ink` | `#17120F` | `#1B1710` | Names, figures, headlines |
+| `--ink-2` | `#4A403A` | `#4C443A` | Body copy |
+| `--muted` | `#746A62` | `#746B5F` | Meta, labels, captions (4.8:1 on paper) |
+| `--line` | `#E4DBD0` | `#E3DACA` | Hairlines |
+| `--accent` | `#9A7328` brass | `#A15A20` amber | Rules, marks, active control fills |
+| `--accent-ink` | `#6E5119` | `#7A4315` | The accent as *text* — darker, ≥7:1 |
+| `--accent-soft` | `#EFE6D3` | `#F2E5D6` | The one tint, used behind nothing but a control |
+| `--tile-warm` | `sepia(.10) saturate(.9)` | `sepia(.16) saturate(.92)` | Filter that warms the map to match the paper |
 
 ## Type
 
-One family: **Plus Jakarta Sans** (400 / 500 / 600 / 800). Numbers use
-`font-variant-numeric: tabular-nums` — no monospace anywhere; monospace in a
-price list is costume, not information.
+Two faces from one family pairing: **Instrument Serif** (400, italic) for display
+and for the name of every spot, **Instrument Sans** (400/500/600) for everything
+functional. Prices use `font-variant-numeric: tabular-nums`. No monospace.
 
-| Step | Size / line-height | Weight | Use |
+Setting names in serif and prices in sans is how a printed menu is set, and it is
+what makes a 96-row list read as a list of places rather than a database table.
+
+| Step | Size / line-height | Face | Use |
 | --- | --- | --- | --- |
-| display | `clamp(42px, 7.2vw, 76px)` / 0.98 | 800 | Hero headline |
-| h2 | `clamp(28px, 4vw, 42px)` / 1.06 | 800 | Section headings |
-| h3 | `20px` / 1.25 | 700 | Card and panel titles |
-| lede | `clamp(16px, 1.4vw, 19px)` / 1.55 | 400 | Hero and section subcopy |
-| body | `15.5px` / 1.6 | 400 | Prose |
-| meta | `13px` / 1.4 | 500 | Row meta, captions |
-| label | `11.5px` / 1 · `.09em` · uppercase | 700 | Eyebrows and column labels only |
-| price | `18px` / 1 tabular | 700 | Prices in rows |
-| price-lg | `28px` / 1 tabular | 800 | Stat band figures |
+| cover | `clamp(46px, 9vw, 104px)` / 0.96 · `-.02em` | Serif 400 | The drink name on the cover |
+| section | `clamp(26px, 3vw, 34px)` / 1.1 · `-.01em` | Serif 400 | Footer and panel headings |
+| chapter | `11.5px` / 1 · `.16em` · caps | Sans 600 | Neighborhood headings |
+| name | `19px` / 1.3 · `-.005em` | Serif 400 | A spot's name |
+| price | `17px` / 1 tabular | Sans 600 | Prices in rows |
+| figure | `clamp(26px,3vw,34px)` / 1 tabular | Sans 500 | Index numbers on the cover |
+| body | `15px` / 1.65 | Sans 400 | Prose |
+| meta | `13px` / 1.45 | Sans 400 | Row meta, captions |
+| label | `11px` / 1 · `.14em` · caps | Sans 600 | Eyebrows, column labels |
 
-Tracking: `-0.03em` on display, `-0.02em` on h2, `-0.01em` on h3, 0 elsewhere.
+## Space, edge, depth
 
-## Space, radius, elevation
-
-- Spacing scale (4px base): `4 8 12 16 24 32 48 64 96 128`. Nothing off-scale.
-- Page gutter: `20px` mobile, `32px` ≥720px, `48px` ≥1080px. Max content width `1200px`.
-- Radius: `10px` controls, `14px` inputs and chips, `20px` cards and panels, `999px` pills.
-- Elevation (ink at low alpha, never gray):
-  - rest `0 1px 2px rgba(11,27,51,.06)`
-  - raised `0 6px 20px -8px rgba(11,27,51,.16)`
-  - overlay `0 24px 60px -20px rgba(11,27,51,.34)`
+- Spacing scale (4px base): `4 8 12 16 20 24 32 40 56 72 96 128`.
+- Page gutter `20px`, `36px` ≥760px, `56px` ≥1200px. List column caps at `760px`.
+- Corners stay close to sharp — paper, not plastic: `3px` on fields and marks,
+  `6px` on panels, `999px` on the drink switch alone.
+- Depth is almost absent. One shadow, `0 18px 50px -24px rgba(23,18,15,.28)`, and
+  only on things that genuinely float: the detail panel and the map's own chrome.
+  Everything else separates with a hairline.
 
 ## Motion
 
-- Durations: `140ms` state, `240ms` reveal, `320ms` panel, `520ms` count-up.
-- Easing: `cubic-bezier(.2,.7,.2,1)` for entrances, `cubic-bezier(.4,0,.2,1)` for exits.
-- Reveals travel `10px` maximum and stagger `28ms`, capped at 12 items.
-- Everything above collapses to zero under `prefers-reduced-motion: reduce`.
+- `120ms` for a control's own state, `240ms` for a list change, `420ms` for the
+  detail panel, `600ms` for the room swap, `700ms` for the ornament drawing itself.
+- Easing `cubic-bezier(.22,.68,.24,1)` in, `cubic-bezier(.4,0,.24,1)` out.
+- Reveals travel `8px`, never more, and stagger `26ms` to a cap of ten.
+- Under `prefers-reduced-motion: reduce` every duration collapses to ~0 and the
+  ornament simply appears drawn.
 
 ## Rules this project does not break
 
-1. No gradients. Flat fills only.
-2. No emoji standing in for an icon — icons are drawn as SVG on a 24px grid at 1.75px stroke.
-3. No decorative chart, meter or bar without a real number behind it.
-4. No color fill behind a word to "highlight" it; color lives on glyphs and on real controls.
-5. No slogan band at the bottom. The page ends on the method notes, which are real information.
+1. No gradient anywhere except the single scrim behind the detail panel.
+2. Icons are drawn on a 24px grid at 1.5px stroke. No emoji.
+3. Nothing is colored that is not a price fact or an active control.
+4. No card grid. Rows are ruled lines on paper, as on a menu.
+5. No number appears that the sweep did not produce.
