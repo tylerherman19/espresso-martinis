@@ -1,8 +1,8 @@
 {
- "generated_at": "2026-09-09T09:59:46+00:00",
+ "generated_at": "2026-09-13T05:45:34+00:00",
  "metro": "Milwaukee",
  "restaurants_scanned": 340,
- "count": 96,
+ "count": 97,
  "martinis": [
   {
    "name": "Mix N Rewind",
@@ -2100,6 +2100,28 @@
    "hh_price_cents": null,
    "platform": "toast",
    "guid": "5b4cd395-1f29-4454-b5d1-84f414016155"
+  },
+  {
+   "name": "Branded Bar at The Iron Horse Hotel",
+   "address": "500 W Florida St, Milwaukee, WI",
+   "lat": 43.0276042,
+   "lng": -87.9172461,
+   "neighborhood": "Walker's Point",
+   "downtown": true,
+   "price_cents": null,
+   "items": [
+    {
+     "item": "Espresso Martini",
+     "price_cents": null,
+     "hh_price_cents": null
+    }
+   ],
+   "happy_hour": false,
+   "hh_price_cents": null,
+   "platform": "website",
+   "guid": "manual:branded-bar-iron-horse",
+   "source_url": "https://www.theironhorsehotel.com/wp-content/uploads/2026/04/Branded-Drinks-Menus-7.pdf",
+   "verified_at": "2026-09-13"
   }
  ]
 }
