@@ -3,10 +3,10 @@
  "entries": [
   {
    "name": "Onesto",
-   "address": "221 S 2nd St, Milwaukee, WI",
-   "lat": 43.0288674,
-   "lng": -87.9127913,
-   "neighborhood": "Walker's Point",
+   "address": "221 N Broadway, Milwaukee, WI 53202",
+   "lat": 43.0332,
+   "lng": -87.90759,
+   "neighborhood": "Third Ward",
    "downtown": true,
    "price_cents": 1600,
    "items": [

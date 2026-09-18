@@ -27,6 +27,11 @@ HAPPY = re.compile(r"happy\s*hour|\bhh\b", re.I)
 # North Farwell Avenue") or repeat the whole name. Display cleanup only.
 TRAILING_ADDR = re.compile(r"\s+\d+[\w.-]*\s+[A-Za-z0-9 .'&-]*?"
     r"(Street|St|Avenue|Ave|Road|Rd|Drive|Dr|Lane|Ln|Blvd|Boulevard|Way|Highway|Hwy|Court|Ct|Place|Pl|Northway|Parkway|Pkwy|Terrace|Circle)\.?$", re.I)
+# A unit suffix sits after the street ("Aya 700 East Kilbourn Avenue, Suite 100")
+# and has to come off first or the street match never reaches the end.
+TRAILING_UNIT = re.compile(r"[,\s]+(Suite|Ste|Unit|Apt|Bldg|Building|#)\.?\s*[\w-]+$", re.I)
+# Merchants mark a dead location in the name rather than delisting it.
+CLOSED = re.compile(r"\b(closed|permanently closed|do not use|test store)\b", re.I)
 MARTINI_2 = re.compile(r"martini|\btini\b", re.I)
 # Downtown Milwaukee: Third Ward through Yankee Hill, river to the lake. User
 # steering 2026-09-05: downtown gets read first and leads the site.
@@ -139,15 +144,32 @@ def martini_items(guid: str) -> tuple[list[dict], bool]:
     return list(seen.values()), has_hh
 
 
+# Subdivision names OSM returns that locate nothing for a reader. Outside the
+# city of Milwaukee the municipality is the useful label anyway; inside it,
+# these few are replaced by the city.
+OBSCURE_HOODS = {
+    "Park Place", "Honey Creek Manor", "Bluemound Heights", "Conrad Gardens",
+    "Whitnall Oaks", "Downtown District", "Village Center District",
+    "Southridge Commercial District", "Underwood Parkway", "Inglewood",
+    "Lowell Damon Woods", "Pabst Park", "Six Points", "Forest Home Corridor",
+    "Tosa Village",
+}
+
+
 def neighborhood(lat: float, lng: float) -> str | None:
+    """The label a Milwaukeean would use for where a spot is: the real
+    neighborhood inside the city, the municipality everywhere else."""
     try:
         addr = get(NOMINATIM, params={"lat": lat, "lon": lng, "format": "jsonv2", "zoom": 16}).json().get("address") or {}
     except Exception:
         return None
+    city = addr.get("city") or addr.get("town") or addr.get("village")
     hood = addr.get("suburb") or addr.get("neighbourhood") or addr.get("quarter") or addr.get("city_district")
-    if hood and len(hood) >= 3:
+    if city and city.strip().lower() != "milwaukee":
+        return city
+    if hood and len(hood) >= 3 and hood not in OBSCURE_HOODS:
         return hood
-    return addr.get("city") or addr.get("town") or addr.get("village") or hood
+    return city or hood
 
 
 def clean_name(name: str) -> str:
@@ -160,7 +182,8 @@ def clean_name(name: str) -> str:
         n = len(words) // 2
         if words[:n] == words[n:]:
             name = " ".join(words[:n])
-    return TRAILING_ADDR.sub("", name).strip()
+    name = TRAILING_UNIT.sub("", name)
+    return TRAILING_ADDR.sub("", name).strip().rstrip(",")
 
 
 def is_downtown(lat, lng) -> bool:
@@ -276,6 +299,9 @@ def main() -> None:
     out = []
     for rest, items, has_hh in hits:
         if not items:
+            continue
+        if CLOSED.search(rest.get("name") or ""):
+            print(f"skipping closed location: {rest.get('name')}", file=sys.stderr)
             continue
         loc = rest.get("location") or {}
         lat, lng = loc.get("latitude"), loc.get("longitude")
