@@ -6,14 +6,18 @@
 <title>Milwaukee Drinks — the espresso martini and Spotted Cow list</title>
 <meta name="description" content="Every espresso martini and every Spotted Cow pour in the Milwaukee metro, with what it costs and where to find it.">
 <meta name="theme-color" content="#F6F2EC">
+<link rel="canonical" href="https://tylerherman19.github.io/espresso-martinis/">
 <meta property="og:title" content="Milwaukee Drinks">
 <meta property="og:description" content="Every espresso martini and every Spotted Cow pour in the Milwaukee metro, with what it costs.">
 <meta property="og:type" content="website">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-<link rel="stylesheet" href="styles.css?v=1">
+<meta property="og:url" content="https://tylerherman19.github.io/espresso-martinis/">
+<meta property="og:site_name" content="Milwaukee Drinks">
+<meta name="twitter:card" content="summary">
+<!-- A coupe, drawn on the same 24px grid as the rest of the icons. -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239A7328' stroke-width='1.5' stroke-linecap='round'%3E%3Cpath d='M3.6 6.2h16.8c-.3 5.2-3.8 7.9-8.4 7.9S3.9 11.4 3.6 6.2Z'/%3E%3Cpath d='M12 14.1v5.1M8.2 19.6c1.5-.6 6.1-.6 7.6 0'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="vendor/fonts.css?v=2">
+<link rel="stylesheet" href="vendor/leaflet/leaflet.css?v=2">
+<link rel="stylesheet" href="styles.css?v=2">
 </head>
 <body data-drink="martini">
 
@@ -83,15 +87,17 @@
     <div class="tools-inner">
       <div class="field">
         <svg class="icon field-icon" aria-hidden="true"><use href="#i-search"></use></svg>
-        <input id="find" type="search" autocomplete="off" placeholder="Search a bar or a neighborhood" aria-label="Search spots">
+        <input id="find" type="search" autocomplete="off" placeholder="Search a bar, a neighborhood or a street" aria-label="Search by bar, neighborhood or street">
         <button class="field-clear" id="find-clear" type="button" aria-label="Clear search" hidden>
           <svg class="icon" aria-hidden="true"><use href="#i-close"></use></svg>
         </button>
       </div>
       <div class="tools-row">
         <div class="toggles" role="group" aria-label="Filters">
+          <button class="toggle" type="button" data-filter="downtown" aria-pressed="false">Downtown</button>
           <button class="toggle" type="button" data-filter="hh" aria-pressed="false">Happy hour</button>
           <button class="toggle" type="button" data-filter="value" aria-pressed="false">Under the median</button>
+          <button class="toggle" type="button" data-filter="menu" data-only-drink="cow" aria-pressed="false">On a menu</button>
           <button class="toggle" type="button" id="near-btn" data-filter="near" aria-pressed="false">
             <svg class="icon" aria-hidden="true"><use href="#i-near"></use></svg><span>Near me</span>
           </button>
@@ -107,6 +113,7 @@
         </label>
       </div>
       <p class="tally" id="tally" role="status" aria-live="polite">Reading the latest sweep…</p>
+      <noscript><p class="tally">This list is built in the browser, so it needs JavaScript. The raw data is in <a href="https://github.com/tylerherman19/espresso-martinis/tree/main/data">data/</a>.</p></noscript>
     </div>
   </div>
 
@@ -126,6 +133,7 @@
       <p><b>The sweep.</b> A weekly job walks the ordering platforms every Milwaukee-area venue publishes to, pulls the live menu, and keeps only the lines that are actually an espresso martini or a Spotted Cow pour. Bottled liqueur, six-packs and a chaser tacked onto something else do not count.</p>
       <p><b>The hand-checks.</b> Plenty of good bars never put a menu online. Those are read off a posted menu or confirmed by phone and merged in with the source recorded. Where a live platform and a hand-check disagree, the platform wins.</p>
       <p><b>What a price is.</b> The menu price before tax and tip, for the standard pour. A happy-hour number appears only where the bar posts one — some bars run a happy hour that does not touch these drinks, and that is written on the spot.</p>
+      <p><b>How sure we are.</b> Every espresso martini here comes off a live menu. The Spotted Cow list is hand-researched, so each line says how it is known: nothing next to it means a current menu, <i>menu may be stale</i> means the menu that had it is old, and <i>not on a menu</i> means a check-in or a review put it there and no menu confirms it. <b>On a menu</b> keeps only the first kind.</p>
       <p><b>What it is not.</b> A sweep, not a promise. Menus change, platforms lag, and the register has the last word. If something here is wrong it is worth more to fix than to trust.</p>
     </div>
   </section>
@@ -140,7 +148,7 @@
 <div class="scrim" id="scrim" hidden></div>
 <aside class="detail" id="detail" role="dialog" aria-modal="true" aria-labelledby="detail-name" hidden></aside>
 
-<div class="sheet-map" id="sheet-map" hidden>
+<div class="sheet-map" id="sheet-map" role="dialog" aria-modal="true" aria-labelledby="sheet-title" hidden>
   <div class="sheet-bar">
     <p id="sheet-title">The map</p>
     <button type="button" id="sheet-close" aria-label="Close the map"><svg class="icon" aria-hidden="true"><use href="#i-close"></use></svg></button>
@@ -148,7 +156,7 @@
   <div class="sheet-hold" id="sheet-hold"></div>
 </div>
 
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script src="app.js?v=1"></script>
+<script src="vendor/leaflet/leaflet.js?v=2"></script>
+<script src="app.js?v=2"></script>
 </body>
 </html>

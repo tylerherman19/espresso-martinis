@@ -18,12 +18,13 @@
      "hh_price_cents": null
     }
    ],
-   "happy_hour": true,
+   "happy_hour": false,
    "hh_price_cents": null,
    "platform": "research",
    "guid": "cow:on-tap-bar-restaurant",
    "notes": "Happy hour (daily 2–6 PM) covers PBR and old fashioneds — not Spotted Cow.",
-   "source_url": "https://ontapmilwaukee.com/uploads/menu_images/pdf_16a4235c56687ff7d731518ef0d6a9e7.pdf"
+   "source_url": "https://ontapmilwaukee.com/uploads/menu_images/pdf_16a4235c56687ff7d731518ef0d6a9e7.pdf",
+   "confidence": "menu"
   },
   {
    "name": "Sinabro",
@@ -45,7 +46,8 @@
    "platform": "research",
    "guid": "cow:sinabro",
    "notes": "On tap; price not published.",
-   "source_url": "https://www.beaconjournal.com/story/entertainment/dining/2024/09/23/sinabro-korean-restaurant-comfort-cooking-in-milwaukee-third-ward/75150508007/"
+   "source_url": "https://www.beaconjournal.com/story/entertainment/dining/2024/09/23/sinabro-korean-restaurant-comfort-cooking-in-milwaukee-third-ward/75150508007/",
+   "confidence": "menu"
   },
   {
    "name": "Shake Shack Milwaukee",
@@ -67,7 +69,8 @@
    "platform": "research",
    "guid": "cow:shake-shack-milwaukee",
    "notes": "On tap; price not published.",
-   "source_url": "https://lb2.onmilwaukee.com/articles/first-look-shake-shack-milwaukee"
+   "source_url": "https://lb2.onmilwaukee.com/articles/first-look-shake-shack-milwaukee",
+   "confidence": "menu"
   },
   {
    "name": "Onesto",
@@ -89,7 +92,8 @@
    "platform": "research",
    "guid": "cow:onesto",
    "notes": "",
-   "source_url": "http://places.singleplatform.com/onesto/menu"
+   "source_url": "http://places.singleplatform.com/onesto/menu",
+   "confidence": "menu"
   },
   {
    "name": "Agave South West Bar & Grill",
@@ -111,7 +115,8 @@
    "platform": "research",
    "guid": "cow:agave-south-west-bar-grill",
    "notes": "",
-   "source_url": "http://places.singleplatform.com/agave-south-west-bar--grill/menu"
+   "source_url": "http://places.singleplatform.com/agave-south-west-bar--grill/menu",
+   "confidence": "menu"
   },
   {
    "name": "Smoke Shack",
@@ -133,7 +138,8 @@
    "platform": "research",
    "guid": "cow:smoke-shack",
    "notes": "",
-   "source_url": "http://places.singleplatform.com/smoke-shack-22/menu"
+   "source_url": "http://places.singleplatform.com/smoke-shack-22/menu",
+   "confidence": "menu"
   },
   {
    "name": "The Wicked Hop",
@@ -155,7 +161,8 @@
    "platform": "research",
    "guid": "cow:the-wicked-hop",
    "notes": "Happy hour: $1 off all beer/cider, all day Monday and Tue–Fri 11 AM–7 PM. Also pours a $6 “Beermoooosa”.",
-   "source_url": "http://places.singleplatform.com/the-wicked-hop--jackalope/menu"
+   "source_url": "http://places.singleplatform.com/the-wicked-hop--jackalope/menu",
+   "confidence": "menu"
   },
   {
    "name": "East Town Kitchen & Bar",
@@ -177,7 +184,8 @@
    "platform": "research",
    "guid": "cow:east-town-kitchen-bar",
    "notes": "Happy-hour menu lists $5 draft beer; not confirmed whether Spotted Cow is included.",
-   "source_url": "http://places.singleplatform.com/millioke/menu"
+   "source_url": "http://places.singleplatform.com/millioke/menu",
+   "confidence": "menu"
   },
   {
    "name": "Good Life",
@@ -199,7 +207,8 @@
    "platform": "research",
    "guid": "cow:good-life",
    "notes": "",
-   "source_url": "http://places.singleplatform.com/good-life/menu"
+   "source_url": "http://places.singleplatform.com/good-life/menu",
+   "confidence": "menu"
   },
   {
    "name": "Valhalla",
@@ -221,7 +230,8 @@
    "platform": "research",
    "guid": "cow:valhalla",
    "notes": "Status unverified — sourced from an old opening article.",
-   "source_url": "https://lb2.onmilwaukee.com/articles/valhalla-open-on-old-world-third"
+   "source_url": "https://lb2.onmilwaukee.com/articles/valhalla-open-on-old-world-third",
+   "confidence": "reported"
   },
   {
    "name": "Mader's Restaurant",
@@ -243,7 +253,8 @@
    "platform": "research",
    "guid": "cow:mader-s-restaurant",
    "notes": "",
-   "source_url": "http://urbnexplorer.com/where-to-eat-and-drink-in-milwaukee/"
+   "source_url": "http://urbnexplorer.com/where-to-eat-and-drink-in-milwaukee/",
+   "confidence": "menu"
   },
   {
    "name": "Milwaukee Brat House",
@@ -265,7 +276,8 @@
    "platform": "research",
    "guid": "cow:milwaukee-brat-house",
    "notes": "A 2017 review mentioned a 2-for-1 deal; treat as stale.",
-   "source_url": "https://www.tripadvisor.co.nz/ShowUserReviews-g60097-d2521287-r492882656-Milwaukee_Brat_House-Milwaukee_Wisconsin.html"
+   "source_url": "https://www.tripadvisor.co.nz/ShowUserReviews-g60097-d2521287-r492882656-Milwaukee_Brat_House-Milwaukee_Wisconsin.html",
+   "confidence": "reported"
   },
   {
    "name": "The Wurst Bar",
@@ -287,7 +299,8 @@
    "platform": "research",
    "guid": "cow:the-wurst-bar",
    "notes": "Happy hour Mon–Fri 2:30–5:30 PM: $1 off taps, half-price cans/bottles.",
-   "source_url": "https://OnMilwaukee.com/articles/hidden-gem-the-wurst-bar"
+   "source_url": "https://OnMilwaukee.com/articles/hidden-gem-the-wurst-bar",
+   "confidence": "menu"
   },
   {
    "name": "Drink Wisconsinbly Pub",
@@ -309,7 +322,8 @@
    "platform": "research",
    "guid": "cow:drink-wisconsinbly-pub",
    "notes": "$6 as the “Dew And A Moo” combo with a Tullamore D.E.W. shot.",
-   "source_url": "https://menucollectors.com/drink-wisconsinbly-pub-53203-menu/"
+   "source_url": "https://menucollectors.com/drink-wisconsinbly-pub-53203-menu/",
+   "confidence": "menu"
   },
   {
    "name": "Dorsia",
@@ -331,7 +345,8 @@
    "platform": "research",
    "guid": "cow:dorsia",
    "notes": "Happy hour Mon–Fri 4–6 PM: $4 Spotted Cow.",
-   "source_url": "http://onmilwaukee.com/articles/must-try-milwaukee-happy-hour"
+   "source_url": "http://onmilwaukee.com/articles/must-try-milwaukee-happy-hour",
+   "confidence": "menu"
   },
   {
    "name": "Pfister Hotel Lobby Lounge",
@@ -353,7 +368,8 @@
    "platform": "research",
    "guid": "cow:pfister-hotel-lobby-lounge",
    "notes": "",
-   "source_url": "https://Www.Tripadvisor.ca/ShowUserReviews-g60097-d2627345-r638992928-Pfister_Hotel_Lobby_Lounge-Milwaukee_Wisconsin.html"
+   "source_url": "https://Www.Tripadvisor.ca/ShowUserReviews-g60097-d2627345-r638992928-Pfister_Hotel_Lobby_Lounge-Milwaukee_Wisconsin.html",
+   "confidence": "menu"
   },
   {
    "name": "Café Benelux",
@@ -375,7 +391,8 @@
    "platform": "research",
    "guid": "cow:caf-benelux",
    "notes": "Confirmed via Untappd check-in; price not published.",
-   "source_url": "https://untappd.com/user/hannahfriedland/photos"
+   "source_url": "https://untappd.com/user/hannahfriedland/photos",
+   "confidence": "reported"
   },
   {
    "name": "Gin Rickey",
@@ -397,7 +414,8 @@
    "platform": "research",
    "guid": "cow:gin-rickey",
    "notes": "",
-   "source_url": "https://ambassadorhotelmke.com/gin-rickey"
+   "source_url": "https://ambassadorhotelmke.com/gin-rickey",
+   "confidence": "menu"
   },
   {
    "name": "SafeHouse",
@@ -419,7 +437,8 @@
    "platform": "research",
    "guid": "cow:safehouse",
    "notes": "Listed under “Draft Beers” on the official current menu; price not published.",
-   "source_url": "https://www.safe-house.com/milwaukee-restaurant-menu"
+   "source_url": "https://www.safe-house.com/milwaukee-restaurant-menu",
+   "confidence": "menu"
   },
   {
    "name": "The MECCA Sports Bar and Grill",
@@ -441,7 +460,8 @@
    "platform": "research",
    "guid": "cow:the-mecca-sports-bar-and-grill",
    "notes": "Spring 2022 menu lists draft Spotted Cow at $8 — may be stale. No happy-hour discount found.",
-   "source_url": "https://assets.ctfassets.net/vto13970ddms/7nDIfsJTMMhu3uLIej772B/c6f5f997cb10241ef37134c88665a70f/MeccaMenu_UPDATE_Spring_2022_v10.pdf"
+   "source_url": "https://assets.ctfassets.net/vto13970ddms/7nDIfsJTMMhu3uLIej772B/c6f5f997cb10241ef37134c88665a70f/MeccaMenu_UPDATE_Spring_2022_v10.pdf",
+   "confidence": "stale"
   },
   {
    "name": "Punch Bowl Social",
@@ -463,7 +483,8 @@
    "platform": "research",
    "guid": "cow:punch-bowl-social",
    "notes": "Menu mirrors (~3 years old) list draft Spotted Cow at $7 — may be stale. No happy-hour detail found.",
-   "source_url": "https://menucollectors.com/punch-bowl-social-milwaukee-53203-menu/"
+   "source_url": "https://menucollectors.com/punch-bowl-social-milwaukee-53203-menu/",
+   "confidence": "stale"
   },
   {
    "name": "Mason Street Grill",
@@ -485,7 +506,8 @@
    "platform": "research",
    "guid": "cow:mason-street-grill",
    "notes": "Bottled format at $6 — first confirmed bottle/can in the dataset. Happy hour (Mon–Fri 4–7 PM) covers drafts only, not Spotted Cow.",
-   "source_url": "https://autoreserve.com/en/restaurants/JBQuGsFF53g2XERAqLeg"
+   "source_url": "https://autoreserve.com/en/restaurants/JBQuGsFF53g2XERAqLeg",
+   "confidence": "menu"
   },
   {
    "name": "Who's On Third",
@@ -507,7 +529,8 @@
    "platform": "research",
    "guid": "cow:whos-on-third",
    "notes": "On draft per an Aug 2026 Untappd check-in; price not published. Weaker than a menu.",
-   "source_url": "https://untappd.com/user/ewall19/checkin/1597999725"
+   "source_url": "https://untappd.com/user/ewall19/checkin/1597999725",
+   "confidence": "reported"
   },
   {
    "name": "AJ Bombers",
@@ -529,7 +552,8 @@
    "platform": "research",
    "guid": "cow:aj-bombers",
    "notes": "On tap per an Aug 2025 customer review; price not published. Weaker than a menu.",
-   "source_url": "https://www.tripadvisor.in/ShowUserReviews-g60097-d1454298-r1027542425-AJ_Bombers-Milwaukee_Wisconsin.html"
+   "source_url": "https://www.tripadvisor.in/ShowUserReviews-g60097-d1454298-r1027542425-AJ_Bombers-Milwaukee_Wisconsin.html",
+   "confidence": "reported"
   },
   {
    "name": "Swingin' Door Exchange",
@@ -551,7 +575,8 @@
    "platform": "research",
    "guid": "cow:swingin-door-exchange",
    "notes": "Tap list anchored by New Glarus per news articles; price not published. Secondary sources, not an official menu.",
-   "source_url": "https://www.mashed.com/1862298/swingin-door-exchange-saloon-and-eatery-milwaukee-wisconsin-lake-michigan/"
+   "source_url": "https://www.mashed.com/1862298/swingin-door-exchange-saloon-and-eatery-milwaukee-wisconsin-lake-michigan/",
+   "confidence": "reported"
   },
   {
    "name": "Camp Bar (Third Ward)",
@@ -573,7 +598,8 @@
    "platform": "research",
    "guid": "cow:camp-bar-third-ward",
    "notes": "Local guide recommends ordering it on draft here; price not published. Deer District location (Deer Camp MKE) not confirmed.",
-   "source_url": "https://www.zola.com/wedding/natalie_and_john/poi"
+   "source_url": "https://www.zola.com/wedding/natalie_and_john/poi",
+   "confidence": "reported"
   },
   {
    "name": "Harbor House",
@@ -595,7 +621,8 @@
    "platform": "research",
    "guid": "cow:harbor-house",
    "notes": "On tap per a Yelp review and an Untappd check-in; plain-pour price not published. Weak evidence.",
-   "source_url": "https://restaurantguru.com/Harbor-House-Milwaukee/menu"
+   "source_url": "https://restaurantguru.com/Harbor-House-Milwaukee/menu",
+   "confidence": "reported"
   },
   {
    "name": "Uncle Buck's on Third",
@@ -617,7 +644,8 @@
    "platform": "research",
    "guid": "cow:uncle-bucks-on-third",
    "notes": "Reviewer mentions drinking Spotted Cow here; format and price unknown. Weak evidence — single review.",
-   "source_url": "https://Wanderlog.com/place/details/1120607"
+   "source_url": "https://Wanderlog.com/place/details/1120607",
+   "confidence": "reported"
   },
   {
    "name": "Third Ward Beer Garden",
@@ -639,7 +667,8 @@
    "platform": "research",
    "guid": "cow:third-ward-beer-garden",
    "notes": "Seasonal pop-up; venue page lists Spotted Cow. Format, price, and current-season status unknown. Weak evidence.",
-   "source_url": "http://thirdwardbeergarden.com/"
+   "source_url": "http://thirdwardbeergarden.com/",
+   "confidence": "reported"
   },
   {
    "name": "The Harp Irish Pub",
@@ -661,7 +690,8 @@
    "platform": "research",
    "guid": "cow:the-harp-irish-pub",
    "notes": "Aug 2026 Untappd check-in; format and price unknown. Weak evidence — single check-in.",
-   "source_url": "https://Untappd.com/user/ewall19"
+   "source_url": "https://Untappd.com/user/ewall19",
+   "confidence": "reported"
   },
   {
    "name": "Major Goolsby's",
@@ -683,7 +713,8 @@
    "platform": "research",
    "guid": "cow:major-goolsbys",
    "notes": "Check-ins conflict on format (can vs. draft), so format left unspecified; price not published.",
-   "source_url": "https://untappd.com/user/bob_ruhl_8266"
+   "source_url": "https://untappd.com/user/bob_ruhl_8266",
+   "confidence": "reported"
   },
   {
    "name": "Blue Bat Kitchen & Tequileria",
@@ -705,7 +736,8 @@
    "platform": "research",
    "guid": "cow:blue-bat-kitchen-and-tequileria",
    "notes": "Official menu lists it at $7; format not stated.",
-   "source_url": "https://bluebatkitchen.com/menus"
+   "source_url": "https://bluebatkitchen.com/menus",
+   "confidence": "menu"
   },
   {
    "name": "Blu at the Pfister",
@@ -727,7 +759,8 @@
    "platform": "research",
    "guid": "cow:blu-at-the-pfister",
    "notes": "Summer 2026 hotel menu lists it at $7; format not stated.",
-   "source_url": "http://www.thepfisterhotel.com/media/tk1jvcam/summer-2026_pfister_blu_menu_525x825.pdf"
+   "source_url": "http://www.thepfisterhotel.com/media/tk1jvcam/summer-2026_pfister_blu_menu_525x825.pdf",
+   "confidence": "menu"
   },
   {
    "name": "Miller Time Pub & Grill",
@@ -749,7 +782,8 @@
    "platform": "research",
    "guid": "cow:miller-time-pub-and-grill",
    "notes": "Official menu lists it; no price or format published.",
-   "source_url": "https://milwaukee.millertimepubandgrill.com/menu"
+   "source_url": "https://milwaukee.millertimepubandgrill.com/menu",
+   "confidence": "menu"
   },
   {
    "name": "Tre Rivali",
@@ -771,7 +805,8 @@
    "platform": "research",
    "guid": "cow:tre-rivali",
    "notes": "SinglePlatform menu lists it at $8; format not stated.",
-   "source_url": "http://places.singleplatform.com/tre-rivali/menu"
+   "source_url": "http://places.singleplatform.com/tre-rivali/menu",
+   "confidence": "menu"
   },
   {
    "name": "St. Paul Fish Company",
@@ -793,7 +828,8 @@
    "platform": "research",
    "guid": "cow:st-paul-fish-company",
    "notes": "Weak evidence: single recent Untappd check-in; format and price unknown.",
-   "source_url": "https://Untappd.com/user/Kszabo4"
+   "source_url": "https://Untappd.com/user/Kszabo4",
+   "confidence": "reported"
   },
   {
    "name": "McGillycuddy's",
@@ -815,7 +851,8 @@
    "platform": "research",
    "guid": "cow:mcgillycuddys",
    "notes": "Weak evidence: single 2025 Untappd check-in; format and price unknown.",
-   "source_url": "https://untappd.com/v/mcgillycuddy-s/15549/photos"
+   "source_url": "https://untappd.com/v/mcgillycuddy-s/15549/photos",
+   "confidence": "reported"
   },
   {
    "name": "Red Rock Saloon",
@@ -837,7 +874,8 @@
    "platform": "research",
    "guid": "cow:red-rock-saloon",
    "notes": "Weak evidence: undated Untappd check-in; format and price unknown.",
-   "source_url": "https://untappd.com/v/red-rock-saloon/11977/photos"
+   "source_url": "https://untappd.com/v/red-rock-saloon/11977/photos",
+   "confidence": "reported"
   },
   {
    "name": "Brothers Bar & Grill",
@@ -859,7 +897,8 @@
    "platform": "research",
    "guid": "cow:brothers-bar-and-grill",
    "notes": "Weak evidence: undated Untappd check-in; format and price unknown.",
-   "source_url": "https://untappd.com/v/brothers-bar-grill/11457/photos"
+   "source_url": "https://untappd.com/v/brothers-bar-grill/11457/photos",
+   "confidence": "reported"
   },
   {
    "name": "Points East Pub",
@@ -881,7 +920,8 @@
    "platform": "research",
    "guid": "cow:points-east-pub",
    "notes": "Official site lists it; reviews describe pitchers (draft inferred, not stated on a menu); no price.",
-   "source_url": "https://thepointseastpub.com/"
+   "source_url": "https://thepointseastpub.com/",
+   "confidence": "reported"
   },
   {
    "name": "Il Cervo at The Trade Hotel",
@@ -903,7 +943,8 @@
    "platform": "research",
    "guid": "cow:il-cervo-at-the-trade-hotel",
    "notes": "On draft, $8 on the current official beer menu. No happy-hour info published.",
-   "source_url": "https://www.ilcervorestaurant.com/menu/beer/"
+   "source_url": "https://www.ilcervorestaurant.com/menu/beer/",
+   "confidence": "menu"
   },
   {
    "name": "My Office",
@@ -925,7 +966,8 @@
    "platform": "research",
    "guid": "cow:my-office",
    "notes": "Weak evidence: March 2026 Untappd check-in shows draft; no official menu, no price.",
-   "source_url": "https://untappd.com/user/Napalm/checkin/1554584396"
+   "source_url": "https://untappd.com/user/Napalm/checkin/1554584396",
+   "confidence": "reported"
   },
   {
    "name": "Mo's Irish Pub",
@@ -947,7 +989,8 @@
    "platform": "research",
    "guid": "cow:mos-irish-pub",
    "notes": "Weak evidence: single July 2024 review; format and price unknown.",
-   "source_url": "https://www.tripadvisor.co.nz/ShowUserReviews-g60097-d392287-r959994885-Mo_s_Irish_Pub-Milwaukee_Wisconsin.html"
+   "source_url": "https://www.tripadvisor.co.nz/ShowUserReviews-g60097-d392287-r959994885-Mo_s_Irish_Pub-Milwaukee_Wisconsin.html",
+   "confidence": "reported"
   },
   {
    "name": "Fiserv Forum general public concourse",
@@ -969,7 +1012,8 @@
    "platform": "research",
    "guid": "cow:fiserv-forum-general-public-concourse",
    "notes": "2018 press preview of the public concourse; a 12 oz can was listed at $10 — historical/stale, current arena pricing may differ.",
-   "source_url": "https://onmilwaukee.com/articles/mkeat-at-fiserv-forum"
+   "source_url": "https://onmilwaukee.com/articles/mkeat-at-fiserv-forum",
+   "confidence": "stale"
   },
   {
    "name": "Draft & Co.",
@@ -991,7 +1035,8 @@
    "platform": "research",
    "guid": "cow:draft-and-co",
    "notes": "Weak evidence: June 2026 Untappd check-in shows draft; no price.",
-   "source_url": "https://untappd.com/user/vegter1"
+   "source_url": "https://untappd.com/user/vegter1",
+   "confidence": "reported"
   },
   {
    "name": "Boone & Crockett",
@@ -1013,7 +1058,8 @@
    "platform": "research",
    "guid": "cow:boone-and-crockett",
    "notes": "Bottles/cans, $4 on a fresh official menu.",
-   "source_url": "https://www.boonemilwaukee.com/beer-wine-other"
+   "source_url": "https://www.boonemilwaukee.com/beer-wine-other",
+   "confidence": "menu"
   },
   {
    "name": "Club Charlies",
@@ -1035,7 +1081,8 @@
    "platform": "research",
    "guid": "cow:club-charlies",
    "notes": "Weak evidence: recent Untappd check-ins show draft; no menu found, no price.",
-   "source_url": "https://untappd.com/user/kingdaddy530/checkin/1554820241"
+   "source_url": "https://untappd.com/user/kingdaddy530/checkin/1554820241",
+   "confidence": "reported"
   },
   {
    "name": "Y-Not II Tavern",
@@ -1057,7 +1104,8 @@
    "platform": "research",
    "guid": "cow:y-not-ii-tavern",
    "notes": "Weak evidence: Aug 2026 Untappd check-in shows draft; no menu found.",
-   "source_url": "https://untappd.com/user/MarkGaskill/checkin/1595902961"
+   "source_url": "https://untappd.com/user/MarkGaskill/checkin/1595902961",
+   "confidence": "reported"
   },
   {
    "name": "Merriment Social",
@@ -1079,7 +1127,8 @@
    "platform": "research",
    "guid": "cow:merriment-social",
    "notes": "Spring 2022 menu (stale) lists it at $8; the current menu names no beers — treat as dated.",
-   "source_url": "https://static1.squarespace.com/static/61813ff761b99650be1a7a83/t/6233762eb4438e7b404b5675/1647539762207/CURRENT+MERRIMENT+BRUNCH+MENU+-+Spring+2022.pdf"
+   "source_url": "https://static1.squarespace.com/static/61813ff761b99650be1a7a83/t/6233762eb4438e7b404b5675/1647539762207/CURRENT+MERRIMENT+BRUNCH+MENU+-+Spring+2022.pdf",
+   "confidence": "stale"
   },
   {
    "name": "Char'd",
@@ -1101,7 +1150,8 @@
    "platform": "research",
    "guid": "cow:chard",
    "notes": "Menu mirror lists it; format and price not stated.",
-   "source_url": "http://places.singleplatform.com/chard/menu"
+   "source_url": "http://places.singleplatform.com/chard/menu",
+   "confidence": "stale"
   },
   {
    "name": "The Outsider",
@@ -1123,7 +1173,8 @@
    "platform": "research",
    "guid": "cow:the-outsider",
    "notes": "Menu mirror lists it at $6 (bottle listing); a May 2026 Untappd check-in says draft — format left unspecified.",
-   "source_url": "https://wnam-cdn.menuweb.menu/storage/media/companies_menu_pdf/114777988/the-outsider-milwaukee-menu.pdf"
+   "source_url": "https://wnam-cdn.menuweb.menu/storage/media/companies_menu_pdf/114777988/the-outsider-milwaukee-menu.pdf",
+   "confidence": "stale"
   },
   {
    "name": "Deer Camp MKE",
@@ -1145,7 +1196,8 @@
    "platform": "research",
    "guid": "cow:deer-camp-mke",
    "notes": "Weak evidence: recent Untappd check-ins mention draft; no official menu, no price.",
-   "source_url": "https://untappd.com/user/jessealger/checkin/1584705122"
+   "source_url": "https://untappd.com/user/jessealger/checkin/1584705122",
+   "confidence": "reported"
   },
   {
    "name": "The Loaded Slate",
@@ -1167,7 +1219,8 @@
    "platform": "research",
    "guid": "cow:the-loaded-slate",
    "notes": "Weak/historical evidence: a 2011 article and a 2021 review; verify it's still operating.",
-   "source_url": "https://OnMilwaukee.com/articles/loadslate11"
+   "source_url": "https://OnMilwaukee.com/articles/loadslate11",
+   "confidence": "reported"
   }
  ]
 }

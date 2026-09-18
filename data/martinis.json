@@ -2,7 +2,7 @@
  "generated_at": "2026-09-16T10:09:52+00:00",
  "metro": "Milwaukee",
  "restaurants_scanned": 342,
- "count": 98,
+ "count": 97,
  "martinis": [
   {
    "name": "Mix N Rewind",
@@ -144,7 +144,7 @@
    "address": "6505 West North Avenue, Wauwatosa, WI",
    "lat": 43.060563,
    "lng": -87.99399,
-   "neighborhood": "Pabst Park",
+   "neighborhood": "Wauwatosa",
    "downtown": false,
    "price_cents": 995,
    "items": [
@@ -214,7 +214,7 @@
    "address": "6610 West Greenfield Avenue, West Allis, WI",
    "lat": 43.016991,
    "lng": -87.99432,
-   "neighborhood": "Six Points",
+   "neighborhood": "West Allis",
    "downtown": false,
    "price_cents": 1000,
    "items": [
@@ -234,7 +234,7 @@
    "address": "7808 W Layton Avenue, Greenfield, WI",
    "lat": 42.9599386,
    "lng": -88.0129396,
-   "neighborhood": "Whitnall Oaks",
+   "neighborhood": "Greenfield",
    "downtown": false,
    "price_cents": 1000,
    "items": [
@@ -259,7 +259,7 @@
    "address": "5300 S 76th St, Unit 1450A, Greendale, WI",
    "lat": 42.948156,
    "lng": -88.004706,
-   "neighborhood": "Southridge Commercial District",
+   "neighborhood": "Greendale",
    "downtown": false,
    "price_cents": 1000,
    "items": [
@@ -299,7 +299,7 @@
    "address": "10539 W Forest Home Ave, Hales Corners, WI",
    "lat": 42.93811,
    "lng": -88.04469,
-   "neighborhood": "Forest Home Corridor",
+   "neighborhood": "Hales Corners",
    "downtown": false,
    "price_cents": 1000,
    "items": [
@@ -319,7 +319,7 @@
    "address": "10843 W. Park Place, Milwaukee, WI",
    "lat": 43.148935,
    "lng": -88.045959,
-   "neighborhood": "Park Place",
+   "neighborhood": "Milwaukee",
    "downtown": false,
    "price_cents": 1050,
    "items": [
@@ -374,7 +374,7 @@
    "address": "5121 West Howard Avenue, Milwaukee, WI",
    "lat": 42.97334,
    "lng": -87.97879,
-   "neighborhood": "Honey Creek Manor",
+   "neighborhood": "Milwaukee",
    "downtown": false,
    "price_cents": 1100,
    "items": [
@@ -434,7 +434,7 @@
    "address": "6715 West North Avenue, Wauwatosa, WI",
    "lat": 43.060562,
    "lng": -87.996879,
-   "neighborhood": "Pabst Park",
+   "neighborhood": "Wauwatosa",
    "downtown": false,
    "price_cents": 1100,
    "items": [
@@ -450,7 +450,7 @@
    "guid": "d6098a8a-59a7-4bd8-b3f4-2830f42208e4"
   },
   {
-   "name": "Transfer Pizzeria Caf\u00e9",
+   "name": "Transfer Pizzeria Café",
    "address": "101 W Mitchell St, Milwaukee, WI",
    "lat": 43.012085,
    "lng": -87.91127,
@@ -491,7 +491,7 @@
   },
   {
    "name": "Brunch It Up - Milwaukee",
-   "address": "714 N MILWAUKEE ST, MILWAUKEE, WI",
+   "address": "714 N MILWAUKEE ST, Milwaukee, WI",
    "lat": 43.039225,
    "lng": -87.906267,
    "neighborhood": "Downtown",
@@ -514,7 +514,7 @@
    "address": "7700 Harwood Avenue, Wauwatosa, WI",
    "lat": 43.049483,
    "lng": -88.008475,
-   "neighborhood": "Lowell Damon Woods",
+   "neighborhood": "Wauwatosa",
    "downtown": false,
    "price_cents": 1200,
    "items": [
@@ -650,26 +650,6 @@
    "guid": "98b2b2bb-233f-4831-bfcb-611af2ab53b3"
   },
   {
-   "name": "Former GCB/EHG Wauwatosa CLOSED",
-   "address": "11200 West Burleigh Street, Wauwatosa, WI",
-   "lat": 43.075632,
-   "lng": -88.053479,
-   "neighborhood": "Wauwatosa",
-   "downtown": false,
-   "price_cents": 1200,
-   "items": [
-    {
-     "item": "Espresso Martini",
-     "price_cents": 1200,
-     "hh_price_cents": null
-    }
-   ],
-   "happy_hour": false,
-   "hh_price_cents": null,
-   "platform": "toast",
-   "guid": "2ca48494-2e3e-4f3d-9b46-40cb95318a10"
-  },
-  {
    "name": "Good City Brewing - East Side",
    "address": "2108 North Farwell Avenue, Milwaukee, WI",
    "lat": 43.057746,
@@ -691,10 +671,10 @@
   },
   {
    "name": "IVR",
-   "address": "10950 W GOOD HOPE ROAD, MILWAUKEE, WI",
+   "address": "10950 W GOOD HOPE ROAD, Milwaukee, WI",
    "lat": 43.149017,
    "lng": -88.048904,
-   "neighborhood": "Park Place",
+   "neighborhood": "Milwaukee",
    "downtown": false,
    "price_cents": 1200,
    "items": [
@@ -719,7 +699,7 @@
    "address": "1427 Underwood Ave, Wauwatosa, WI",
    "lat": 43.05016,
    "lng": -88.00861,
-   "neighborhood": "Tosa Village",
+   "neighborhood": "Wauwatosa",
    "downtown": false,
    "price_cents": 1200,
    "items": [
@@ -794,7 +774,7 @@
    "address": "10842 W Bluemound Rd, Wauwatosa, WI",
    "lat": 43.035864,
    "lng": -88.047955,
-   "neighborhood": "Underwood Parkway",
+   "neighborhood": "Wauwatosa",
    "downtown": false,
    "price_cents": 1200,
    "items": [
@@ -834,7 +814,7 @@
    "address": "10049 W Forest Home Ave, Hales Corners, WI",
    "lat": 42.94234,
    "lng": -88.0388,
-   "neighborhood": "Forest Home Corridor",
+   "neighborhood": "Hales Corners",
    "downtown": false,
    "price_cents": 1200,
    "items": [
@@ -984,7 +964,7 @@
    "address": "9427 west greenfield Ave, West Allis, WI",
    "lat": 43.016192,
    "lng": -88.029956,
-   "neighborhood": "Conrad Gardens",
+   "neighborhood": "West Allis",
    "downtown": false,
    "price_cents": 1300,
    "items": [
@@ -1029,7 +1009,7 @@
    "address": "14460 College Ave, New Berlin, WI",
    "lat": 42.930156,
    "lng": -88.095172,
-   "neighborhood": "Muskego",
+   "neighborhood": "New Berlin",
    "downtown": false,
    "price_cents": 1300,
    "items": [
@@ -1049,7 +1029,7 @@
    "address": "14460 W. College Ave, New Berlin, WI",
    "lat": 42.93014,
    "lng": -88.095138,
-   "neighborhood": "Muskego",
+   "neighborhood": "New Berlin",
    "downtown": false,
    "price_cents": 1300,
    "items": [
@@ -1090,7 +1070,7 @@
    "guid": "594edfe7-e437-42cb-b7d6-630ab9dd42fa"
   },
   {
-   "name": "Summer Of \u201885",
+   "name": "Summer Of ‘85",
    "address": "2213 N. MLK Drive, Milwaukee, WI",
    "lat": 43.05948,
    "lng": -87.914612,
@@ -1154,7 +1134,7 @@
    "address": "1234 Milwaukee Avenue, South Milwaukee, WI",
    "lat": 42.911075,
    "lng": -87.86678,
-   "neighborhood": "Downtown District",
+   "neighborhood": "South Milwaukee",
    "downtown": false,
    "price_cents": 1300,
    "items": [
@@ -1215,11 +1195,11 @@
    "guid": "2a87807f-4ab2-4362-b408-22d810cb1040"
   },
   {
-   "name": "Ann\u2019s Italian Restaurant",
+   "name": "Ann’s Italian Restaurant",
    "address": "5969 S 108th Pl, Hales Corners, WI",
    "lat": 42.93591,
    "lng": -88.049524,
-   "neighborhood": "Village Center District",
+   "neighborhood": "Hales Corners",
    "downtown": false,
    "price_cents": 1400,
    "items": [
@@ -1319,7 +1299,7 @@
    "address": "7677 West State Street, Wauwatosa, WI",
    "lat": 43.049284,
    "lng": -88.008113,
-   "neighborhood": "Lowell Damon Woods",
+   "neighborhood": "Wauwatosa",
    "downtown": false,
    "price_cents": 1400,
    "items": [
@@ -1339,7 +1319,7 @@
    "address": "6519 W North Ave, Wauwatosa, WI",
    "lat": 43.060614,
    "lng": -87.993913,
-   "neighborhood": "Pabst Park",
+   "neighborhood": "Wauwatosa",
    "downtown": false,
    "price_cents": 1400,
    "items": [
@@ -1359,7 +1339,7 @@
    "address": "6818 W North Ave., Wauwatosa, WI",
    "lat": 43.060949,
    "lng": -87.998149,
-   "neighborhood": "Inglewood",
+   "neighborhood": "Wauwatosa",
    "downtown": false,
    "price_cents": 1400,
    "items": [
@@ -1439,7 +1419,7 @@
    "address": "5901 W National Ave, West Allis, WI",
    "lat": 43.017495,
    "lng": -87.986301,
-   "neighborhood": "Six Points",
+   "neighborhood": "West Allis",
    "downtown": false,
    "price_cents": 1400,
    "items": [
@@ -1861,10 +1841,10 @@
   },
   {
    "name": "St. Francis Brewery and Restaurant",
-   "address": "3825 S Kinnickinnic Ave, St Francis, WI",
+   "address": "3825 S Kinnickinnic Ave, St. Francis, WI",
    "lat": 42.974132,
    "lng": -87.875924,
-   "neighborhood": "Saint Francis",
+   "neighborhood": "St. Francis",
    "downtown": false,
    "price_cents": 1500,
    "items": [
@@ -1979,7 +1959,7 @@
    "address": "6024 W Bluemound Rd, Milwaukee, WI",
    "lat": 43.036775,
    "lng": -87.988337,
-   "neighborhood": "Bluemound Heights",
+   "neighborhood": "Milwaukee",
    "downtown": false,
    "price_cents": 1600,
    "items": [
@@ -1996,10 +1976,10 @@
   },
   {
    "name": "Onesto",
-   "address": "221 S 2nd St, Milwaukee, WI",
-   "lat": 43.0288674,
-   "lng": -87.9127913,
-   "neighborhood": "Walker's Point",
+   "address": "221 N Broadway, Milwaukee, WI 53202",
+   "lat": 43.0332,
+   "lng": -87.90759,
+   "neighborhood": "Third Ward",
    "downtown": true,
    "price_cents": 1600,
    "items": [
@@ -2102,7 +2082,7 @@
    "guid": "1be82a52-79a1-45f4-bf64-0f9b3af6a1ac"
   },
   {
-   "name": "Aya 700 East Kilbourn Avenue, Suite 100",
+   "name": "Aya",
    "address": "700 East Kilbourn Avenue, Milwaukee, WI",
    "lat": 43.043305,
    "lng": -87.902918,

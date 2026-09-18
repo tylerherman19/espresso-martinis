@@ -31,7 +31,7 @@ for the one control that is currently active.
 | `--accent` | `#9A7328` brass | `#A15A20` amber | Rules, marks, active control fills |
 | `--accent-ink` | `#6E5119` | `#7A4315` | The accent as *text* — darker, ≥7:1 |
 | `--accent-soft` | `#EFE6D3` | `#F2E5D6` | The one tint, used behind nothing but a control |
-| `--tile-warm` | `sepia(.10) saturate(.9)` | `sepia(.16) saturate(.92)` | Filter that warms the map to match the paper |
+| `--tile-warm` | `sepia(.10) saturate(.9) brightness(1.02) contrast(1.02)` | `sepia(.16) saturate(.92) brightness(1.02) contrast(1.02)` | Filter that warms the map to match the paper |
 
 ## Type
 
@@ -53,6 +53,10 @@ what makes a 96-row list read as a list of places rather than a database table.
 | body | `15px` / 1.65 | Sans 400 | Prose |
 | meta | `13px` / 1.45 | Sans 400 | Row meta, captions |
 | label | `11px` / 1 · `.14em` · caps | Sans 600 | Eyebrows, column labels |
+| tag | `11px` / 1 · `.1em` · caps | Sans 600 | The one badge on a row |
+
+Both faces are served from `vendor/fonts/`. Instrument Sans is variable, so one
+file covers 400 through 600 and the page fetches it once.
 
 ## Space, edge, depth
 
@@ -77,6 +81,12 @@ what makes a 96-row list read as a list of places rather than a database table.
 
 1. No gradient anywhere except the single scrim behind the detail panel.
 2. Icons are drawn on a 24px grid at 1.5px stroke. No emoji.
-3. Nothing is colored that is not a price fact or an active control.
+3. Nothing is colored that is not a price fact or an active control. A caveat
+   about how well a line is evidenced is not a price fact: it stays `--muted`
+   at weight 500, so the accent keeps meaning money.
 4. No card grid. Rows are ruled lines on paper, as on a menu.
-5. No number appears that the sweep did not produce.
+5. No number appears that the sweep or a recorded hand-check did not produce.
+6. Nothing the page needs is fetched from a third party. Leaflet and the fonts
+   live in `vendor/`, and the map is the only thing allowed to fail — when it
+   does, `body.no-map` takes the column and the Map button away rather than
+   leaving a dead panel.
