@@ -1,8 +1,8 @@
 {
- "generated_at": "2026-09-16T10:09:52+00:00",
+ "generated_at": "2026-09-23T10:12:59+00:00",
  "metro": "Milwaukee",
- "restaurants_scanned": 342,
- "count": 97,
+ "restaurants_scanned": 343,
+ "count": 98,
  "martinis": [
   {
    "name": "Mix N Rewind",
@@ -450,7 +450,7 @@
    "guid": "d6098a8a-59a7-4bd8-b3f4-2830f42208e4"
   },
   {
-   "name": "Transfer Pizzeria Café",
+   "name": "Transfer Pizzeria Caf\u00e9",
    "address": "101 W Mitchell St, Milwaukee, WI",
    "lat": 43.012085,
    "lng": -87.91127,
@@ -491,7 +491,7 @@
   },
   {
    "name": "Brunch It Up - Milwaukee",
-   "address": "714 N MILWAUKEE ST, Milwaukee, WI",
+   "address": "714 N MILWAUKEE ST, MILWAUKEE, WI",
    "lat": 43.039225,
    "lng": -87.906267,
    "neighborhood": "Downtown",
@@ -671,7 +671,7 @@
   },
   {
    "name": "IVR",
-   "address": "10950 W GOOD HOPE ROAD, Milwaukee, WI",
+   "address": "10950 W GOOD HOPE ROAD, MILWAUKEE, WI",
    "lat": 43.149017,
    "lng": -88.048904,
    "neighborhood": "Milwaukee",
@@ -728,11 +728,6 @@
    "downtown": true,
    "price_cents": 1200,
    "items": [
-    {
-     "item": "Espresso Tini",
-     "price_cents": 1200,
-     "hh_price_cents": null
-    },
     {
      "item": "Espresso Martini",
      "price_cents": 1200,
@@ -1009,7 +1004,7 @@
    "address": "14460 College Ave, New Berlin, WI",
    "lat": 42.930156,
    "lng": -88.095172,
-   "neighborhood": "New Berlin",
+   "neighborhood": "Muskego",
    "downtown": false,
    "price_cents": 1300,
    "items": [
@@ -1029,7 +1024,7 @@
    "address": "14460 W. College Ave, New Berlin, WI",
    "lat": 42.93014,
    "lng": -88.095138,
-   "neighborhood": "New Berlin",
+   "neighborhood": "Muskego",
    "downtown": false,
    "price_cents": 1300,
    "items": [
@@ -1070,7 +1065,7 @@
    "guid": "594edfe7-e437-42cb-b7d6-630ab9dd42fa"
   },
   {
-   "name": "Summer Of ‘85",
+   "name": "Summer Of \u201885",
    "address": "2213 N. MLK Drive, Milwaukee, WI",
    "lat": 43.05948,
    "lng": -87.914612,
@@ -1189,13 +1184,33 @@
      "hh_price_cents": null
     }
    ],
-   "happy_hour": false,
+   "happy_hour": true,
    "hh_price_cents": null,
    "platform": "toast",
    "guid": "2a87807f-4ab2-4362-b408-22d810cb1040"
   },
   {
-   "name": "Ann’s Italian Restaurant",
+   "name": "Mad Rooster Cafe Milwaukee",
+   "address": "4401 W Greenfield Ave, West Milwaukee, WI",
+   "lat": 43.016338,
+   "lng": -87.968954,
+   "neighborhood": "West Milwaukee",
+   "downtown": false,
+   "price_cents": 1350,
+   "items": [
+    {
+     "item": "Espresso Martini",
+     "price_cents": 1350,
+     "hh_price_cents": null
+    }
+   ],
+   "happy_hour": false,
+   "hh_price_cents": null,
+   "platform": "toast",
+   "guid": "2faf7892-e26a-4085-b0e1-c1f8d3bb845b"
+  },
+  {
+   "name": "Ann\u2019s Italian Restaurant",
    "address": "5969 S 108th Pl, Hales Corners, WI",
    "lat": 42.93591,
    "lng": -88.049524,
@@ -1590,6 +1605,31 @@
    "guid": "a204faba-dc7c-4d21-b562-e89336f9f1c4"
   },
   {
+   "name": "St. Francis Brewery and Restaurant",
+   "address": "3825 S Kinnickinnic Ave, St Francis, WI",
+   "lat": 42.974132,
+   "lng": -87.875924,
+   "neighborhood": "Saint Francis",
+   "downtown": false,
+   "price_cents": 1400,
+   "items": [
+    {
+     "item": "Biscoff Espresso Martini",
+     "price_cents": 1400,
+     "hh_price_cents": null
+    },
+    {
+     "item": "Midnight Hustle - Espresso Martini",
+     "price_cents": 1500,
+     "hh_price_cents": null
+    }
+   ],
+   "happy_hour": false,
+   "hh_price_cents": null,
+   "platform": "toast",
+   "guid": "b70aa28b-5578-4772-95f2-b203bbf5547f"
+  },
+  {
    "name": "Story Hill BKC",
    "address": "5100 West Bluemound Road, Milwaukee, WI",
    "lat": 43.037022,
@@ -1840,26 +1880,6 @@
    "guid": "53e8820d-c857-45ae-baf8-d7fd32f83401"
   },
   {
-   "name": "St. Francis Brewery and Restaurant",
-   "address": "3825 S Kinnickinnic Ave, St. Francis, WI",
-   "lat": 42.974132,
-   "lng": -87.875924,
-   "neighborhood": "St. Francis",
-   "downtown": false,
-   "price_cents": 1500,
-   "items": [
-    {
-     "item": "Midnight Hustle - Espresso Martini",
-     "price_cents": 1500,
-     "hh_price_cents": null
-    }
-   ],
-   "happy_hour": false,
-   "hh_price_cents": null,
-   "platform": "toast",
-   "guid": "b70aa28b-5578-4772-95f2-b203bbf5547f"
-  },
-  {
    "name": "Sweetdiner- MKE",
    "address": "239 E. Chicago St Suite 103, Milwaukee, WI",
    "lat": 43.032345,
@@ -1955,7 +1975,7 @@
    "guid": "281f1dcb-b8ef-4f0b-880c-03def9eb47a7"
   },
   {
-   "name": "Milwaukee Steakhouse",
+   "name": "Milwaukee",
    "address": "6024 W Bluemound Rd, Milwaukee, WI",
    "lat": 43.036775,
    "lng": -87.988337,
