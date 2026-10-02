@@ -1,5 +1,5 @@
 {
- "note": "Hand-verified spots the platform sweep cannot see (no online ordering, website-only menus). Merged into martinis.json on every run; a live platform hit for the same name wins.",
+ "note": "Hand-verified spots the platform sweep cannot see (no online ordering, website-only menus). Merged into martinis.json on every run; a live platform hit for the same name (or the guid in `replaces`) wins, and a hand-check beats a platform reading carried over from an earlier week.",
  "entries": [
   {
    "name": "Onesto",
@@ -21,7 +21,7 @@
    "platform": "website",
    "guid": "manual:onesto",
    "source_url": "https://onestomke.com/menus",
-   "verified_at": "2026-09-05"
+   "verified_at": "2026-10-02"
   },
   {
    "name": "Branded Bar at The Iron Horse Hotel",
@@ -43,7 +43,514 @@
    "platform": "website",
    "guid": "manual:branded-bar-iron-horse",
    "source_url": "https://www.theironhorsehotel.com/wp-content/uploads/2026/04/Branded-Drinks-Menus-7.pdf",
-   "verified_at": "2026-09-13"
+   "verified_at": "2026-10-02"
+  },
+  {
+   "name": "Cafe Benelux",
+   "address": "346 N Broadway, Milwaukee, WI",
+   "lat": 43.034921,
+   "lng": -87.90699,
+   "neighborhood": "Third Ward",
+   "downtown": true,
+   "price_cents": 1400,
+   "items": [
+    {
+     "item": "Espresso-tini",
+     "price_cents": 1400,
+     "hh_price_cents": null
+    }
+   ],
+   "happy_hour": false,
+   "hh_price_cents": null,
+   "platform": "website",
+   "guid": "manual:cafe-benelux",
+   "source_url": "https://cafebenelux.com/menus",
+   "verified_at": "2026-10-02",
+   "notes": "State Line coffee liqueur, Skyy Vanilla vodka, espresso, soft whip.",
+   "replaces": "8ccdf22b-43c1-4fcd-82c1-b7ec9ac8d20e"
+  },
+  {
+   "name": "Sweet Diner",
+   "address": "239 E Chicago St, Milwaukee, WI",
+   "lat": 43.032459,
+   "lng": -87.908102,
+   "neighborhood": "Third Ward",
+   "downtown": true,
+   "price_cents": 1500,
+   "items": [
+    {
+     "item": "Espresso Martini",
+     "price_cents": 1500,
+     "hh_price_cents": null
+    }
+   ],
+   "happy_hour": false,
+   "hh_price_cents": null,
+   "platform": "website",
+   "guid": "manual:sweet-diner",
+   "source_url": "https://www.sweetdiner.com/drinks",
+   "verified_at": "2026-10-02",
+   "notes": "Stoli Vanilla vodka, Anodyne espresso, Kahlúa, simple syrup.",
+   "replaces": "3a345621-3f21-4cdb-939e-57df28579e7d"
+  },
+  {
+   "name": "Movida at Hotel Madrid",
+   "address": "600 S 6th St, Milwaukee, WI",
+   "lat": 43.025183,
+   "lng": -87.918046,
+   "neighborhood": "Walker's Point",
+   "downtown": true,
+   "price_cents": 1500,
+   "items": [
+    {
+     "item": "Movida Espresso Martini",
+     "price_cents": 1500,
+     "hh_price_cents": null
+    }
+   ],
+   "happy_hour": false,
+   "hh_price_cents": null,
+   "platform": "website",
+   "guid": "manual:movida-at-hotel-madrid",
+   "source_url": "https://www.hotelmadridmke.com/spanish-tapas-paella-menu-milwaukee",
+   "verified_at": "2026-10-02",
+   "notes": "Ketel One, Mr. Black, Stone Creek cold brew.",
+   "replaces": "18ef7ab1-88b4-4afb-8aa7-7edd05dcd25c"
+  },
+  {
+   "name": "District Fore",
+   "address": "233 E Chicago St, Milwaukee, WI",
+   "lat": 43.032243,
+   "lng": -87.908334,
+   "neighborhood": "Third Ward",
+   "downtown": true,
+   "price_cents": 1300,
+   "items": [
+    {
+     "item": "Espresso Martini",
+     "price_cents": 1300,
+     "hh_price_cents": null
+    }
+   ],
+   "happy_hour": false,
+   "hh_price_cents": null,
+   "platform": "website",
+   "guid": "manual:district-fore",
+   "source_url": "https://districtfore.com/menu/",
+   "verified_at": "2026-10-02",
+   "notes": "Tito's, Borghetti espresso liqueur, espresso, simple syrup.",
+   "replaces": "4849ed18-5afb-4679-86d8-75985160ac00"
+  },
+  {
+   "name": "The Spread",
+   "address": "1137 N Dr Martin Luther King Jr Dr, Milwaukee, WI",
+   "lat": 43.045188,
+   "lng": -87.914767,
+   "neighborhood": "Deer District",
+   "downtown": true,
+   "price_cents": 1300,
+   "items": [
+    {
+     "item": "Espresso Martini",
+     "price_cents": 1300,
+     "hh_price_cents": null
+    }
+   ],
+   "happy_hour": false,
+   "hh_price_cents": null,
+   "platform": "website",
+   "guid": "manual:the-spread",
+   "source_url": "https://910399ff-92dd-46ee-95bb-49e14ffa034f.usrfiles.com/ugd/910399_76934c3b289b45b1ae9b37b89fa09815.pdf",
+   "verified_at": "2026-10-02",
+   "notes": "A Barker Company ready-to-drink espresso martini, chilled, shaken and served.",
+   "replaces": "48e8e433-cf77-4910-9142-993290032124"
+  },
+  {
+   "name": "The Wicked Hop",
+   "address": "345 N Broadway, Milwaukee, WI",
+   "lat": 43.034888,
+   "lng": -87.90757,
+   "neighborhood": "Third Ward",
+   "downtown": true,
+   "price_cents": 1500,
+   "items": [
+    {
+     "item": "Espresso Martini",
+     "price_cents": 1500,
+     "hh_price_cents": 700
+    }
+   ],
+   "happy_hour": true,
+   "hh_price_cents": 700,
+   "platform": "website",
+   "guid": "manual:the-wicked-hop",
+   "source_url": "https://www.thewickedhop.com/drinks/",
+   "verified_at": "2026-10-02",
+   "notes": "Grey Goose at $15. Hoppy Hour ($7, Smirnoff) runs Monday to Friday 4–6pm, and Tuesday and Sunday 4–9pm."
+  },
+  {
+   "name": "The Copper Turtle",
+   "address": "330 E Menomonee St, Milwaukee, WI",
+   "lat": 43.031635,
+   "lng": -87.90618,
+   "neighborhood": "Third Ward",
+   "downtown": true,
+   "price_cents": 1700,
+   "items": [
+    {
+     "item": "Meaghan Hau's (vodka)",
+     "price_cents": 1700,
+     "hh_price_cents": null
+    },
+    {
+     "item": "Brown Sugar Bourbon",
+     "price_cents": 1700,
+     "hh_price_cents": null
+    },
+    {
+     "item": "El Caliente (tequila)",
+     "price_cents": 1700,
+     "hh_price_cents": null
+    },
+    {
+     "item": "Gin Lovers",
+     "price_cents": 1700,
+     "hh_price_cents": null
+    },
+    {
+     "item": "Pumpkin Spice Latte",
+     "price_cents": 1700,
+     "hh_price_cents": null
+    }
+   ],
+   "happy_hour": false,
+   "hh_price_cents": null,
+   "platform": "website",
+   "guid": "manual:the-copper-turtle",
+   "source_url": "https://thecopperturtle.com/milwaukee-third-ward-the-copper-turtle-our-menu",
+   "verified_at": "2026-10-02",
+   "notes": "A whole espresso martini section: coffee liqueur, cold brew and fee foam on the spirit of your choice."
+  },
+  {
+   "name": "McGillycuddy's",
+   "address": "1135 N Water St, Milwaukee, WI",
+   "lat": 43.045468,
+   "lng": -87.911415,
+   "neighborhood": "Water Street",
+   "downtown": true,
+   "price_cents": 1000,
+   "items": [
+    {
+     "item": "Espresso Martini",
+     "price_cents": 1000,
+     "hh_price_cents": 700
+    }
+   ],
+   "happy_hour": true,
+   "hh_price_cents": 700,
+   "platform": "website",
+   "guid": "manual:mcgillycuddy-s",
+   "source_url": "https://mcgillycuddysmilwaukee.com/milwaukee-water-street-mcgillycuddy-s-drink-menu",
+   "verified_at": "2026-10-02",
+   "notes": "$7 during happy hour, Tuesday to Friday 4–7pm."
+  },
+  {
+   "name": "Vagabond",
+   "address": "1122 N Edison St, Milwaukee, WI",
+   "lat": 43.04487,
+   "lng": -87.912038,
+   "neighborhood": "Water Street",
+   "downtown": true,
+   "price_cents": 1200,
+   "items": [
+    {
+     "item": "Espresso Martini",
+     "price_cents": 1200,
+     "hh_price_cents": null
+    }
+   ],
+   "happy_hour": false,
+   "hh_price_cents": null,
+   "platform": "website",
+   "guid": "manual:vagabond",
+   "source_url": "https://vagabondmke.com/milwaukee-vagabond-drink-menu",
+   "verified_at": "2026-10-02",
+   "notes": "Made with Cazadores Café tequila, espresso and dulce de leche."
+  },
+  {
+   "name": "The Harp",
+   "address": "113 E Juneau Ave, Milwaukee, WI",
+   "lat": 43.045505,
+   "lng": -87.912783,
+   "neighborhood": "Water Street",
+   "downtown": true,
+   "price_cents": 1200,
+   "items": [
+    {
+     "item": "Espresso Martini",
+     "price_cents": 1200,
+     "hh_price_cents": null
+    }
+   ],
+   "happy_hour": false,
+   "hh_price_cents": null,
+   "platform": "website",
+   "guid": "manual:the-harp",
+   "source_url": "https://theharpirishpub.com/milwaukee-downtown-harp-irish-pub-drink-menu",
+   "verified_at": "2026-10-02",
+   "notes": "Tito's, Mr. Black, Stone Creek cold brew. Listed under the summer cocktails."
+  },
+  {
+   "name": "Elsa's on the Park",
+   "address": "833 N Jefferson St, Milwaukee, WI",
+   "lat": 43.042058,
+   "lng": -87.905832,
+   "neighborhood": "Downtown",
+   "downtown": true,
+   "price_cents": 1600,
+   "items": [
+    {
+     "item": "Espresso Martini",
+     "price_cents": 1600,
+     "hh_price_cents": null
+    }
+   ],
+   "happy_hour": false,
+   "hh_price_cents": null,
+   "platform": "website",
+   "guid": "manual:elsa-s-on-the-park",
+   "source_url": "https://elsas.com/drink-menu",
+   "verified_at": "2026-10-02",
+   "notes": "Smirnoff, Kahlúa, Baileys, espresso."
+  },
+  {
+   "name": "Harbor House",
+   "address": "550 N Harbor Dr, Milwaukee, WI",
+   "lat": 43.037724,
+   "lng": -87.895248,
+   "neighborhood": "Downtown",
+   "downtown": true,
+   "price_cents": 1900,
+   "items": [
+    {
+     "item": "Espresso Martini",
+     "price_cents": 1900,
+     "hh_price_cents": null
+    }
+   ],
+   "happy_hour": false,
+   "hh_price_cents": null,
+   "platform": "website",
+   "guid": "manual:harbor-house",
+   "source_url": "https://www.bartolottas.com/harbor-house/menu",
+   "verified_at": "2026-10-02",
+   "notes": "On the dessert menu: espresso-infused vanilla vodka, Mr. Black."
+  },
+  {
+   "name": "Knights Bar at Mader's",
+   "address": "1037 N Old World 3rd St, Milwaukee, WI",
+   "lat": 43.043932,
+   "lng": -87.914688,
+   "neighborhood": "Deer District",
+   "downtown": true,
+   "price_cents": null,
+   "items": [
+    {
+     "item": "Espresso Martini",
+     "price_cents": null,
+     "hh_price_cents": null
+    }
+   ],
+   "happy_hour": false,
+   "hh_price_cents": null,
+   "platform": "website",
+   "guid": "manual:knights-bar-at-mader-s",
+   "source_url": "https://madersrestaurant.com/pages/knights-bar",
+   "verified_at": "2026-10-02",
+   "notes": "On the Knights Bar cocktail list (Tito's, Mr. Black, espresso); no price posted."
+  },
+  {
+   "name": "Tom's Watch Bar",
+   "address": "1134 N Vel R. Phillips Ave, Milwaukee, WI",
+   "lat": 43.045172,
+   "lng": -87.915596,
+   "neighborhood": "Deer District",
+   "downtown": true,
+   "price_cents": null,
+   "items": [
+    {
+     "item": "Espresso Martini",
+     "price_cents": null,
+     "hh_price_cents": null
+    }
+   ],
+   "happy_hour": false,
+   "hh_price_cents": null,
+   "platform": "website",
+   "guid": "manual:tom-s-watch-bar",
+   "source_url": "https://tomswatchbar.com/milwaukee/menu/",
+   "verified_at": "2026-10-02",
+   "notes": "On the Milwaukee specialty martini list; no price posted."
+  },
+  {
+   "name": "The Sofie",
+   "address": "777 N Jefferson St, Milwaukee, WI",
+   "lat": 43.040749,
+   "lng": -87.905705,
+   "neighborhood": "Downtown",
+   "downtown": true,
+   "price_cents": null,
+   "items": [
+    {
+     "item": "Espresso Martini",
+     "price_cents": null,
+     "hh_price_cents": null
+    }
+   ],
+   "happy_hour": false,
+   "hh_price_cents": null,
+   "platform": "website",
+   "guid": "manual:the-sofie",
+   "source_url": "https://www.thesofie.com/downtown-milwaukee-cocktail-lounge",
+   "verified_at": "2026-10-02",
+   "notes": "On the martini list (Tito's, Mr. Black, espresso); no price posted."
+  },
+  {
+   "name": "POP",
+   "address": "124 W National Ave, Milwaukee, WI",
+   "lat": 43.02335,
+   "lng": -87.912102,
+   "neighborhood": "Walker's Point",
+   "downtown": true,
+   "price_cents": null,
+   "items": [
+    {
+     "item": "I Guess So Espresso Martini",
+     "price_cents": null,
+     "hh_price_cents": null
+    }
+   ],
+   "happy_hour": false,
+   "hh_price_cents": null,
+   "platform": "website",
+   "guid": "manual:pop",
+   "source_url": "https://www.popwalkerspoint.com/all-menus",
+   "verified_at": "2026-10-02",
+   "notes": "Named on the signature cocktail list; no price posted."
+  },
+  {
+   "name": "Brothers Bar & Grill",
+   "address": "1213 N Water St, Milwaukee, WI",
+   "lat": 43.046096,
+   "lng": -87.91146,
+   "neighborhood": "Water Street",
+   "downtown": true,
+   "price_cents": null,
+   "items": [
+    {
+     "item": "Espresso Martini",
+     "price_cents": null,
+     "hh_price_cents": 800
+    }
+   ],
+   "happy_hour": true,
+   "hh_price_cents": 800,
+   "platform": "website",
+   "guid": "manual:brothers-bar-grill",
+   "source_url": "https://www.brothersbar.com/milwaukee",
+   "verified_at": "2026-10-02",
+   "notes": "$8 all day Sunday; no everyday price posted."
+  },
+  {
+   "name": "Hi Hat Lounge",
+   "address": "1701 N Arlington Pl, Milwaukee, WI",
+   "lat": 43.053066,
+   "lng": -87.895153,
+   "neighborhood": "Brady Street",
+   "downtown": true,
+   "price_cents": 1300,
+   "items": [
+    {
+     "item": "Espresso Martini",
+     "price_cents": 1300,
+     "hh_price_cents": null
+    }
+   ],
+   "happy_hour": false,
+   "hh_price_cents": null,
+   "platform": "website",
+   "guid": "manual:hi-hat-lounge",
+   "source_url": "https://hihatlounge.com/milwaukee-brady-street-hi-hat-drink-menu",
+   "verified_at": "2026-10-02",
+   "notes": "Three Olives Espresso, crème de cacao, Kahlúa."
+  },
+  {
+   "name": "Tauro Cocina",
+   "address": "1758 N Water St, Milwaukee, WI",
+   "lat": 43.053847,
+   "lng": -87.90299,
+   "neighborhood": "Lower East Side",
+   "downtown": true,
+   "price_cents": 1500,
+   "items": [
+    {
+     "item": "Espresso Martini",
+     "price_cents": 1500,
+     "hh_price_cents": null
+    }
+   ],
+   "happy_hour": false,
+   "hh_price_cents": null,
+   "platform": "website",
+   "guid": "manual:tauro-cocina",
+   "source_url": "https://taurococina.com/milwaukee-lower-east-side-tauro-cocina-drink-menu",
+   "verified_at": "2026-10-02"
+  },
+  {
+   "name": "Dorsia",
+   "address": "1301 E Brady St, Milwaukee, WI",
+   "lat": 43.05278,
+   "lng": -87.895107,
+   "neighborhood": "Brady Street",
+   "downtown": true,
+   "price_cents": 1500,
+   "items": [
+    {
+     "item": "Espresso Martini",
+     "price_cents": 1500,
+     "hh_price_cents": null
+    }
+   ],
+   "happy_hour": false,
+   "hh_price_cents": null,
+   "platform": "website",
+   "guid": "manual:dorsia",
+   "source_url": "https://dorsiamke.com/drink-menu",
+   "verified_at": "2026-10-02",
+   "notes": "Saint Brady vodka, Mr. Black, freshly pulled espresso."
+  },
+  {
+   "name": "La Masa Empanada Bar",
+   "address": "1300 E Brady St, Milwaukee, WI",
+   "lat": 43.053117,
+   "lng": -87.894767,
+   "neighborhood": "Brady Street",
+   "downtown": true,
+   "price_cents": 1400,
+   "items": [
+    {
+     "item": "Espresso Martini",
+     "price_cents": 1400,
+     "hh_price_cents": null
+    }
+   ],
+   "happy_hour": false,
+   "hh_price_cents": null,
+   "platform": "website",
+   "guid": "manual:la-masa-empanada-bar",
+   "source_url": "https://lamasaempanadas.com/drinks/",
+   "verified_at": "2026-10-02",
+   "notes": "Blue Ice double espresso vodka, Borghetti, Valentine cold brew."
   }
  ]
 }

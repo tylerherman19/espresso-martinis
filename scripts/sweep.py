@@ -52,6 +52,8 @@ OVERPASS = ["https://overpass.kumi.systems/api/interpreter", "https://overpass-a
 # outright. The 2026-09-30 run wrote 2 spots over 98 when Toast started
 # answering 403, and the site showed 2 until it was put back by hand.
 MIN_KEEP = 0.5
+# Hand-verified spots merged into every run.
+MANUAL = Path(__file__).resolve().parent.parent / "data" / "manual.json"
 
 
 def get(url, **kw):
@@ -312,17 +314,20 @@ def assemble(fresh: list[dict], carried: list[dict], manual: list[dict]) -> list
     """The list as written: what was read live this run, then the last reading
     of anything whose source did not answer, then the hand-checks. A live read
     beats a hand-check of the same name, and a hand-check beats a reading
-    carried over from an earlier week."""
+    carried over from an earlier week. A hand-check can name the platform
+    spot it stands for in `replaces`, when the platform spells the bar
+    differently ("Sweetdiner- MKE")."""
     out = list(fresh)
     live_guids = {r["guid"] for r in out}
     live_names = {r["name"].lower() for r in out}
     hand_names = {e["name"].lower() for e in manual}
+    hand_guids = {e["replaces"] for e in manual if e.get("replaces")}
     for r in carried:
-        if r["guid"] in live_guids or r["name"].lower() in live_names | hand_names:
+        if r["guid"] in live_guids | hand_guids or r["name"].lower() in live_names | hand_names:
             continue
         out.append(r)
     for e in manual:
-        if e["name"].lower() in live_names:
+        if e["name"].lower() in live_names or e.get("replaces") in live_guids:
             print(f"manual: {e['name']} also on a platform now, keeping the live one", file=sys.stderr)
             continue
         out.append(e)
@@ -500,10 +505,9 @@ def main() -> None:
 
     # Hand-verified spots the platforms cannot see (no online ordering,
     # website-only menus).
-    manual_path = Path(__file__).resolve().parent.parent / "data" / "manual.json"
     manual = []
-    if manual_path.exists():
-        manual = json.loads(manual_path.read_text()).get("entries") or []
+    if MANUAL.exists():
+        manual = json.loads(MANUAL.read_text()).get("entries") or []
 
     out_rows = assemble(out, carried, manual)
     kept = sum(1 for r in out_rows if any(r is c for c in carried))

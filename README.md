@@ -45,6 +45,16 @@ below half of the last one, it writes nothing and fails; `--force` writes anyway
 when the drop is real. This exists because on 2026-09-30 Toast started answering
 403 and the sweep replaced 98 spots with 2.
 
+## Adding a hand-check
+
+Read the price off the bar's own menu (its website, a posted PDF, or a phone
+call) and add an entry to `data/manual.json` with the `source_url` it came
+from and today's date in `verified_at`. Use `price_cents: null` when the menu
+lists the drink without a price. If the bar is already on the list from a
+platform under another spelling, put that entry's `guid` in `replaces`, so
+the hand-check stands in for the platform's old reading. The next sweep, or a
+manual run of `python scripts/sweep.py`, merges it in.
+
 ## How sure a line is
 
 An espresso martini line is graded by age. A swept line carries `seen_at`, the

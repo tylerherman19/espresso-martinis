@@ -67,6 +67,16 @@ class Assemble(unittest.TestCase):
         self.assertEqual(by_name, {("Blu", "toast", 1400), ("Onesto", "website", 1600), ("Kept", "toast", 1100)})
         self.assertEqual([r["price_cents"] for r in out], sorted(r["price_cents"] for r in out))
 
+    def test_hand_check_replaces_by_guid(self):
+        # The platform spells it "Sweetdiner- MKE"; the hand-check says "Sweet Diner".
+        carried = [row("t9", "Sweetdiner- MKE", 1500)]
+        hand = [row("manual:sweet-diner", "Sweet Diner", 1500, platform="website", replaces="t9")]
+        with redirect_stderr(io.StringIO()):
+            self.assertEqual([r["guid"] for r in sweep.assemble([], carried, hand)], ["manual:sweet-diner"])
+            # Once the platform answers again, its live reading wins.
+            live = [row("t9", "Sweetdiner- MKE", 1600)]
+            self.assertEqual([r["guid"] for r in sweep.assemble(live, carried, hand)], ["t9"])
+
     def test_collapsed(self):
         self.assertTrue(sweep.collapsed(2, 98))
         self.assertFalse(sweep.collapsed(60, 98))
@@ -85,6 +95,10 @@ class MainRun(unittest.TestCase):
         prev[0]["seen_at"] = "2026-09-16"  # one already carried once, keeps its date
         self.prev_doc = {"generated_at": "2026-09-23T10:00:00+00:00", "count": len(prev), "martinis": prev}
         self.out.write_text(json.dumps(self.prev_doc))
+        # Two hand-checks, so the run does not depend on what data/manual.json holds today.
+        self.manual = Path(self.tmp.name) / "manual.json"
+        self.manual.write_text(json.dumps({"entries": [
+            row("manual:a", "Hand A", 1600, platform="website"), row("manual:b", "Hand B", None, platform="website")]}))
 
     def tearDown(self):
         self.tmp.cleanup()
@@ -97,6 +111,7 @@ class MainRun(unittest.TestCase):
                 mock.patch.object(sweep, "martini_items", side_effect=fake_items), \
                 mock.patch.object(sweep, "clover_slugs", return_value=({}, True)), \
                 mock.patch.object(sweep, "neighborhood", return_value="Downtown"), \
+                mock.patch.object(sweep, "MANUAL", self.manual), \
                 mock.patch.object(sweep.time, "sleep"), \
                 mock.patch.dict(os.environ, env), \
                 mock.patch.object(sys, "argv", ["sweep.py", "--out", str(self.out)]), \
