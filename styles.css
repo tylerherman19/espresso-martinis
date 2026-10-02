@@ -114,8 +114,6 @@ body[data-drink="martini"] .glass-coupe, body[data-drink="cow"] .glass-pint { op
 .toggle:hover { border-color:var(--ink-2); }
 .toggle[aria-pressed="true"] { background:var(--accent); border-color:var(--accent); color:var(--paper-lift); }
 .toggle[data-state="working"] { opacity:.6; pointer-events:none; }
-/* Only the Cow list carries an evidence grade, so its filter lives there. */
-body:not([data-drink="cow"]) .toggle[data-only-drink="cow"] { display:none; }
 .sort { display:inline-flex; align-items:center; gap:9px; color:var(--muted); font-size:11px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; }
 .sort select { border:1px solid var(--line); background:var(--paper-lift); border-radius:var(--r); padding:9px 11px; font-size:13px; font-weight:500; letter-spacing:0; text-transform:none; color:var(--ink); }
 .tally { color:var(--muted); font-size:13px; }
@@ -269,6 +267,7 @@ body.no-map .map-col, body.no-map .bar-map { display:none; }
 .act.ghost:hover { border-color:var(--ink); opacity:1; }
 .detail-src { margin-top:18px; font-size:12.5px; }
 .detail-src a { color:var(--accent-ink); font-weight:600; text-decoration:none; border-bottom:1px solid var(--accent); }
+.detail-src span { color:var(--muted); }
 
 /* ── mobile map sheet ────────────────────────────────── */
 .sheet-map { position:fixed; inset:0; z-index:980; display:flex; flex-direction:column; background:var(--paper); opacity:0; transition:opacity var(--t-panel) var(--out); }

@@ -1,0 +1,31 @@
+name: Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  sweep:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - run: pip install requests
+      - run: python -m unittest discover tests
+      - name: Data files parse
+        run: |
+          python - <<'PY'
+          import json
+          for path, key in [("data/martinis.json", "martinis"), ("data/cow.json", "cows"), ("data/manual.json", "entries")]:
+              rows = json.load(open(path))[key]
+              for r in rows:
+                  assert r.get("guid") and r.get("name"), f"{path}: a row is missing its guid or name"
+              print(f"{path}: {len(rows)} rows")
+          PY
