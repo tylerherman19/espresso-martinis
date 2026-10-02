@@ -17,7 +17,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239A7328' stroke-width='1.5' stroke-linecap='round'%3E%3Cpath d='M3.6 6.2h16.8c-.3 5.2-3.8 7.9-8.4 7.9S3.9 11.4 3.6 6.2Z'/%3E%3Cpath d='M12 14.1v5.1M8.2 19.6c1.5-.6 6.1-.6 7.6 0'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="vendor/fonts.css?v=2">
 <link rel="stylesheet" href="vendor/leaflet/leaflet.css?v=2">
-<link rel="stylesheet" href="styles.css?v=2">
+<link rel="stylesheet" href="styles.css?v=3">
 </head>
 <body data-drink="martini">
 
@@ -68,7 +68,7 @@
     </div>
 
     <h1 class="cover-title"><span id="cover-title">Espresso Martinis</span></h1>
-    <p class="cover-sub" id="cover-sub">Every one we can find in the metro, with the price that is on the menu right now.</p>
+    <p class="cover-sub" id="cover-sub">Every one we can find in the metro, with the price on the menu when we last read it.</p>
 
     <dl class="index" id="index">
       <div><dt>Spots</dt><dd data-stat="spots">—</dd></div>
@@ -97,7 +97,7 @@
           <button class="toggle" type="button" data-filter="downtown" aria-pressed="false">Downtown</button>
           <button class="toggle" type="button" data-filter="hh" aria-pressed="false">Happy hour</button>
           <button class="toggle" type="button" data-filter="value" aria-pressed="false">Under the median</button>
-          <button class="toggle" type="button" data-filter="menu" data-only-drink="cow" aria-pressed="false">On a menu</button>
+          <button class="toggle" type="button" data-filter="menu" aria-pressed="false">On a menu</button>
           <button class="toggle" type="button" id="near-btn" data-filter="near" aria-pressed="false">
             <svg class="icon" aria-hidden="true"><use href="#i-near"></use></svg><span>Near me</span>
           </button>
@@ -130,10 +130,10 @@
   <section class="notes" id="notes">
     <h2>How the number gets here.</h2>
     <div class="notes-grid">
-      <p><b>The sweep.</b> A weekly job walks the ordering platforms every Milwaukee-area venue publishes to, pulls the live menu, and keeps only the lines that are actually an espresso martini or a Spotted Cow pour. Bottled liqueur, six-packs and a chaser tacked onto something else do not count.</p>
+      <p><b>The sweep.</b> A weekly job walks the ordering platforms every Milwaukee-area venue publishes to, pulls the live menu, and keeps only the lines that are actually an espresso martini or a Spotted Cow pour. Bottled liqueur, six-packs and a chaser tacked onto something else do not count. When a platform does not answer, its bars keep their last reading rather than dropping off the list.</p>
       <p><b>The hand-checks.</b> Plenty of good bars never put a menu online. Those are read off a posted menu or confirmed by phone and merged in with the source recorded. Where a live platform and a hand-check disagree, the platform wins.</p>
-      <p><b>What a price is.</b> The menu price before tax and tip, for the standard pour. A happy-hour number appears only where the bar posts one — some bars run a happy hour that does not touch these drinks, and that is written on the spot.</p>
-      <p><b>How sure we are.</b> Every espresso martini here comes off a live menu. The Spotted Cow list is hand-researched, so each line says how it is known: nothing next to it means a current menu, <i>menu may be stale</i> means the menu that had it is old, and <i>not on a menu</i> means a check-in or a review put it there and no menu confirms it. <b>On a menu</b> keeps only the first kind.</p>
+      <p><b>What a price is.</b> The everyday menu price before tax and tip, for the standard pour. Turn on <b>Happy hour</b> to see the happy-hour price instead, where the bar posts one — some bars run a happy hour that does not touch these drinks, and that is written on the spot.</p>
+      <p><b>How sure we are.</b> An espresso martini swept off a live menu is good for two weeks; if its platform has not answered since, the line says <i>menu may be stale</i>. One checked by hand off the bar's own menu holds for three months. The Spotted Cow list is hand-researched, so each line says how it is known: nothing next to it means a current menu, <i>menu may be stale</i> means the menu that had it is old, and <i>not on a menu</i> means a check-in or a review put it there and no menu confirms it. <b>On a menu</b> keeps only the lines with nothing next to them.</p>
       <p><b>What it is not.</b> A sweep, not a promise. Menus change, platforms lag, and the register has the last word. If something here is wrong it is worth more to fix than to trust.</p>
     </div>
   </section>
@@ -157,6 +157,6 @@
 </div>
 
 <script src="vendor/leaflet/leaflet.js?v=2"></script>
-<script src="app.js?v=2"></script>
+<script src="app.js?v=3"></script>
 </body>
 </html>

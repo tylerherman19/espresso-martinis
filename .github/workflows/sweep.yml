@@ -17,12 +17,17 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 60
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: '3.12'
       - run: pip install requests
+      - name: Test the sweep before trusting it
+        run: python -m unittest discover tests
+      # Exits non-zero, writing nothing, when the list would collapse. That
+      # skips the commit below and GitHub emails the failed run.
       - name: Sweep and write data/martinis.json
+        id: sweep
         run: python scripts/sweep.py
       - name: Commit if changed
         run: |
@@ -33,3 +38,10 @@ jobs:
           # A code push may have landed mid-run; fold it in instead of failing.
           git pull --rebase origin main
           git push
+      # A source that did not answer still lets the run commit (its spots keep
+      # their last reading), but the run goes red so somebody looks.
+      - name: Fail if a source did not answer
+        if: steps.sweep.outputs.degraded == 'true'
+        run: |
+          echo "::error::A source did not answer this week. Its spots kept their last reading; the sweep step's summary says which."
+          exit 1

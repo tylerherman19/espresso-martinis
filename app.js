@@ -14,7 +14,7 @@ const itemName = t => (/[a-z]/.test(t) ? t : t.replace(/([A-Z])([A-Z]+)/g, (m, a
 const DATA = { martini: [], cow: [] };
 const SWEPT = { martini: null, cow: null };
 const COPY = {
-  martini: { title: 'Espresso Martinis', sub: 'Every one we can find in the metro, with the price that is on the menu right now.' },
+  martini: { title: 'Espresso Martinis', sub: 'Every one we can find in the metro, with the price on the menu when we last read it.' },
   cow: { title: 'Spotted Cow', sub: 'Where New Glarus is actually on tap or in the cooler, and what the pour costs.' }
 };
 /* Each list is swept on its own clock, so the footer has to follow the room. */
@@ -73,20 +73,43 @@ function milesFrom(here, s) {
 const milesText = m => (m < 0.1 ? 'right here' : m < 10 ? m.toFixed(1) + ' mi' : Math.round(m) + ' mi');
 
 /* ── prices ──────────────────────────────────────────── */
-const priceOf = s => (s.hh_price_cents != null ? s.hh_price_cents : s.price_cents);
+/* A row shows the everyday price. The happy-hour price takes its place only
+   with the Happy hour filter on, or when it is the only price the bar posts —
+   otherwise a $6 happy hour reads as the cheapest drink in town. */
+const hhShown = s => s.hh_price_cents != null && (state.filters.has('hh') || s.price_cents == null);
+const priceOf = s => (hhShown(s) ? s.hh_price_cents : s.price_cents);
+const everyday = s => s.price_cents;
 const key = s => { const p = priceOf(s); return p == null ? Infinity : p; };
 const priceText = s => { const p = priceOf(s); return p == null ? 'Not posted' : money(p); };
-function median(list) {
-  const p = list.map(priceOf).filter(v => v != null).sort((a, b) => a - b);
+function median(list, pick = priceOf) {
+  const p = list.map(pick).filter(v => v != null).sort((a, b) => a - b);
   if (!p.length) return null;
   const mid = p.length >> 1;
   return p.length % 2 ? p[mid] : Math.round((p[mid - 1] + p[mid]) / 2);
 }
 const all = () => DATA[state.drink];
 /* The median of the whole room is the same for every row in it, so work it
-   out once and hold it until the room or its data changes. */
+   out once and hold it until the room or its data changes. It is the everyday
+   median, so turning on Happy hour does not move the bar it is measured by. */
 const MID = {};
-const midOf = () => (state.drink in MID ? MID[state.drink] : (MID[state.drink] = median(all())));
+const midOf = () => (state.drink in MID ? MID[state.drink] : (MID[state.drink] = median(all(), everyday)));
+
+/* ── how sure a line is ──────────────────────────────── */
+/* The Cow research grades itself. A martini line is graded by age: a swept
+   line is read again every week, so two missed weeks make it stale; a
+   hand-check off the bar's own menu holds for a season. */
+const DAY = 864e5;
+function confidenceOf(s) {
+  if (s.confidence) return s.confidence;
+  const swept = s.seen_at != null;
+  const when = Date.parse(swept ? s.seen_at : s.verified_at);
+  if (isNaN(when)) return 'menu';
+  return Date.now() - when > (swept ? 14 : 90) * DAY ? 'stale' : 'menu';
+}
+const readOn = s => {
+  const when = new Date(s.seen_at || s.verified_at || NaN);
+  return isNaN(when) ? '' : when.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
+};
 const isUnder = s => { const m = midOf(), p = priceOf(s); return m != null && p != null && p < m; };
 
 /* ── which spots show ────────────────────────────────── */
@@ -96,7 +119,7 @@ function keeps(s) {
   if (f.has('hh') && !s.happy_hour) return false;
   if (f.has('value') && !isUnder(s)) return false;
   if (f.has('downtown') && !isDowntown(s)) return false;
-  if (f.has('menu') && s.confidence && s.confidence !== 'menu') return false;
+  if (f.has('menu') && confidenceOf(s) !== 'menu') return false;
   const q = state.query.trim().toLowerCase();
   if (!q) return true;
   return s.name.toLowerCase().includes(q)
@@ -149,8 +172,8 @@ function servedAs(s) {
   const tap = /draft|tap/.test(t), pack = /bottle|can/.test(t);
   return tap && pack ? 'Tap, bottle or can' : tap ? 'On tap' : pack ? 'Bottle or can' : '';
 }
-/* How good the line is, in the words the entry's own note uses. Spots swept
-   off a live menu carry nothing here and need no caveat. */
+/* How good the line is, in the words the entry's own note uses. A line read
+   off a current menu carries nothing here and needs no caveat. */
 const CAVEAT = { stale: 'Menu may be stale', reported: 'Not on a menu' };
 function rowHtml(s, low) {
   const p = priceOf(s);
@@ -165,10 +188,10 @@ function rowHtml(s, low) {
   }
   /* A caveat outranks a price badge: a cheapest-here that is not on a menu is
      exactly the line a reader should not take at face value. */
-  const caveat = CAVEAT[s.confidence] || '';
+  const caveat = CAVEAT[confidenceOf(s)] || '';
   let tag = caveat;
   if (!tag) {
-    if (s.hh_price_cents != null) tag = 'Happy-hour price';
+    if (hhShown(s)) tag = 'Happy-hour price';
     else if (low != null && p === low) tag = 'Cheapest here';
     else if (s.happy_hour) tag = 'Happy hour';
   }
@@ -263,7 +286,9 @@ function countTo(el, to, fmt) {
 let COVER_SEEN = false;
 function renderIndex(animate) {
   const list = all();
-  const prices = list.map(priceOf).filter(p => p != null);
+  /* The cover speaks for the whole room at any hour, so it reads everyday
+     prices only. Happy hour gets its own count beside them. */
+  const prices = list.map(everyday).filter(p => p != null);
   const put = (k, to, fmt) => {
     const el = $(`[data-stat="${k}"]`);
     if (!el) return;
@@ -271,7 +296,7 @@ function renderIndex(animate) {
   };
   put('spots', list.length, v => String(v));
   put('low', prices.length ? Math.min(...prices) : 0, v => (prices.length ? money(v) : '—'));
-  put('median', median(list) || 0, v => (prices.length ? money(v) : '—'));
+  put('median', midOf() || 0, v => (prices.length ? money(v) : '—'));
   put('hh', list.filter(s => s.happy_hour).length, v => String(v));
 }
 
@@ -303,9 +328,6 @@ function setDrink(drink) {
     return;
   }
   state.drink = drink;
-  /* "On a menu" grades the Cow research; it has no meaning on the martinis,
-     where every line comes off a live menu already. */
-  if (drink !== 'cow') state.filters.delete('menu');
   document.body.dataset.drink = drink;
   syncToggles();
   edges();
@@ -353,6 +375,15 @@ function trapTab(e, panel) {
 }
 
 /* ── the detail panel ────────────────────────────────── */
+/* When the line was read and where from, so a reader can judge a stale one
+   for themselves. */
+function detailSrc(s) {
+  const when = readOn(s), url = safeUrl(s.source_url);
+  if (!when && !url) return '';
+  const read = when ? `<span>Menu read ${esc(when)}</span>` : '';
+  const link = url ? `<a href="${esc(url)}" target="_blank" rel="noopener">Where this ${state.drink === 'cow' ? 'line' : 'price'} came from</a>` : '';
+  return `<p class="detail-src">${read}${read && link ? ' · ' : ''}${link}</p>`;
+}
 let CAME_FROM = null;
 function openDetail(guid) {
   const s = all().find(x => x.guid === guid);
@@ -378,7 +409,7 @@ function openDetail(guid) {
       <a class="act" href="https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(s.name + ' ' + (s.address || ''))}" target="_blank" rel="noopener">Directions</a>
       <button class="act ghost" type="button" data-find="${esc(s.guid)}">Find it on the map</button>
     </div>
-    ${safeUrl(s.source_url) ? `<p class="detail-src"><a href="${esc(safeUrl(s.source_url))}" target="_blank" rel="noopener">Where this ${state.drink === 'cow' ? 'line' : 'price'} came from</a></p>` : ''}`;
+    ${detailSrc(s)}`;
 
   CAME_FROM = document.activeElement;
   scrim.hidden = false; panel.hidden = false;
@@ -447,7 +478,7 @@ function dressPins() {
   Object.entries(PINS).forEach(([guid, m]) => m.setIcon(iconFor(m._spot, guid === LIVE)));
 }
 function popHtml(s) {
-  const hh = s.hh_price_cents != null;
+  const hh = hhShown(s);
   return `<div class="pop-name">${esc(s.name)}</div>
     <div class="pop-meta">${esc(areaOf(s))}${state.here ? ' · ' + milesText(milesFrom(state.here, s)) : ''}</div>
     <div class="pop-price${hh ? ' hh' : ''}">${priceText(s)}${hh ? ' happy hour' : ''}</div>
