@@ -1,11 +1,12 @@
 {
- "generated_at": "2026-10-14T10:13:16+00:00",
+ "generated_at": "2026-10-21T10:11:11+00:00",
  "metro": "Milwaukee",
  "restaurants_scanned": 0,
  "count": 98,
  "carried_forward": 96,
  "problems": [
-  "Toast directory: 35 of 35 areas did not answer"
+  "Toast directory: 35 of 35 areas did not answer",
+  "Overpass: no mirror answered, so Clover was checked on its seed list only"
  ],
  "martinis": [
   {
