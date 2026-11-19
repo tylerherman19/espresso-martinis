@@ -28,10 +28,13 @@ function showSwept() {
 }
 let LOCKS = 0;
 function syncInert() {
-  const modal = $('#sheet-map').classList.contains('open') ? $('#sheet-map')
-    : $('#detail').classList.contains('open') ? $('#detail') : null;
+  /* A detail opened from a map popup sits on top of the sheet. */
+  const detail = $('#detail').classList.contains('open') ? $('#detail') : null;
+  const sheet = $('#sheet-map').classList.contains('open') ? $('#sheet-map') : null;
+  const modal = detail || sheet;
   $$('header, main, footer, .skip-link').forEach(el => { el.inert = !!modal; });
   $('#detail').inert = !!modal && modal !== $('#detail');
+  $('#sheet-map').inert = !!sheet && modal !== sheet;
 }
 function lockScroll() { LOCKS++; document.documentElement.style.overflow = 'hidden'; syncInert(); }
 function unlockScroll() { if (LOCKS) LOCKS--; if (!LOCKS) document.documentElement.style.overflow = ''; syncInert(); }
@@ -402,6 +405,8 @@ function openDetail(guid) {
     ${detailSrc(s)}`;
 
   CAME_FROM = document.activeElement;
+  const overSheet = $('#sheet-map').classList.contains('open');
+  panel.classList.toggle('over-sheet', overSheet); scrim.classList.toggle('over-sheet', overSheet);
   scrim.hidden = false; panel.hidden = false;
   void panel.getBoundingClientRect();
   scrim.classList.add('open'); panel.classList.add('open');
@@ -424,7 +429,10 @@ function closeDetail() {
   CAME_FROM = null;
   DETAIL_CLOSE = setTimeout(() => {
     panel.hidden = true; scrim.hidden = true;
-    if (LOCKS) return;
+    if (LOCKS) {
+      if (back && back.isConnected && $('#sheet-map').contains(back)) back.focus();
+      return;
+    }
     /* The row may have been re-rendered underneath; fall back to the list. */
     if (back && back.isConnected) back.focus();
     else if (document.activeElement === document.body) $('#find').focus();
@@ -432,10 +440,10 @@ function closeDetail() {
 }
 $('#scrim').addEventListener('click', closeDetail);
 document.addEventListener('keydown', e => {
-  const sheetOpen = $('#sheet-map').classList.contains('open');
-  if (e.key === 'Escape') { if (sheetOpen) closeSheet(); else closeDetail(); return; }
-  if (sheetOpen) trapTab(e, $('#sheet-map'));
-  else if ($('#detail').classList.contains('open')) trapTab(e, $('#detail'));
+  const detailOpen = $('#detail').classList.contains('open');
+  if (e.key === 'Escape') { if (detailOpen) closeDetail(); else closeSheet(); return; }
+  if (detailOpen) trapTab(e, $('#detail'));
+  else if ($('#sheet-map').classList.contains('open')) trapTab(e, $('#sheet-map'));
 });
 
 /* ── the map ─────────────────────────────────────────── */
