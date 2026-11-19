@@ -53,6 +53,31 @@ test('coordinates must be finite numbers in the metro area', () => {
     assert.equal(validCoords(s), false);
   }
 });
+test('menu grades age from the last reading without overriding reported or stale', () => {
+  const now = Date.parse('2026-12-09');
+  assert.equal(confidenceOf({ confidence: 'menu', seen_at: '2026-11-24' }, now), 'stale');
+  assert.equal(confidenceOf({ confidence: 'menu', seen_at: '2026-11-25' }, now), 'menu');
+  assert.equal(confidenceOf({ confidence: 'menu', verified_at: '2026-09-09' }, now), 'stale');
+  assert.equal(confidenceOf({ confidence: 'menu', verified_at: '2026-09-10' }, now), 'menu');
+  for (const confidence of ['reported', 'stale']) {
+    assert.equal(confidenceOf({ confidence, verified_at: '2026-12-01' }, now), confidence);
+  }
+  assert.equal(confidenceOf({ verified_at: 'invalid' }, now), 'menu');
+});
+test('Cow loading uses the research date only when its own reading date is absent', async () => {
+  const rows = ['menu', 'reported', 'stale'].map(confidence => ({ guid: confidence, name: confidence, confidence }));
+  rows.push({ guid: 'fresh', name: 'Fresh', confidence: 'menu', verified_at: '2026-12-01' });
+  const fetcher = async () => ({ ok: true, json: async () => ({ generated_at: '2026-09-09', cows: rows }) });
+  const doc = await loadData('data/cow.json', 'cows', fetcher);
+  assert.deepEqual(doc.cows.map(s => confidenceOf(s, Date.parse('2026-12-09'))), ['stale', 'reported', 'stale', 'menu']);
+  for (const row of doc.cows.slice(0, 3)) {
+    assert.equal(row.verified_at, undefined);
+    assert.equal(row.seen_at, undefined);
+    assert.equal(row._research_at, '2026-09-09');
+  }
+  assert.equal(doc.cows[3].verified_at, '2026-12-01');
+  assert.equal(rows[0].verified_at, undefined);
+});
 test('stable URLs revalidate; normal and empty datasets load', async () => {
   for (const rows of [[], [{ guid: 'one', name: 'Bar' }]]) {
     const doc = await loadData('data/cow.json', 'cows', async (url, options) => {

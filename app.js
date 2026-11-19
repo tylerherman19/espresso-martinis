@@ -102,7 +102,7 @@ const MID = {};
 const midOf = () => (state.drink in MID ? MID[state.drink] : (MID[state.drink] = median(all(), everyday)));
 
 /* ── how sure a line is ──────────────────────────────── */
-/* The Cow research grades itself. A martini line is graded by age: a swept
+/* A line is graded by age: a swept
    line is read again every week, so two missed weeks make it stale; a
    hand-check off the bar's own menu holds for a season. */
 const readOn = s => {

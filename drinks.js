@@ -13,9 +13,9 @@ const Drinks = (() => {
   const validCoords = s => Number.isFinite(s.lat) && Number.isFinite(s.lng)
     && s.lat >= 42.5 && s.lat <= 43.6 && s.lng >= -88.6 && s.lng <= -87.5;
   function confidenceOf(s, now = Date.now()) {
-    if (s.confidence) return s.confidence;
+    if (s.confidence && s.confidence !== 'menu') return s.confidence;
     const swept = s.seen_at != null;
-    const when = Date.parse(swept ? s.seen_at : s.verified_at);
+    const when = Date.parse(swept ? s.seen_at : (s.verified_at || s._research_at));
     if (isNaN(when)) return 'menu';
     return now - when > (swept ? 14 : 90) * 864e5 ? 'stale' : 'menu';
   }
@@ -37,6 +37,9 @@ const Drinks = (() => {
     if (!doc || !Array.isArray(doc[key]) || !doc[key].every(s => s && typeof s === 'object'
       && !Array.isArray(s) && typeof s.guid === 'string' && typeof s.name === 'string')) {
       throw new Error(`${url}: invalid ${key} collection`);
+    }
+    if (key === 'cows' && doc.generated_at) {
+      doc[key] = doc[key].map(s => ({ ...s, _research_at: doc.generated_at }));
     }
     return doc;
   }
