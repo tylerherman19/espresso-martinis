@@ -47,7 +47,7 @@
    "guid": "cow:sinabro",
    "notes": "On tap; price not published.",
    "source_url": "https://www.beaconjournal.com/story/entertainment/dining/2024/09/23/sinabro-korean-restaurant-comfort-cooking-in-milwaukee-third-ward/75150508007/",
-   "confidence": "menu"
+   "confidence": "reported"
   },
   {
    "name": "Shake Shack Milwaukee",
@@ -70,7 +70,7 @@
    "guid": "cow:shake-shack-milwaukee",
    "notes": "On tap; price not published.",
    "source_url": "https://lb2.onmilwaukee.com/articles/first-look-shake-shack-milwaukee",
-   "confidence": "menu"
+   "confidence": "reported"
   },
   {
    "name": "Onesto",
@@ -254,7 +254,7 @@
    "guid": "cow:mader-s-restaurant",
    "notes": "",
    "source_url": "http://urbnexplorer.com/where-to-eat-and-drink-in-milwaukee/",
-   "confidence": "menu"
+   "confidence": "reported"
   },
   {
    "name": "Milwaukee Brat House",
@@ -300,7 +300,7 @@
    "guid": "cow:the-wurst-bar",
    "notes": "Happy hour Mon–Fri 2:30–5:30 PM: $1 off taps, half-price cans/bottles.",
    "source_url": "https://OnMilwaukee.com/articles/hidden-gem-the-wurst-bar",
-   "confidence": "menu"
+   "confidence": "reported"
   },
   {
    "name": "Drink Wisconsinbly Pub",
@@ -309,11 +309,11 @@
    "lng": -87.9154,
    "neighborhood": "Deer District",
    "downtown": true,
-   "price_cents": 600,
+   "price_cents": null,
    "items": [
     {
      "item": "Spotted Cow — draft",
-     "price_cents": 600,
+     "price_cents": null,
      "hh_price_cents": null
     }
    ],
@@ -346,7 +346,7 @@
    "guid": "cow:dorsia",
    "notes": "Happy hour Mon–Fri 4–6 PM: $4 Spotted Cow.",
    "source_url": "http://onmilwaukee.com/articles/must-try-milwaukee-happy-hour",
-   "confidence": "menu"
+   "confidence": "reported"
   },
   {
    "name": "Pfister Hotel Lobby Lounge",
@@ -369,7 +369,7 @@
    "guid": "cow:pfister-hotel-lobby-lounge",
    "notes": "",
    "source_url": "https://Www.Tripadvisor.ca/ShowUserReviews-g60097-d2627345-r638992928-Pfister_Hotel_Lobby_Lounge-Milwaukee_Wisconsin.html",
-   "confidence": "menu"
+   "confidence": "reported"
   },
   {
    "name": "Café Benelux",
@@ -507,7 +507,7 @@
    "guid": "cow:mason-street-grill",
    "notes": "Bottled format at $6 — first confirmed bottle/can in the dataset. Happy hour (Mon–Fri 4–7 PM) covers drafts only, not Spotted Cow.",
    "source_url": "https://autoreserve.com/en/restaurants/JBQuGsFF53g2XERAqLeg",
-   "confidence": "menu"
+   "confidence": "reported"
   },
   {
    "name": "Who's On Third",
@@ -1013,7 +1013,7 @@
    "guid": "cow:fiserv-forum-general-public-concourse",
    "notes": "2018 press preview of the public concourse; a 12 oz can was listed at $10 — historical/stale, current arena pricing may differ.",
    "source_url": "https://onmilwaukee.com/articles/mkeat-at-fiserv-forum",
-   "confidence": "stale"
+   "confidence": "reported"
   },
   {
    "name": "Draft & Co.",
