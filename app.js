@@ -95,12 +95,12 @@ const MID = {};
 const midOf = () => (state.drink in MID ? MID[state.drink] : (MID[state.drink] = median(all(), everyday)));
 
 /* ── how sure a line is ──────────────────────────────── */
-/* The Cow research grades itself. A martini line is graded by age: a swept
+/* A line is graded by age: a swept
    line is read again every week, so two missed weeks make it stale; a
    hand-check off the bar's own menu holds for a season. */
 const DAY = 864e5;
 function confidenceOf(s) {
-  if (s.confidence) return s.confidence;
+  if (s.confidence && s.confidence !== 'menu') return s.confidence;
   const swept = s.seen_at != null;
   const when = Date.parse(swept ? s.seen_at : s.verified_at);
   if (isNaN(when)) return 'menu';
@@ -722,7 +722,7 @@ const load = url => fetch(`${url}?${bust}`).then(r => {
 });
 Promise.all([load('data/martinis.json'), load('data/cow.json')]).then(([m, c]) => {
   DATA.martini = m.martinis || [];
-  DATA.cow = c.cows || [];
+  DATA.cow = (c.cows || []).map(s => ({ ...s, verified_at: s.verified_at || c.generated_at }));
   delete MID.martini; delete MID.cow;
   SWEPT.martini = m.generated_at ? new Date(m.generated_at) : null;
   SWEPT.cow = c.generated_at ? new Date(c.generated_at) : null;

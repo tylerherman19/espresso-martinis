@@ -73,6 +73,10 @@ def toast_query(query: str) -> dict:
     return payload.get("data") or {}
 
 
+class ToastAccessRefused(RuntimeError):
+    pass
+
+
 def toast_directory() -> tuple[dict[str, dict], int, int]:
     """Every Toast restaurant in the box, plus how many grid cells failed out
     of how many were asked. A failed cell means its restaurants are unknown,
@@ -91,6 +95,8 @@ def toast_directory() -> tuple[dict[str, dict], int, int]:
         try:
             rows = toast_query(q).get("nearbyRestaurants") or []
         except Exception as exc:
+            if isinstance(exc, requests.HTTPError) and exc.response is not None and exc.response.status_code == 403:
+                raise ToastAccessRefused("Toast API refused access (HTTP 403); Toast venues carried forward") from exc
             print(f"directory {lat:.2f},{lng:.2f}: {exc}", file=sys.stderr)
             failed += 1
             continue
@@ -370,7 +376,12 @@ def main() -> None:
     unread: set[str] = set()
     problems: list[str] = []
 
-    directory, failed, cells = toast_directory()
+    try:
+        directory, failed, cells = toast_directory()
+    except ToastAccessRefused as exc:
+        directory, failed, cells = {}, 0, 0
+        problems.append(str(exc))
+        unread |= {g for g, r in prev_rows.items() if r["platform"] == "toast"}
     if failed:
         problems.append(f"Toast directory: {failed} of {cells} areas did not answer")
         unread |= {g for g, r in prev_rows.items() if r["platform"] == "toast" and g not in directory}

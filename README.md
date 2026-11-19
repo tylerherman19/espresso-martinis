@@ -17,7 +17,7 @@ together, and the grid never does.
 | Path | What it is |
 | --- | --- |
 | `index.html`, `styles.css`, `app.js` | The whole site. No build step, no framework. |
-| `vendor/` | Leaflet and the two webfonts, served from here. The page makes no third-party request. |
+| `vendor/` | Leaflet and the two webfonts, served from here. The map requests tiles from OpenStreetMap. |
 | `DESIGN.md` | The design system — color tokens per room, type scale, spacing, motion. Read it before changing anything visual. |
 | `data/martinis.json` | Swept weekly off live ordering platforms. |
 | `data/cow.json` | Hand-researched, updated by hand. Every line carries its source and how well it is evidenced. |
@@ -51,7 +51,8 @@ An espresso martini line is graded by age. A swept line carries `seen_at`, the
 day its menu was last read; past 14 days it shows *Menu may be stale*. A
 hand-verified line in `data/manual.json` carries `verified_at` and holds for 90
 days. The Spotted Cow list is researched by hand and each entry records a
-`confidence`:
+`confidence`. Menu-backed Cow entries age to stale after 90 days, using their
+`verified_at` date or, when absent, the Cow dataset's `generated_at` date:
 
 | `confidence` | On the row | Means |
 | --- | --- | --- |

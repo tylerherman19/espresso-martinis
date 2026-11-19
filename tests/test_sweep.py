@@ -35,6 +35,25 @@ class CleanName(unittest.TestCase):
 
 
 class ToastQuery(unittest.TestCase):
+    def test_directory_stops_on_forbidden(self):
+        response = mock.Mock(status_code=403)
+        error = sweep.requests.HTTPError(response=response)
+        for prefix in ([], [{"nearbyRestaurants": [{"guid": "t1"}]}]):
+            with mock.patch.object(sweep, "toast_query", side_effect=prefix + [error]) as query, \
+                    mock.patch.object(sweep.time, "sleep"), redirect_stderr(io.StringIO()):
+                with self.assertRaises(sweep.ToastAccessRefused):
+                    sweep.toast_directory()
+            self.assertEqual(query.call_count, len(prefix) + 1)
+
+    def test_directory_empty_success_and_non_forbidden_error(self):
+        for answer, expected_failed in (({}, 0), (RuntimeError("unavailable"), 35)):
+            with mock.patch.object(sweep, "toast_query", side_effect=None if isinstance(answer, dict) else answer,
+                                   return_value=answer), \
+                    mock.patch.object(sweep.time, "sleep"), redirect_stderr(io.StringIO()):
+                found, failed, cells = sweep.toast_directory()
+            self.assertEqual(found, {})
+            self.assertEqual((failed, cells), (expected_failed, 35))
+
     def test_errors_without_data_raise(self):
         resp = mock.Mock()
         resp.json.return_value = {"errors": [{"message": "Forbidden"}]}
@@ -89,11 +108,11 @@ class MainRun(unittest.TestCase):
     def tearDown(self):
         self.tmp.cleanup()
 
-    def run_main(self, directory, failed, menus):
+    def run_main(self, directory, failed, menus, refusal=None):
         def fake_items(guid):
             return menus.get(guid, ([], False, True))
         env = {"GITHUB_OUTPUT": str(self.gh_out)}
-        with mock.patch.object(sweep, "toast_directory", return_value=(directory, failed, 28)), \
+        with mock.patch.object(sweep, "toast_directory", return_value=(directory, failed, 28), side_effect=refusal), \
                 mock.patch.object(sweep, "martini_items", side_effect=fake_items), \
                 mock.patch.object(sweep, "clover_slugs", return_value=({}, True)), \
                 mock.patch.object(sweep, "neighborhood", return_value="Downtown"), \
@@ -115,6 +134,14 @@ class MainRun(unittest.TestCase):
         self.assertEqual(dates["t0"], "2026-09-16")
         self.assertEqual(dates["t1"], "2026-09-23")
         self.assertTrue(doc["problems"])
+        self.assertIn("degraded=true", self.gh_out.read_text())
+
+    def test_forbidden_skips_menus_and_degrades(self):
+        message = "Toast API refused access (HTTP 403); Toast venues carried forward"
+        doc = self.run_main({}, 0, {}, refusal=sweep.ToastAccessRefused(message))
+        self.assertEqual(doc["restaurants_scanned"], 0)
+        self.assertEqual(doc["carried_forward"], 20)
+        self.assertEqual(doc["problems"], [message])
         self.assertIn("degraded=true", self.gh_out.read_text())
 
     def test_healthy_run_drops_what_is_gone(self):
