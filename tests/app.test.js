@@ -70,7 +70,11 @@ test('Cow loading uses the research date only when its own reading date is absen
   const fetcher = async () => ({ ok: true, json: async () => ({ generated_at: '2026-09-09', cows: rows }) });
   const doc = await loadData('data/cow.json', 'cows', fetcher);
   assert.deepEqual(doc.cows.map(s => confidenceOf(s, Date.parse('2026-12-09'))), ['stale', 'reported', 'stale', 'menu']);
-  assert.equal(doc.cows[0].verified_at, '2026-09-09');
+  for (const row of doc.cows.slice(0, 3)) {
+    assert.equal(row.verified_at, undefined);
+    assert.equal(row.seen_at, undefined);
+    assert.equal(row._research_at, '2026-09-09');
+  }
   assert.equal(doc.cows[3].verified_at, '2026-12-01');
   assert.equal(rows[0].verified_at, undefined);
 });

@@ -15,7 +15,7 @@ const Drinks = (() => {
   function confidenceOf(s, now = Date.now()) {
     if (s.confidence && s.confidence !== 'menu') return s.confidence;
     const swept = s.seen_at != null;
-    const when = Date.parse(swept ? s.seen_at : s.verified_at);
+    const when = Date.parse(swept ? s.seen_at : (s.verified_at || s._research_at));
     if (isNaN(when)) return 'menu';
     return now - when > (swept ? 14 : 90) * 864e5 ? 'stale' : 'menu';
   }
@@ -39,7 +39,7 @@ const Drinks = (() => {
       throw new Error(`${url}: invalid ${key} collection`);
     }
     if (key === 'cows' && doc.generated_at) {
-      doc[key] = doc[key].map(s => ({ ...s, verified_at: s.verified_at || doc.generated_at }));
+      doc[key] = doc[key].map(s => ({ ...s, _research_at: doc.generated_at }));
     }
     return doc;
   }
