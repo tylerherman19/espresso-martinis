@@ -107,6 +107,11 @@ class Assemble(unittest.TestCase):
         b = row("c2", "The Bar", address="Milwaukee, WI", lat=43.10)
         self.assertEqual({r["guid"] for r in sweep.assemble([a, b], [], [])}, {"c1", "c2"})
 
+    def test_grid_address_without_coords_merges(self):
+        a = row("g1", "The Bar", address="N96W16865 Cumberland Ct, Menomonee Falls, WI", lat=None, lng=None)
+        b = row("g2", "The Bar", address="n96w16865 cumberland ct, menomonee falls, wi", lat=None, lng=None)
+        self.assertEqual(sweep.assemble([a], [], [b]), [a])
+
     def test_empty_inputs(self):
         self.assertEqual(sweep.assemble([], [], []), [])
 

@@ -406,7 +406,7 @@ def same_venue(a: dict, b: dict) -> bool:
     if normalized(a["name"]) != normalized(b["name"]):
         return False
     # A city-only address ("Milwaukee, WI") does not place a branch.
-    street = re.compile(r"^\s*\d")
+    street = re.compile(r"^\s*[NSEW]?\d", re.I)
     if all(street.match(r.get("address") or "") for r in (a, b)) and normalized(a["address"]) == normalized(b["address"]):
         return True
     coords = [r.get(k) for r in (a, b) for k in ("lat", "lng")]
