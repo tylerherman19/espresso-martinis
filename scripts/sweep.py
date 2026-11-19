@@ -6,12 +6,17 @@ import argparse
 import concurrent.futures
 import datetime as dt
 import itertools
+import ipaddress
 import json
+import math
 import os
 import re
+import socket
 import sys
+import tempfile
 import time
 from pathlib import Path
+from urllib.parse import urljoin, urlsplit, urlunsplit
 
 import requests
 
@@ -34,6 +39,11 @@ TRAILING_UNIT = re.compile(r"[,\s]+(Suite|Ste|Unit|Apt|Bldg|Building|#)\.?\s*[\w
 # Merchants mark a dead location in the name rather than delisting it.
 CLOSED = re.compile(r"\b(closed|permanently closed|do not use|test store)\b", re.I)
 MARTINI_2 = re.compile(r"martini|\btini\b", re.I)
+NOT_COCKTAIL = re.compile(r"\b(?:na|n/a|non[\s-]*alcoholic|mocktails?|zero[\s-]*proof|"
+                          r"chocolate\s+bars?|dessert\s+bars?|bars?\s+dessert|cakes?|cookies?|"
+                          r"brownies?|desserts?|ice\s+cream|flights?|shop|retail|bottles?|"
+                          r"pancakes?|waffles?|cupcakes?|candy|truffles?|canned|packs?|bars?$|"
+                          r"six[\s-]*packs?|6[\s-]*packs?|liqueur)\b", re.I)
 # Downtown Milwaukee: Third Ward through Yankee Hill, river to the lake. User
 # steering 2026-09-05: downtown gets read first and leads the site.
 DT = (43.020, -87.930, 43.062, -87.870)
@@ -66,11 +76,22 @@ def toast_query(query: str) -> dict:
     errors = payload.get("errors") or []
     for err in errors:
         print(f"Toast GraphQL: {err.get('message')}", file=sys.stderr)
-    # Errors with no data is a refusal, not an empty answer. Treating it as
-    # empty is how a blocked run looks like a city with no bars.
-    if errors and not payload.get("data"):
+    if errors:
         raise RuntimeError(f"Toast GraphQL: {errors[0].get('message')}")
-    return payload.get("data") or {}
+    if not isinstance(payload.get("data"), dict):
+        raise ValueError("Toast response has no data object")
+    return payload["data"]
+
+
+def required_list(obj: dict, field: str) -> list:
+    value = obj.get(field)
+    if not isinstance(value, list):
+        raise ValueError(f"missing or invalid {field}")
+    return value
+
+
+def is_martini(name: str) -> bool:
+    return bool(MARTINI.search(name) and MARTINI_2.search(name) and not NOT_COCKTAIL.search(name))
 
 
 class ToastAccessRefused(RuntimeError):
@@ -93,7 +114,9 @@ def toast_directory() -> tuple[dict[str, dict], int, int]:
              "latitude:%.4f,longitude:%.4f,radius:%d}){guid name shortUrl "
              "location{address1 city state latitude longitude}}}" % (when, lat, lng, RADIUS_MI))
         try:
-            rows = toast_query(q).get("nearbyRestaurants") or []
+            rows = required_list(toast_query(q), "nearbyRestaurants")
+            if any(not isinstance(row, dict) or not row.get("guid") for row in rows):
+                raise ValueError("invalid restaurant row")
         except Exception as exc:
             if isinstance(exc, requests.HTTPError) and exc.response is not None and exc.response.status_code == 403:
                 raise ToastAccessRefused("Toast API refused access (HTTP 403); Toast venues carried forward") from exc
@@ -102,6 +125,7 @@ def toast_directory() -> tuple[dict[str, dict], int, int]:
             continue
         if len(rows) >= PAGE_CAP:
             print(f"directory truncated at {lat:.2f},{lng:.2f}", file=sys.stderr)
+            failed += 1
         for row in rows:
             found[row["guid"]] = row
         time.sleep(0.25)
@@ -132,7 +156,13 @@ def martini_items(guid: str) -> tuple[list[dict], bool, bool]:
         q = ('{menusV3(input:{restaurantGuid:"%s"%s}){... on MenusResponse{menus{name groups{name '
              'items{name price prices}}}}}}' % (guid, vis))
         try:
-            menus = (toast_query(q).get("menusV3") or {}).get("menus") or []
+            result = toast_query(q).get("menusV3")
+            if not isinstance(result, dict):
+                raise ValueError("missing or invalid menusV3")
+            menus = required_list(result, "menus")
+            for menu in menus:
+                for group in required_list(menu, "groups"):
+                    required_list(group, "items")
         except Exception as exc:
             print(f"menu {guid}: {exc}", file=sys.stderr)
             read = False
@@ -145,14 +175,7 @@ def martini_items(guid: str) -> tuple[list[dict], bool, bool]:
                 has_hh = has_hh or group_hh
                 for item in group.get("items") or []:
                     name = (item.get("name") or "").strip()
-                    if not (MARTINI.search(name) and MARTINI_2.search(name)):
-                        continue
-                    # "SHOP ..." rows are retail shelf stock, not a poured drink.
-                    if name.lower().startswith("shop "):
-                        continue
-                    # "... liqueur" rows are a pour of the bottled liqueur,
-                    # not the mixed cocktail (Explorium lists both).
-                    if "liqueur" in name.lower():
+                    if not is_martini(name):
                         continue
                     item_hh = group_hh or bool(HAPPY.search(name))
                     prices = [c for c in (cents(p) for p in item.get("prices") or []) if c]
@@ -228,8 +251,8 @@ def osm_websites() -> list[str] | None:
         try:
             payload = get(host, params={"data": query}, timeout=180).json()
             if payload.get("remark"):
-                print(f"overpass remark: {payload['remark'][:160]}", file=sys.stderr)
-            els = payload.get("elements") or []
+                raise ValueError(f"overpass remark: {payload['remark'][:160]}")
+            els = required_list(payload, "elements")
         except Exception as exc:
             print(f"overpass {host}: {exc}", file=sys.stderr)
             continue
@@ -243,27 +266,73 @@ def osm_websites() -> list[str] | None:
     return None
 
 
-def clover_slugs() -> tuple[dict[str, str], bool]:
-    """slug -> website it was found on, seeds plus OSM website link scan, and
-    whether the OSM half of that ran at all."""
+def public_url(url: str) -> str:
+    parts = urlsplit(url)
+    if parts.scheme not in ("http", "https") or not parts.hostname or parts.username or parts.password:
+        raise ValueError("website must be a public HTTP(S) URL")
+    addresses = socket.getaddrinfo(parts.hostname, parts.port or (443 if parts.scheme == "https" else 80),
+                                   type=socket.SOCK_STREAM)
+    if not addresses or any(not ipaddress.ip_address(a[4][0]).is_global for a in addresses):
+        raise ValueError("website resolves to a non-public address")
+    return addresses[0][4][0]
+
+
+class WebsiteAdapter(requests.adapters.HTTPAdapter):
+    def __init__(self, hostname):
+        self.hostname = hostname
+        super().__init__()
+
+    def init_poolmanager(self, *args, **kwargs):
+        super().init_poolmanager(*args, server_hostname=self.hostname, assert_hostname=self.hostname, **kwargs)
+
+
+def website_html(url: str) -> str:
+    for _ in range(6):
+        ip = public_url(url)
+        parts = urlsplit(url)
+        host = f"[{ip}]" if ":" in ip else ip
+        port = parts.port or (443 if parts.scheme == "https" else 80)
+        pinned = urlunsplit((parts.scheme, f"{host}:{port}", parts.path, parts.query, ""))
+        with requests.Session() as session:
+            session.trust_env = False
+            session.mount("https://", WebsiteAdapter(parts.hostname))
+            with session.get(pinned, headers={**UA, "Host": parts.netloc}, timeout=12,
+                             allow_redirects=False, stream=True) as response:
+                response.raise_for_status()
+                if response.is_redirect:
+                    url = urljoin(url, response.headers["Location"])
+                    continue
+                body = bytearray()
+                for chunk in response.iter_content(chunk_size=16384):
+                    if len(body) + len(chunk) > 400000:
+                        raise ValueError("website exceeds 400000 bytes")
+                    body.extend(chunk)
+                return body.decode(response.encoding or "utf-8", errors="replace")
+    raise ValueError("too many website redirects")
+
+
+def clover_slugs() -> tuple[dict[str, str], list[str]]:
+    """Seed and discovered slugs, plus discovery failures."""
     found = {slug: "seed" for slug in CLOVER_SEEDS}
     urls = osm_websites()
     if urls is None:
         print("osm: no Overpass mirror answered, seeds only", file=sys.stderr)
-        return found, False
+        return found, ["Overpass: no mirror answered, so Clover discovery used its seed list only"]
     print(f"osm: {len(urls)} bar/restaurant websites to scan for Clover links", file=sys.stderr)
     def probe(url):
         try:
-            html = requests.get(url, headers=UA, timeout=12).text[:400000]
-        except Exception:
-            return []
-        return CLOVER_LINK.findall(html)
+            return CLOVER_LINK.findall(website_html(url)), None
+        except Exception as exc:
+            return [], f"Clover discovery {url}: {exc}"
+    problems = []
     with concurrent.futures.ThreadPoolExecutor(max_workers=5) as pool:
-        for url, slugs in zip(urls, pool.map(probe, urls)):
+        for url, (slugs, problem) in zip(urls, pool.map(probe, urls)):
+            if problem:
+                problems.append(problem)
             for slug in slugs:
                 found.setdefault(slug, url)
     print(f"clover: {len(found)} ordering pages found", file=sys.stderr)
-    return found, True
+    return found, problems
 
 
 def geocode(address: str):
@@ -280,16 +349,16 @@ def geocode(address: str):
 def clover_martini_items(slug: str) -> tuple[dict, list[dict]] | None:
     merchant = get(CLOVER_API + f"/{slug}", params={"slug": "true"}).json()
     if not merchant.get("merchantUuid"):
-        return None
-    menu = get(CLOVER_API + f"/{merchant['merchantUuid']}/menu").json()
-    categories = menu.get("categories") or {}
+        raise ValueError("Clover response has no merchantUuid")
+    try:
+        menu = get(CLOVER_API + f"/{merchant['merchantUuid']}/menu").json()
+    except requests.HTTPError as exc:
+        # Only a missing merchant means it left Clover; a missing menu is unread.
+        raise RuntimeError(f"Clover menu: {exc}") from exc
     seen: dict[str, dict] = {}
-    for node in menu.get("items") or []:
+    for node in required_list(menu, "items"):
         name = (node.get("name") or "").strip()
-        if not (MARTINI.search(name) and MARTINI_2.search(name)):
-            continue
-        # Bottled-liqueur pours are not the mixed cocktail.
-        if "liqueur" in name.lower():
+        if not is_martini(name):
             continue
         price = node.get("price")
         if not isinstance(price, (int, float)) or price <= 0:
@@ -305,9 +374,53 @@ def clover_martini_items(slug: str) -> tuple[dict, list[dict]] | None:
 
 def load_previous(path: Path) -> dict:
     try:
-        return json.loads(path.read_text())
-    except (OSError, ValueError):
-        return {}
+        doc = json.loads(path.read_text())
+    except FileNotFoundError:
+        if not path.exists() and not path.is_symlink():
+            return {}
+        raise
+    if not isinstance(doc, dict) or not isinstance(doc.get("martinis"), list):
+        raise ValueError(f"{path}: invalid previous directory")
+    for row in doc["martinis"]:
+        if not isinstance(row, dict) or not row.get("guid") or not row.get("name") or "price_cents" not in row:
+            raise ValueError(f"{path}: invalid previous venue")
+    return doc
+
+
+def write_atomic(path: Path, doc: dict) -> None:
+    body = json.dumps(doc, indent=1)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    temporary = None
+    try:
+        with tempfile.NamedTemporaryFile(mode="w", dir=path.parent, prefix=f".{path.name}.",
+                                         encoding="utf-8", delete=False) as fh:
+            temporary = Path(fh.name)
+            fh.write(body)
+            fh.flush()
+            os.fsync(fh.fileno())
+        os.replace(temporary, path)
+    finally:
+        if temporary is not None:
+            temporary.unlink(missing_ok=True)
+
+
+def normalized(text: str) -> str:
+    return re.sub(r"[^\w]+", " ", text.casefold()).strip()
+
+
+def same_venue(a: dict, b: dict) -> bool:
+    if normalized(a["name"]) != normalized(b["name"]):
+        return False
+    # A city-only address ("Milwaukee, WI") does not place a branch.
+    street = re.compile(r"^\s*[NSEW]?\d", re.I)
+    if all(street.match(r.get("address") or "") for r in (a, b)) and normalized(a["address"]) == normalized(b["address"]):
+        return True
+    coords = [r.get(k) for r in (a, b) for k in ("lat", "lng")]
+    if not all(isinstance(v, (int, float)) and math.isfinite(v) for v in coords):
+        return False
+    lat1, lng1, lat2, lng2 = map(math.radians, coords)
+    distance = math.sin((lat2 - lat1) / 2) ** 2 + math.cos(lat1) * math.cos(lat2) * math.sin((lng2 - lng1) / 2) ** 2
+    return 6371000 * 2 * math.asin(math.sqrt(min(1, distance))) <= 100
 
 
 def by_price(rows: list[dict]) -> None:
@@ -315,23 +428,13 @@ def by_price(rows: list[dict]) -> None:
 
 
 def assemble(fresh: list[dict], carried: list[dict], manual: list[dict]) -> list[dict]:
-    """The list as written: what was read live this run, then the last reading
-    of anything whose source did not answer, then the hand-checks. A live read
-    beats a hand-check of the same name, and a hand-check beats a reading
-    carried over from an earlier week."""
-    out = list(fresh)
-    live_guids = {r["guid"] for r in out}
-    live_names = {r["name"].lower() for r in out}
-    hand_names = {e["name"].lower() for e in manual}
-    for r in carried:
-        if r["guid"] in live_guids or r["name"].lower() in live_names | hand_names:
+    """Live readings beat hand-checks, which beat carried readings of the
+    same venue. A shared name without a matching location is not a duplicate."""
+    out = []
+    for r in fresh + manual + carried:
+        if any(r["guid"] == other["guid"] or same_venue(r, other) for other in out):
             continue
         out.append(r)
-    for e in manual:
-        if e["name"].lower() in live_names:
-            print(f"manual: {e['name']} also on a platform now, keeping the live one", file=sys.stderr)
-            continue
-        out.append(e)
     by_price(out)
     return out
 
@@ -360,11 +463,16 @@ def report(problems: list[str]) -> None:
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--limit", type=int, default=0)
-    ap.add_argument("--out", default="data/martinis.json")
+    ap.add_argument("--output", "--out", dest="out", default="data/martinis.json")
     ap.add_argument("--force", action="store_true",
                     help="write even when the list shrinks past MIN_KEEP of the last one")
     args = ap.parse_args()
     out_path = Path(args.out)
+    production = Path(__file__).resolve().parent.parent / "data" / "martinis.json"
+    if args.limit < 0:
+        ap.error("--limit must not be negative")
+    if args.limit and out_path.resolve() == production.resolve():
+        ap.error("--limit requires --output pointing somewhere other than data/martinis.json")
     today = dt.date.today().isoformat()
 
     # Last run's swept spots, so a source that does not answer this time costs
@@ -401,14 +509,12 @@ def main() -> None:
         if not read:
             menu_failed += 1
             unread.add(guid)
-            # Half a menu is worse than last week's whole one.
-            if guid in prev_rows:
-                continue
+            continue
         if items or has_hh:
             hits.append((rest, items, has_hh))
         if i % 50 == 0:
             print(f"{i}/{len(guids)} scanned, {len(hits)} with espresso martinis", file=sys.stderr)
-    if menu_failed > max(3, len(guids) // 20):
+    if menu_failed:
         problems.append(f"Toast menus: {menu_failed} of {len(guids)} did not answer")
 
     out = []
@@ -425,9 +531,7 @@ def main() -> None:
         addr = ", ".join(x for x in [loc.get("address1"), loc.get("city"), loc.get("state")] if x)
         hh_prices = [m["hh_price_cents"] for m in items if m.get("hh_price_cents")]
         regular = [m["price_cents"] for m in items if m["price_cents"]]
-        # Board price is the everyday price; a happy-hour-only listing still
-        # gets the spot on the board at its hh price.
-        cheapest = min(regular) if regular else min(hh_prices, default=None)
+        cheapest = min(regular, default=None)
         out.append({
             "name": clean_name(rest.get("name")),
             "address": addr,
@@ -443,15 +547,17 @@ def main() -> None:
             "seen_at": today,
         })
 
-    slugs, osm_ok = clover_slugs()
-    if not osm_ok:
-        problems.append("Overpass: no mirror answered, so Clover was checked on its seed list only")
-        unread |= {g for g, r in prev_rows.items() if r["platform"] == "clover" and g not in slugs}
+    slugs, discovery_problems = clover_slugs()
+    problems.extend(discovery_problems)
+    for g, r in prev_rows.items():
+        if r["platform"] == "clover":
+            slugs.setdefault(g, "previous")
     for slug, found_on in slugs.items():
         try:
             result = clover_martini_items(slug)
         except requests.HTTPError as exc:
             print(f"clover {slug}: {exc}", file=sys.stderr)
+            problems.append(f"Clover {slug}: {exc}")
             # A 404 is a merchant that left Clover; anything else is Clover
             # not answering, and the last reading stands.
             if exc.response is None or exc.response.status_code != 404:
@@ -459,9 +565,12 @@ def main() -> None:
             continue
         except Exception as exc:
             print(f"clover {slug}: {exc}", file=sys.stderr)
+            problems.append(f"Clover {slug}: {exc}")
             unread.add(slug)
             continue
         if not result:
+            unread.add(slug)
+            problems.append(f"Clover {slug}: missing menu response")
             continue
         merchant, items = result
         if not items:
@@ -472,9 +581,6 @@ def main() -> None:
         if isinstance(loc.get("latitude"), (int, float)):
             lat, lng = loc["latitude"], loc["longitude"]
         name = clean_name(merchant.get("name"))
-        dupe = any(name.lower() == r["name"].lower() for r in out)
-        if dupe:
-            continue
         address = ", ".join(x for x in [addr.get("address1"), addr.get("city"), addr.get("state")] if x)
         if lat is None and address:
             lat, lng = geocode(address)
@@ -490,7 +596,7 @@ def main() -> None:
             "lat": lat, "lng": lng,
             "neighborhood": hood,
             "downtown": is_downtown(lat, lng),
-            "price_cents": min(regular) if regular else min(hh_prices, default=None),
+            "price_cents": min(regular, default=None),
             "items": sorted(items, key=lambda m: (m["price_cents"] is None, m["price_cents"] or 0)),
             "happy_hour": bool(hh_prices),
             "hh_price_cents": min(hh_prices) if hh_prices else None,
@@ -537,8 +643,7 @@ def main() -> None:
         "problems": problems,
         "martinis": out_rows,
     }
-    out_path.parent.mkdir(parents=True, exist_ok=True)
-    out_path.write_text(json.dumps(doc, indent=1))
+    write_atomic(out_path, doc)
     print(f"wrote {args.out}: {len(out_rows)} restaurants with espresso martinis from {len(guids)} scanned", file=sys.stderr)
     report(problems)
 

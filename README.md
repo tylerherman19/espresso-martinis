@@ -32,8 +32,9 @@ answers. If Leaflet fails to load the map stands down and the list carries on.
 ## What counts
 
 A line counts when it is a standalone espresso martini or a standalone Spotted
-Cow pour. Bottled liqueur, six-packs, and a chaser tacked onto another drink do
-not. Prices are the menu price before tax and tip; a happy-hour number appears
+Cow pour. Nonalcoholic drinks, food and desserts, retail bottles, flights,
+bottled liqueur, six-packs, and a chaser tacked onto another drink do not.
+Prices are the menu price before tax and tip; a happy-hour number appears
 only where the bar posts one for these drinks specifically.
 
 ## When a source does not answer
@@ -44,6 +45,27 @@ the run goes red so GitHub emails about it. If a run would still shrink the list
 below half of the last one, it writes nothing and fails; `--force` writes anyway
 when the drop is real. This exists because on 2026-09-30 Toast started answering
 403 and the sweep replaced 98 spots with 2.
+
+Every failed Toast directory/menu read, Clover menu read, or Clover discovery
+probe is recorded in `problems` and emits `degraded=true`; there is no failure
+threshold. The workflow commits retained data before marking the run failed.
+Previously known Clover slugs are always queried, even if discovery fails.
+GraphQL errors and missing/null requested fields are unread responses, not
+evidence that a menu is empty. Confirmed empty menu arrays can remove a spot.
+
+Writes use a temporary sibling file and atomic replacement. If an existing
+output file is unreadable or invalid, the sweep stops rather than discarding
+its previous readings. A missing output file starts a new directory.
+
+`--limit N` is for partial runs and requires `--output PATH` (also spelled
+`--out PATH`) pointing somewhere other than the production `data/martinis.json`.
+`--force` does not override this restriction. Limited runs still contact live
+services; tests use offline fixtures and mocks instead.
+
+Website discovery accepts only HTTP(S) URLs resolving to public addresses,
+checks every redirect target, and streams at most 400,000 response bytes.
+Venue merging uses a normalized name plus a matching normalized address or
+coordinates within 100 meters; a shared name alone does not merge branches.
 
 ## How sure a line is
 
@@ -68,6 +90,8 @@ The **On a menu** filter keeps only the first kind, in both rooms. Each entry's
 A row shows the everyday price (`price_cents`), and so do the cover's figures.
 The happy-hour price takes the row's place only with the **Happy hour** filter
 on, or when it is the only price a bar posts.
+An entry with only a happy-hour price keeps its everyday `price_cents` null,
+so that price does not enter the everyday cover figures.
 
 ## Where a spot sits
 
