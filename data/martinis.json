@@ -2,8 +2,8 @@
  "generated_at": "2026-11-18T14:00:16+00:00",
  "metro": "Milwaukee",
  "restaurants_scanned": 0,
- "count": 98,
- "carried_forward": 96,
+ "count": 97,
+ "carried_forward": 95,
  "problems": [
   "Toast directory: 35 of 35 areas did not answer",
   "Overpass: no mirror answered, so Clover was checked on its seed list only"
@@ -58,13 +58,8 @@
    "lng": -88.118853,
    "neighborhood": "Menomonee Falls",
    "downtown": false,
-   "price_cents": 700,
+   "price_cents": 1000,
    "items": [
-    {
-     "item": "NA Espresso Martini",
-     "price_cents": 700,
-     "hh_price_cents": null
-    },
     {
      "item": "Espresso Martini",
      "price_cents": 1000,
@@ -148,27 +143,6 @@
    "hh_price_cents": null,
    "platform": "toast",
    "guid": "5dea25ec-dff7-45c4-858a-463ca09edd51",
-   "seen_at": "2026-09-23"
-  },
-  {
-   "name": "The Little Village Play Cafe",
-   "address": "6505 West North Avenue, Wauwatosa, WI",
-   "lat": 43.060563,
-   "lng": -87.99399,
-   "neighborhood": "Wauwatosa",
-   "downtown": false,
-   "price_cents": 995,
-   "items": [
-    {
-     "item": "Espresso Martini Chocolate Bar",
-     "price_cents": 995,
-     "hh_price_cents": null
-    }
-   ],
-   "happy_hour": false,
-   "hh_price_cents": null,
-   "platform": "toast",
-   "guid": "f5f80755-7af6-4fcd-80e6-2cec9a605fff",
    "seen_at": "2026-09-23"
   },
   {
@@ -736,13 +710,8 @@
    "lng": -88.00861,
    "neighborhood": "Wauwatosa",
    "downtown": false,
-   "price_cents": 1200,
+   "price_cents": 1400,
    "items": [
-    {
-     "item": "NA Espresso Martini",
-     "price_cents": 1200,
-     "hh_price_cents": null
-    },
     {
      "item": "Lucky's Espresso Martini",
      "price_cents": 1400,
