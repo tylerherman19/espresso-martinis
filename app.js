@@ -6,12 +6,13 @@ const $$ = s => [...document.querySelectorAll(s)];
 const esc = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 /* Only ever build a link out of a source the page can actually open. */
 const safeUrl = u => (/^https?:\/\//i.test(String(u || '')) ? String(u) : '');
-const money = c => '$' + (c / 100).toFixed(c % 100 === 0 ? 0 : 2);
+const { money, validCoords, confidenceOf } = Drinks;
 const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
 /* Menus get typed in caps. Lower them so a long list reads evenly. */
 const itemName = t => (/[a-z]/.test(t) ? t : t.replace(/([A-Z])([A-Z]+)/g, (m, a, b) => a + b.toLowerCase()));
 
 const DATA = { martini: [], cow: [] };
+const STATUS = { martini: 'loading', cow: 'loading' };
 const SWEPT = { martini: null, cow: null };
 const COPY = {
   martini: { title: 'Espresso Martinis', sub: 'Every one we can find in the metro, with the price on the menu when we last read it.' },
@@ -26,8 +27,17 @@ function showSwept() {
   el.dateTime = when.toISOString().slice(0, 10);
 }
 let LOCKS = 0;
-function lockScroll() { if (LOCKS++) return; document.documentElement.style.overflow = 'hidden'; }
-function unlockScroll() { if (!LOCKS || --LOCKS) return; document.documentElement.style.overflow = ''; }
+function syncInert() {
+  /* A detail opened from a map popup sits on top of the sheet. */
+  const detail = $('#detail').classList.contains('open') ? $('#detail') : null;
+  const sheet = $('#sheet-map').classList.contains('open') ? $('#sheet-map') : null;
+  const modal = detail || sheet;
+  $$('header, main, footer, .skip-link').forEach(el => { el.inert = !!modal; });
+  $('#detail').inert = !!modal && modal !== $('#detail');
+  $('#sheet-map').inert = !!sheet && modal !== sheet;
+}
+function lockScroll() { LOCKS++; document.documentElement.style.overflow = 'hidden'; syncInert(); }
+function unlockScroll() { if (LOCKS) LOCKS--; if (!LOCKS) document.documentElement.style.overflow = ''; syncInert(); }
 
 const state = { drink: 'martini', query: '', filters: new Set(), sort: 'hood', here: null, prevSort: 'hood' };
 
@@ -76,16 +86,13 @@ const milesText = m => (m < 0.1 ? 'right here' : m < 10 ? m.toFixed(1) + ' mi' :
 /* A row shows the everyday price. The happy-hour price takes its place only
    with the Happy hour filter on, or when it is the only price the bar posts —
    otherwise a $6 happy hour reads as the cheapest drink in town. */
-const hhShown = s => s.hh_price_cents != null && (state.filters.has('hh') || s.price_cents == null);
-const priceOf = s => (hhShown(s) ? s.hh_price_cents : s.price_cents);
+const hhShown = s => Drinks.hhShown(s, state.filters.has('hh'));
+const priceOf = s => Drinks.priceOf(s, state.filters.has('hh'));
 const everyday = s => s.price_cents;
 const key = s => { const p = priceOf(s); return p == null ? Infinity : p; };
 const priceText = s => { const p = priceOf(s); return p == null ? 'Not posted' : money(p); };
 function median(list, pick = priceOf) {
-  const p = list.map(pick).filter(v => v != null).sort((a, b) => a - b);
-  if (!p.length) return null;
-  const mid = p.length >> 1;
-  return p.length % 2 ? p[mid] : Math.round((p[mid - 1] + p[mid]) / 2);
+  return Drinks.median(list, pick);
 }
 const all = () => DATA[state.drink];
 /* The median of the whole room is the same for every row in it, so work it
@@ -98,14 +105,6 @@ const midOf = () => (state.drink in MID ? MID[state.drink] : (MID[state.drink] =
 /* The Cow research grades itself. A martini line is graded by age: a swept
    line is read again every week, so two missed weeks make it stale; a
    hand-check off the bar's own menu holds for a season. */
-const DAY = 864e5;
-function confidenceOf(s) {
-  if (s.confidence) return s.confidence;
-  const swept = s.seen_at != null;
-  const when = Date.parse(swept ? s.seen_at : s.verified_at);
-  if (isNaN(when)) return 'menu';
-  return Date.now() - when > (swept ? 14 : 90) * DAY ? 'stale' : 'menu';
-}
 const readOn = s => {
   const when = new Date(s.seen_at || s.verified_at || NaN);
   return isNaN(when) ? '' : when.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
@@ -115,18 +114,7 @@ const isUnder = s => { const m = midOf(), p = priceOf(s); return m != null && p 
 /* ── which spots show ────────────────────────────────── */
 const items = s => (Array.isArray(s.items) ? s.items : []);
 function keeps(s) {
-  const f = state.filters;
-  if (f.has('hh') && !s.happy_hour) return false;
-  if (f.has('value') && !isUnder(s)) return false;
-  if (f.has('downtown') && !isDowntown(s)) return false;
-  if (f.has('menu') && confidenceOf(s) !== 'menu') return false;
-  const q = state.query.trim().toLowerCase();
-  if (!q) return true;
-  return s.name.toLowerCase().includes(q)
-    || (s.neighborhood || '').toLowerCase().includes(q)
-    || areaOf(s).toLowerCase().includes(q)
-    || (s.address || '').toLowerCase().includes(q)
-    || items(s).some(it => String(it.item).toLowerCase().includes(q));
+  return Drinks.keeps(s, { ...state, mid: midOf(), area: areaOf(s), downtown: isDowntown(s) });
 }
 function order() {
   const byName = (a, b) => a.name.localeCompare(b.name);
@@ -206,6 +194,13 @@ function rowHtml(s, low) {
 function renderList() {
   const list = showing();
   const box = $('#results');
+  if (STATUS[state.drink] !== 'ready') {
+    const message = STATUS[state.drink] === 'error' ? 'This list is unavailable. Reload the page to try again.' : 'Loading this list…';
+    box.innerHTML = `<div class="blank"><h3>${esc(COPY[state.drink].title)}</h3><p>${message}</p></div>`;
+    $('#tally').textContent = message;
+    drawPins();
+    return;
+  }
   if (!list.length) {
     box.innerHTML = `<div class="blank">
       <h3>Nothing here matches.</h3>
@@ -292,6 +287,7 @@ function renderIndex(animate) {
   const put = (k, to, fmt) => {
     const el = $(`[data-stat="${k}"]`);
     if (!el) return;
+    if (STATUS[state.drink] !== 'ready') { el._v = 0; el.textContent = '—'; return; }
     if (animate && COVER_SEEN) countTo(el, to, fmt); else { el._v = to; el.textContent = fmt(to); }
   };
   put('spots', list.length, v => String(v));
@@ -323,10 +319,6 @@ function glide() {
 const THEME = { martini: '#F6F2EC', cow: '#F5F1E6' };
 function setDrink(drink) {
   if (state.drink === drink) return;
-  if (!DATA[drink].length) {
-    $('#tally').textContent = 'That list has not loaded. Reload the page to try again.';
-    return;
-  }
   state.drink = drink;
   document.body.dataset.drink = drink;
   syncToggles();
@@ -384,10 +376,11 @@ function detailSrc(s) {
   const link = url ? `<a href="${esc(url)}" target="_blank" rel="noopener">Where this ${state.drink === 'cow' ? 'line' : 'price'} came from</a>` : '';
   return `<p class="detail-src">${read}${read && link ? ' · ' : ''}${link}</p>`;
 }
-let CAME_FROM = null;
+let CAME_FROM = null, DETAIL_CLOSE = null;
 function openDetail(guid) {
   const s = all().find(x => x.guid === guid);
   if (!s) return;
+  clearTimeout(DETAIL_CLOSE);
   const panel = $('#detail'), scrim = $('#scrim');
   const lines = items(s).map(it => {
     const reg = it.price_cents != null ? money(it.price_cents) : null;
@@ -412,24 +405,34 @@ function openDetail(guid) {
     ${detailSrc(s)}`;
 
   CAME_FROM = document.activeElement;
+  const overSheet = $('#sheet-map').classList.contains('open');
+  panel.classList.toggle('over-sheet', overSheet); scrim.classList.toggle('over-sheet', overSheet);
   scrim.hidden = false; panel.hidden = false;
   void panel.getBoundingClientRect();
   scrim.classList.add('open'); panel.classList.add('open');
   lockScroll();
   panel.querySelector('.detail-x').addEventListener('click', closeDetail);
-  panel.querySelector('[data-find]').addEventListener('click', () => { closeDetail(); findOnMap(guid); });
+  panel.querySelector('[data-find]').addEventListener('click', () => {
+    const back = CAME_FROM;
+    closeDetail();
+    findOnMap(guid, back);
+  });
   panel.querySelector('.detail-x').focus();
   setLive(guid, true);
 }
 function closeDetail() {
   const panel = $('#detail'), scrim = $('#scrim');
-  if (panel.hidden) return;
+  if (!panel.classList.contains('open')) return;
   panel.classList.remove('open'); scrim.classList.remove('open');
   unlockScroll();
   const back = CAME_FROM;
   CAME_FROM = null;
-  setTimeout(() => {
+  DETAIL_CLOSE = setTimeout(() => {
     panel.hidden = true; scrim.hidden = true;
+    if (LOCKS) {
+      if (back && back.isConnected && $('#sheet-map').contains(back)) back.focus();
+      return;
+    }
     /* The row may have been re-rendered underneath; fall back to the list. */
     if (back && back.isConnected) back.focus();
     else if (document.activeElement === document.body) $('#find').focus();
@@ -437,9 +440,10 @@ function closeDetail() {
 }
 $('#scrim').addEventListener('click', closeDetail);
 document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') { if (!$('#detail').hidden) closeDetail(); else closeSheet(); return; }
-  if (!$('#detail').hidden) trapTab(e, $('#detail'));
-  else if (!$('#sheet-map').hidden) trapTab(e, $('#sheet-map'));
+  const detailOpen = $('#detail').classList.contains('open');
+  if (e.key === 'Escape') { if (detailOpen) closeDetail(); else closeSheet(); return; }
+  if (detailOpen) trapTab(e, $('#detail'));
+  else if ($('#sheet-map').classList.contains('open')) trapTab(e, $('#sheet-map'));
 });
 
 /* ── the map ─────────────────────────────────────────── */
@@ -489,7 +493,7 @@ function drawPins() {
   if (!MAP) return;
   Object.values(PINS).forEach(m => m.remove());
   PINS = {}; LIVE = null;
-  const list = showing();
+  const list = showing().filter(validCoords);
   list.forEach(s => {
     const m = L.marker([s.lat, s.lng], { icon: iconFor(s, false), title: s.name, riseOnHover: true, keyboard: false });
     m._spot = s;
@@ -518,7 +522,7 @@ function mapNote() {
 /* Frame the central bars when there are enough of them: fitting the whole metro
    leaves the tall map column mostly empty field. */
 function frame(list) {
-  const set = list || showing();
+  const set = (list || showing()).filter(validCoords);
   if (!set.length || !MAP) return;
   PIN_SIG = set.map(s => s.guid).join(',');
   const core = set.filter(s => districtOf(s) !== null);
@@ -545,10 +549,10 @@ function scrollRowTo(guid) {
   const row = document.querySelector(`.row[data-guid="${CSS.escape(guid)}"]`);
   if (row) row.scrollIntoView({ behavior: REDUCED ? 'auto' : 'smooth', block: 'center' });
 }
-function findOnMap(guid) {
+function findOnMap(guid, returnFocus) {
   if (!mapReady()) return;
   const wide = matchMedia('(min-width: 1080px)').matches;
-  if (!wide) openSheet(guid);
+  if (!wide) openSheet(guid, returnFocus);
   else {
     bootMap();
     const m = PINS[guid];
@@ -565,7 +569,7 @@ document.addEventListener('click', e => {
 
 /* The map is one instance; the phone sheet borrows it and gives it back. */
 let SHEET_FROM = null;
-function openSheet(guid) {
+function openSheet(guid, returnFocus) {
   if (!mapReady()) return;
   const sheet = $('#sheet-map');
   if (!sheet.hidden) return;
@@ -574,8 +578,8 @@ function openSheet(guid) {
   sheet.hidden = false;
   void sheet.getBoundingClientRect();
   sheet.classList.add('open');
+  SHEET_FROM = returnFocus || document.activeElement;
   lockScroll();
-  SHEET_FROM = document.activeElement;
   $('#sheet-title').textContent = state.drink === 'cow' ? 'Spotted Cow on the map' : 'Espresso martinis on the map';
   $('#sheet-close').focus();
   setTimeout(() => {
@@ -586,7 +590,7 @@ function openSheet(guid) {
 }
 function closeSheet() {
   const sheet = $('#sheet-map');
-  if (sheet.hidden) return;
+  if (!sheet.classList.contains('open')) return;
   sheet.classList.remove('open');
   unlockScroll();
   const back = SHEET_FROM;
@@ -715,25 +719,24 @@ new IntersectionObserver((entries, obs) => {
 mapReady();
 
 /* ── boot ────────────────────────────────────────────── */
-const bust = 'v=' + Date.now();
-const load = url => fetch(`${url}?${bust}`).then(r => {
-  if (!r.ok) throw new Error(`${url} ${r.status}`);
-  return r.json();
-});
-Promise.all([load('data/martinis.json'), load('data/cow.json')]).then(([m, c]) => {
-  DATA.martini = m.martinis || [];
-  DATA.cow = c.cows || [];
-  delete MID.martini; delete MID.cow;
-  SWEPT.martini = m.generated_at ? new Date(m.generated_at) : null;
-  SWEPT.cow = c.generated_at ? new Date(c.generated_at) : null;
-  showSwept();
-  renderIndex(false);
-  renderList();
-  glide();
-  measure();
-  drawGlass($('.glass-coupe'));
-}).catch(err => {
-  console.error(err);
-  $('#tally').textContent = 'The list could not be loaded. Reload the page to try again.';
+[['martini', 'data/martinis.json', 'martinis'], ['cow', 'data/cow.json', 'cows']].forEach(([drink, url, key]) => {
+  Drinks.loadData(url, key).then(doc => {
+    DATA[drink] = doc[key];
+    STATUS[drink] = 'ready';
+    delete MID[drink];
+    SWEPT[drink] = doc.generated_at ? new Date(doc.generated_at) : null;
+  }).catch(err => {
+    STATUS[drink] = 'error';
+    console.warn(`Could not load ${drink}:`, err);
+  }).finally(() => {
+    if (STATUS[state.drink] === 'error' && STATUS[drink] === 'ready') setDrink(drink);
+    if (state.drink !== drink) return;
+    showSwept();
+    renderIndex(false);
+    renderList();
+    glide();
+    measure();
+    drawGlass($('.glass-coupe'));
+  });
 });
 if (document.fonts) document.fonts.ready.then(() => { glide(); measure(); });
