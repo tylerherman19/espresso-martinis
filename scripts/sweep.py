@@ -344,7 +344,11 @@ def clover_martini_items(slug: str) -> tuple[dict, list[dict]] | None:
     merchant = get(CLOVER_API + f"/{slug}", params={"slug": "true"}).json()
     if not merchant.get("merchantUuid"):
         raise ValueError("Clover response has no merchantUuid")
-    menu = get(CLOVER_API + f"/{merchant['merchantUuid']}/menu").json()
+    try:
+        menu = get(CLOVER_API + f"/{merchant['merchantUuid']}/menu").json()
+    except requests.HTTPError as exc:
+        # Only a missing merchant means it left Clover; a missing menu is unread.
+        raise RuntimeError(f"Clover menu: {exc}") from exc
     seen: dict[str, dict] = {}
     for node in required_list(menu, "items"):
         name = (node.get("name") or "").strip()
@@ -401,7 +405,9 @@ def normalized(text: str) -> str:
 def same_venue(a: dict, b: dict) -> bool:
     if normalized(a["name"]) != normalized(b["name"]):
         return False
-    if a.get("address") and b.get("address") and normalized(a["address"]) == normalized(b["address"]):
+    # A city-only address ("Milwaukee, WI") does not place a branch.
+    street = re.compile(r"^\s*\d")
+    if all(street.match(r.get("address") or "") for r in (a, b)) and normalized(a["address"]) == normalized(b["address"]):
         return True
     coords = [r.get(k) for r in (a, b) for k in ("lat", "lng")]
     if not all(isinstance(v, (int, float)) and math.isfinite(v) for v in coords):

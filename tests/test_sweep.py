@@ -102,6 +102,11 @@ class Assemble(unittest.TestCase):
         manual = row("m1", "THE BAR", address="1 MAIN ST., Milwaukee, WI", lat=None, lng=None)
         self.assertEqual(sweep.assemble([live], [], [manual]), [live])
 
+    def test_city_only_addresses_do_not_merge_distant_branches(self):
+        a = row("c1", "The Bar", address="Milwaukee, WI", lat=43.04)
+        b = row("c2", "The Bar", address="Milwaukee, WI", lat=43.10)
+        self.assertEqual({r["guid"] for r in sweep.assemble([a, b], [], [])}, {"c1", "c2"})
+
     def test_empty_inputs(self):
         self.assertEqual(sweep.assemble([], [], []), [])
 
