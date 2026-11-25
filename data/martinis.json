@@ -1,12 +1,12 @@
 {
- "generated_at": "2026-11-18T14:00:16+00:00",
+ "generated_at": "2026-11-25T15:37:51+00:00",
  "metro": "Milwaukee",
  "restaurants_scanned": 0,
  "count": 97,
  "carried_forward": 95,
  "problems": [
-  "Toast directory: 35 of 35 areas did not answer",
-  "Overpass: no mirror answered, so Clover was checked on its seed list only"
+  "Toast API refused access (HTTP 403); Toast venues carried forward",
+  "Overpass: no mirror answered, so Clover discovery used its seed list only"
  ],
  "martinis": [
   {
@@ -49,27 +49,6 @@
    "hh_price_cents": null,
    "platform": "toast",
    "guid": "41353d61-30cc-4d4f-82cc-95ee0f048fdb",
-   "seen_at": "2026-09-23"
-  },
-  {
-   "name": "Bandero County Wood Grill",
-   "address": "n96w16865 Cumberland Court, Menomonee Falls, WI",
-   "lat": 43.191399,
-   "lng": -88.118853,
-   "neighborhood": "Menomonee Falls",
-   "downtown": false,
-   "price_cents": 1000,
-   "items": [
-    {
-     "item": "Espresso Martini",
-     "price_cents": 1000,
-     "hh_price_cents": null
-    }
-   ],
-   "happy_hour": false,
-   "hh_price_cents": null,
-   "platform": "toast",
-   "guid": "6fcfffd6-6437-45af-9905-50d72692e71d",
    "seen_at": "2026-09-23"
   },
   {
@@ -143,6 +122,27 @@
    "hh_price_cents": null,
    "platform": "toast",
    "guid": "5dea25ec-dff7-45c4-858a-463ca09edd51",
+   "seen_at": "2026-09-23"
+  },
+  {
+   "name": "Bandero County Wood Grill",
+   "address": "n96w16865 Cumberland Court, Menomonee Falls, WI",
+   "lat": 43.191399,
+   "lng": -88.118853,
+   "neighborhood": "Menomonee Falls",
+   "downtown": false,
+   "price_cents": 1000,
+   "items": [
+    {
+     "item": "Espresso Martini",
+     "price_cents": 1000,
+     "hh_price_cents": null
+    }
+   ],
+   "happy_hour": false,
+   "hh_price_cents": null,
+   "platform": "toast",
+   "guid": "6fcfffd6-6437-45af-9905-50d72692e71d",
    "seen_at": "2026-09-23"
   },
   {
@@ -701,27 +701,6 @@
    "hh_price_cents": null,
    "platform": "toast",
    "guid": "23a73642-acc0-4ece-bb68-a962111ce18f",
-   "seen_at": "2026-09-23"
-  },
-  {
-   "name": "Lucky Joes",
-   "address": "1427 Underwood Ave, Wauwatosa, WI",
-   "lat": 43.05016,
-   "lng": -88.00861,
-   "neighborhood": "Wauwatosa",
-   "downtown": false,
-   "price_cents": 1400,
-   "items": [
-    {
-     "item": "Lucky's Espresso Martini",
-     "price_cents": 1400,
-     "hh_price_cents": null
-    }
-   ],
-   "happy_hour": false,
-   "hh_price_cents": null,
-   "platform": "toast",
-   "guid": "f1733527-e671-49d6-b517-1e20ece3fa5b",
    "seen_at": "2026-09-23"
   },
   {
@@ -1607,6 +1586,27 @@
    "hh_price_cents": null,
    "platform": "toast",
    "guid": "67d45cd1-03d0-4283-bb5e-22cbada67542",
+   "seen_at": "2026-09-23"
+  },
+  {
+   "name": "Lucky Joes",
+   "address": "1427 Underwood Ave, Wauwatosa, WI",
+   "lat": 43.05016,
+   "lng": -88.00861,
+   "neighborhood": "Wauwatosa",
+   "downtown": false,
+   "price_cents": 1400,
+   "items": [
+    {
+     "item": "Lucky's Espresso Martini",
+     "price_cents": 1400,
+     "hh_price_cents": null
+    }
+   ],
+   "happy_hour": false,
+   "hh_price_cents": null,
+   "platform": "toast",
+   "guid": "f1733527-e671-49d6-b517-1e20ece3fa5b",
    "seen_at": "2026-09-23"
   },
   {
